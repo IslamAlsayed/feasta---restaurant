@@ -1,0 +1,185 @@
+.PopularDishes {
+    position: relative;
+    font-family: var(--Roboto);
+
+    & .title {
+        padding-bottom: 30px;
+
+        & h2 {
+            font-size: 30px;
+            font-family: var(--Playball);
+
+            & span {
+                color: var(--main-color);
+            }
+        }
+
+        & .description {
+            font-size: 14px;
+            line-height: 1.6;
+            font-family: var(--Roboto);
+        }
+    }
+
+    & .dishes {
+        gap: 60px 30px;
+        width: 100%;
+        padding: 30px;
+        display: -ms-grid;
+        display: grid;
+        position: relative;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+            z-index: 1;
+            background-color: var(--dark-color);
+        }
+
+        &::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-image: url("../../../../../Assets/images/other/index2/berries.jpg");
+        }
+
+        & .dish {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            color: var(--light-color);
+
+            & .dish-img {
+                & img {
+                    -webkit-transition: 0.2s;
+                    -o-transition: 0.2s;
+                    transition: 0.2s;
+                }
+            }
+
+            & .dish-info {
+                font-family: var(--Roboto);
+
+                & .title {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    padding-bottom: 5px;
+                    margin-block: 20px;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    position: relative;
+                    -webkit-box-pack: justify;
+                    -ms-flex-pack: justify;
+                    justify-content: space-between;
+
+                    &::after {
+                        content: "";
+                        width: 50px;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        -webkit-transition: 0.2s;
+                        -o-transition: 0.2s;
+                        transition: 0.2s;
+                        border-bottom: 1px solid var(--main-color);
+                    }
+
+                    & span {
+                        color: var(--main-color);
+                    }
+                }
+
+                & p {
+                    font-size: 12px;
+                    margin-block: 10px;
+                }
+            }
+
+            &:hover {
+                & .dish-img img {
+                    -webkit-transform: translateY(-10px);
+                    -ms-transform: translateY(-10px);
+                    transform: translateY(-10px);
+                }
+
+                & .dish-info .title::after {
+                    width: 150px;
+                }
+            }
+
+            & .action {
+                gap: 30px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+
+                & .btn {
+                    width: 50%;
+                    gap: 10px;
+                    padding: 10px;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    font-size: 12px;
+                    font-family: Arial;
+                    margin: 20px auto 0;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    color: var(--light-color);
+                    background: transparent !important;
+
+                    &:hover i {
+                        color: var(--light-color) !important;
+                    }
+
+                    &.add {
+                        border: 1px solid var(--main-color);
+                        background-color: var(--main-color) !important;
+
+                        & i {
+                            color: var(--light-color) !important;
+                        }
+                    }
+
+                    &.details {
+                        border: 1px solid var(--toxic-color);
+
+                        & i {
+                            color: var(--toxic-color);
+                        }
+
+                        &:hover {
+                            background-color: var(--toxic-color) !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

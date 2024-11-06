@@ -1,0 +1,171 @@
+.BestCoffee {
+    width: 100%;
+    overflow: hidden;
+    padding-block: 50px;
+    margin-block: 50px;
+    position: relative;
+    z-index: 3;
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, var(--main-color)), color-stop(50%, transparent));
+    background-image: -o-linear-gradient(left, var(--main-color) 50%, transparent 50%);
+    background-image: linear-gradient(to right, var(--main-color) 50%, transparent 50%);
+
+    &::before,
+    &::after {
+        content: "";
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        z-index: -1;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-image: url("../../../../../Assets/images/other/coffee-beans.png");
+    }
+
+    &::before {
+        left: 0;
+        opacity: 0.3;
+        -webkit-transform: scale(-1);
+        -ms-transform: scale(-1);
+        transform: scale(-1);
+    }
+
+    &::after {
+        right: 0;
+        opacity: 0.1;
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+
+    & .best-coffee {
+        gap: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        text-align: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+
+        & div {
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+
+        & .date {
+            color: var(--light-color);
+
+            & p {
+                margin-top: 5px;
+            }
+
+            & .contact {
+                gap: 10px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                margin-top: 20px;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+
+                & button {
+                    padding: 0;
+                    margin: 0;
+                    font-size: 16px;
+                    cursor: pointer;
+                    background: transparent;
+                    text-transform: lowercase;
+
+                    &:hover {
+                        color: var(--toxic-color);
+                    }
+                }
+            }
+        }
+
+        & .img {
+            width: 300px;
+            -webkit-transform: scaleX(-1);
+            -ms-transform: scaleX(-1);
+            transform: scaleX(-1);
+        }
+
+        & .info {
+            text-align: start;
+
+            & h3 {
+                text-wrap: balance;
+
+                & span {
+                    color: var(--main-color);
+                }
+            }
+
+            & p {
+                font-size: 12px;
+                line-height: 1.3;
+                margin-block: 10px;
+            }
+
+            & img {
+                width: 220px;
+                height: auto;
+                position: absolute;
+                bottom: 0;
+                right: -20px;
+                z-index: -10;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .BestCoffee {
+        & .best-coffee {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+
+            & .date * {
+                color: var(--dark-color);
+            }
+
+            & .info {
+                padding: 15px;
+                -webkit-backdrop-filter: blur(7px);
+                backdrop-filter: blur(7px);
+
+                & h3 {
+                    & span {
+                        color: var(--light-color);
+                    }
+                }
+
+                & p {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .BestCoffee {
+        & .best-coffee {
+            & .info {
+                & img {
+                    width: 120px;
+                }
+            }
+        }
+    }
+}

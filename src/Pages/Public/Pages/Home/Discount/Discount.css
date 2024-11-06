@@ -1,0 +1,156 @@
+.DiscountBannner {
+    width: 100%;
+    height: 100svh;
+    position: relative;
+    margin-block: 50px 100px;
+    background-image: url("../../../../../Assets/images/backgrounds/background20.jpg");
+
+    &,
+    &::after {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    & .box-voucher {
+        width: 70%;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        padding: 10px;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border: 4px solid var(--main-color);
+
+        & .content-voucher {
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            text-align: center;
+            font-family: var(--Roboto);
+            background-color: var(--light-color);
+
+            &>div {
+                margin-bottom: 30px;
+            }
+
+            & .logo {
+                gap: 10px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+
+                & img {
+                    width: 60px;
+                    height: 60px;
+                }
+
+                & .logo-title {
+                    & span {
+                        display: block;
+                        text-align: start;
+
+                        &:first-of-type {
+                            font-size: 28px;
+                            font-weight: 700;
+                            color: var(--main-color);
+                            font-family: var(--Playball);
+                        }
+
+                        &:last-of-type {
+                            font-size: 14px;
+
+                            color: var(--dark-color-50);
+                            font-family: var(--Roboto);
+                        }
+                    }
+                }
+            }
+
+            & .discount {
+                font-size: 28px;
+
+                & span {
+                    font-weight: 700;
+                    color: var(--main-color);
+                }
+            }
+
+            & .voucher {
+                & h2 {
+                    font-size: 34px;
+                    margin-bottom: 20px;
+                    color: var(--main-color);
+                    text-transform: uppercase;
+                }
+
+                & p {
+                    width: 70%;
+                    margin: auto;
+                    line-height: 1.6;
+                }
+            }
+
+            & .social {
+                gap: 20px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+
+                & i {
+                    cursor: pointer;
+                    font-size: 24px;
+                    -webkit-transition: 0.2s;
+                    -o-transition: 0.2s;
+                    transition: 0.2s;
+
+                    &:hover {
+                        margin-top: -5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .DiscountBannner {
+        padding-inline: 15px;
+
+        & .box-voucher {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .DiscountBannner {
+        & .box-voucher {
+            & .content-voucher {
+                & .discount {
+                    font-size: 20px;
+                }
+
+                & .voucher {
+                    & h2 {
+                        font-size: 24px;
+                    }
+
+                    & p {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
