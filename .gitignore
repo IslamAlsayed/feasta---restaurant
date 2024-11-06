@@ -4,8 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-.TODO.txt
-
+TODO.txt
 # testing
 /coverage
 
