@@ -13,7 +13,7 @@ Services, Book Table, Single Chefs, All Recipes, Recipe Details, Check Out, and 
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/IslamAlsayed/feasta-restaurant-site.git
+git clone -b version_0_2_0 https://github.com/IslamAlsayed/feasta-restaurant-site.git
 cd feasta-restaurant-site
 ```
 
