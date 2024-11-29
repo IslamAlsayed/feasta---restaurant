@@ -2,26 +2,20 @@ import "./CartDrawer.css";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { DECREMENT_OR_INCREMENT_HELPER, REMOVE_ITEM_HELPER } from "../../Store/helper";
 
 export default function CartDrawer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const cartItems = useSelector((state) => state.cartItems);
-  const totalPrice = useSelector((state) => state.totalPrice);
-  const totalQuantity = useSelector((state) => state.totalQuantity);
-  const [existItems, setExistItems] = useState(false);
+  const [cartNotEmpty, setCartNotEmpty] = useState(false);
+  const { CART, TOTAL_PRICE, TOTAL_QUANTITY } = useSelector((state) => state);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       const cartDrawer = document.getElementById("CartDrawer");
       const cart = document.getElementById("cart");
-      if (
-        cartDrawer &&
-        cart &&
-        !cartDrawer.contains(e.target) &&
-        !cart.contains(e.target)
-      ) {
+      if (cartDrawer && cart && !cartDrawer.contains(e.target) && !cart.contains(e.target)) {
         cartDrawer.classList.add("close");
         cartDrawer.classList.remove("open");
       }
@@ -29,28 +23,6 @@ export default function CartDrawer() {
 
     document.addEventListener("click", handleClickOutside);
   }, []);
-
-  const handleRemoveItem = (recipe) => {
-    let singleRecipe = document.getElementById(`recipe_${recipe.id}`);
-    handleLoader(`#delete-recipe_${recipe.id}`);
-    singleRecipe.classList.add("disabled");
-    setTimeout(() => {
-      singleRecipe.classList.add("removed");
-      setTimeout(() => {
-        singleRecipe.classList.remove("removed");
-        singleRecipe.classList.remove("disabled");
-      }, 100);
-      dispatch({ type: "REMOVE_ITEM", payload: recipe });
-    }, 1000);
-  };
-
-  const handleIncrement = (recipe) => {
-    dispatch({ type: "INCREMENT_ITEM", payload: recipe });
-  };
-
-  const handleDecrement = (recipe) => {
-    dispatch({ type: "DECREMENT_ITEM", payload: recipe });
-  };
 
   const handleLoader = (element) => {
     const cartDrawer = document.getElementById("CartDrawer");
@@ -80,77 +52,56 @@ export default function CartDrawer() {
   };
 
   useEffect(() => {
-    setExistItems(
-      cartItems.length > 0 && location.pathname !== "/checkout" ? true : false
-    );
-  }, [cartItems, location]);
+    setCartNotEmpty(CART.length > 0 && location.pathname !== "/checkout" ? true : false);
+  }, [CART, location]);
 
   return (
     <div className="CartDrawer close" id="CartDrawer">
       <div className="cart-content">
+
         <div className="head">
           <span>your orders</span>
           <i className="fas fa-cart-shopping"></i>
         </div>
 
-        <p className="count-dishes">
-          <span>{totalQuantity}</span> dishes
-        </p>
+        <p className="count-dishes"><span>{TOTAL_QUANTITY}</span> dishes</p>
 
-        {!cartItems.length > 0 && (
-          <h3 className="cart-empty">'The cart is empty'</h3>
-        )}
+        {!CART.length > 0 && (<h3 className="cart-empty">'The cart is empty'</h3>)}
 
         <div className="content">
           <div className="cart-recipes">
             <div className="recipes">
-              {cartItems.map((recipe, index) => (
+              {CART.map((recipe, index) => (
                 <div className="recipe" id={`recipe_${recipe.id}`} key={index}>
                   <div className="img">
-                    <img
-                      src={require(`../../${recipe.image}`)}
-                      alt={recipe.name}
-                      loading="lazy"
-                    />
+                    <img src={recipe.image} alt={recipe.title} loading="lazy" />
                   </div>
 
                   <div className="text">
-                    <div className="name">{recipe.name}</div>
+                    <div className="title">{recipe.title}</div>
 
                     <div className="price">
                       price: <span>${recipe.price.toFixed(2)}</span>
                     </div>
 
                     <div className="total">
-                      total:
-                      <span>
-                        ${(recipe.price * recipe.quantity).toFixed(2)}
-                      </span>
-                      to
-                      <span>{recipe.quantity}s</span>
+                      total: <span>${(recipe.price * recipe.quantity).toFixed(2)}</span>
+                      to <span>{recipe.quantity}s</span>
                     </div>
                   </div>
 
                   <div className="action">
-                    <button
-                      className="deleteItem btnActive"
-                      id={`delete-recipe_${recipe.id}`}
-                      onClick={() => handleRemoveItem(recipe)}
-                    >
+                    <button className="deleteItem btnActive" id={`delete-recipe_${recipe.id}`}
+                      onClick={() => REMOVE_ITEM_HELPER(recipe.id, dispatch)}>
                       <i className="fas fa-trash-can"></i>
                     </button>
 
                     <div className="quantity">
-                      <span
-                        className="btnActive"
-                        onClick={() => handleDecrement(recipe)}
-                      >
+                      <span className={`btnActive ${recipe.quantity === 1 && "disabled"}`} onClick={() => DECREMENT_OR_INCREMENT_HELPER(recipe, "DECREMENT_ITEM", dispatch)}>
                         <b>-</b>
                       </span>
-                      <span
-                        className="btnActive"
-                        onClick={() => handleIncrement(recipe)}
-                      >
+
+                      <span className="btnActive" onClick={() => DECREMENT_OR_INCREMENT_HELPER(recipe, "INCREMENT_ITEM", dispatch)}>
                         <b>+</b>
                       </span>
                     </div>
@@ -161,28 +112,22 @@ export default function CartDrawer() {
           </div>
 
           <div className="actions">
-            {cartItems.length > 0 && (
+            {CART.length > 0 && (
               <div className="totalAllRecipe">
                 <strong>total:</strong>
-                <span> ${totalPrice.toFixed(2)}</span>
+                <span> ${TOTAL_PRICE.toFixed(2)}</span>
               </div>
             )}
 
             <div className="btns">
-              {existItems && (
-                <button
-                  className="checkOut btnActive"
-                  onClick={() => handleLoader(".checkOut")}
-                >
+              {cartNotEmpty && (
+                <button className="checkOut btnActive" onClick={() => handleLoader(".checkOut")} >
                   checkout
                   <i className="fas fa-money-check-dollar"></i>
                 </button>
               )}
 
-              <button
-                className="closeCart btnActive"
-                onClick={() => handleLoader(".closeCart")}
-              >
+              <button className="closeCart btnActive" onClick={() => handleLoader(".closeCart")} >
                 close cart
                 <i className="fas fa-arrow-right-from-bracket"></i>
               </button>

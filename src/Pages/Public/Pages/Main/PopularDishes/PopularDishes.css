@@ -1,4 +1,5 @@
 .PopularDishes {
+    margin-top: 100px;
     position: relative;
     font-family: var(--Roboto);
 
@@ -143,7 +144,7 @@
                     display: -ms-flexbox;
                     display: flex;
                     font-size: 12px;
-                    font-family: Arial;
+                    font-family: var(--Roboto);
                     margin: 20px auto 0;
                     -webkit-box-align: center;
                     -ms-flex-align: center;

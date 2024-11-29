@@ -1,9 +1,10 @@
 import "./UniqueRecipe.css";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import OpeningTime from "../../../../../Assets/images/other/index1/opening-time.png";
-import { getData, getDataById } from "../../../../../axiosConfig/API";
 import { useDispatch } from "react-redux";
+import { ADD_ITEM_HELPER } from "../../../../../Store/helper";
+import OpeningTime from "../../../../../Assets/images/other/index1/opening-time.png";
+import { getData } from "../../../../../axiosConfig/API";
 
 export default function UniqueRecipe() {
   const dispatch = useDispatch();
@@ -15,15 +16,12 @@ export default function UniqueRecipe() {
 
     try {
       const result = await getData("recipes");
-      let randomNumber1 = Math.floor(Math.random() * result.length);
-      let randomNumber2 = Math.floor(Math.random() * result.length);
-      const result1 = await getDataById("recipes", randomNumber1);
-      const result2 = await getDataById("recipes", randomNumber2);
-      setRecipes([result1, result2]);
+      let randomNumber1 = result.result[Math.floor(Math.random() * result.result.length)];
+      let randomNumber2 = result.result[Math.floor(Math.random() * result.result.length)];
+      setRecipes([randomNumber1, randomNumber2]);
       setLoading(true);
     } catch (error) {
       setLoading(true);
-      console.error(error.response || error.message);
     }
   }, []);
 
@@ -31,22 +29,7 @@ export default function UniqueRecipe() {
     fetchRecipeById();
   }, [fetchRecipeById]);
 
-  const handleAddItem = (item) => {
-    let newItem = {
-      id: item.id ?? 0,
-      name: item.name ?? "null",
-      image: item.image ?? "null",
-      price: parseFloat(item.price) ?? 0,
-      quantity: item.quantity ?? 0,
-    };
-
-    let cartCount = document.getElementById("cart");
-    cartCount.classList.add("added");
-    setTimeout(() => cartCount.classList.remove("added"), 140);
-    dispatch({ type: "ADD_ITEM", payload: newItem });
-  };
-
-  if (!loading) return <p>loading...</p>;
+  if (!loading) return;
 
   return (
     <div className="UniqueRecipes">
@@ -70,14 +53,8 @@ export default function UniqueRecipe() {
             {recipes.map((recipe, index) => (
               <div className="recipe" key={index}>
                 {recipe && recipe.image ? (
-                  <img
-                    src={require(`../../../../../${recipe.image}`)}
-                    alt="recipe"
-                    loading="lazy"
-                  />
-                ) : (
-                  <p>Image not available</p>
-                )}
+                  <img src={recipe.image} alt={recipe.title} loading="lazy" />
+                ) : (<p>Image not available</p>)}
 
                 <div className="info">
                   <div className="title">
@@ -88,35 +65,24 @@ export default function UniqueRecipe() {
                     </div>
                   </div>
                   <div className="price">
-                    <span>{recipe ? recipe.name : "N/A"}</span>
+                    <span>{recipe ? recipe.title : "N/A"}</span>
                     <span>${recipe ? recipe.price : "0.00"}</span>
                   </div>
                   <div className="description">
                     {recipe && String(recipe.description).length >= 140
-                      ? recipe.description.slice(0, 140) + "..."
-                      : recipe
-                      ? recipe.description
-                      : "No description available"}
+                      ? recipe.description.slice(0, 70) + "..."
+                      : recipe ? recipe.description : "No description available"}
                   </div>
                 </div>
 
                 <div className="actions">
-                  <button
-                    className="btn btnActive add"
-                    onClick={() => handleAddItem(recipe)}
-                    disabled={!recipe} // تعطيل الزر إذا كانت recipe غير موجودة
-                  >
+                  <button className="btn btnActive add" disabled={!recipe}
+                    onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
                     <span>add order</span>
                     <i className="fa-solid fa-cart-plus"></i>
                   </button>
 
-                  <Link
-                    to={`/recipe-details/${recipe ? recipe.id : ""}`}
-                    className="btn btnActive details"
-                    onClick={(e) => {
-                      if (!recipe) e.preventDefault();
-                    }} // منع التنقل إذا كانت recipe غير موجودة
-                  >
+                  <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
                     <span>details</span>
                     <i className="fa-solid fa-bookmark"></i>
                   </Link>
@@ -132,6 +98,6 @@ export default function UniqueRecipe() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

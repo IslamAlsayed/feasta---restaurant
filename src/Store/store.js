@@ -2,15 +2,15 @@ import { createStore } from "redux";
 
 // Initial state
 const initialState = {
-  cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
-  totalPrice: 0,
-  totalQuantity: 0,
-};
+  CART: JSON.parse(localStorage.getItem("cartItems")) || [],
+  TOTAL_PRICE: 0,
+  TOTAL_QUANTITY: 0,
+}
 
 // Main function
 const cartReducer = (state = initialState, action) => {
   if (localStorage.getItem("cartItems")) {
-    state.cartItems = state.cartItems.filter((recipe) => recipe.id !== 0);
+    state.CART = state.CART.filter((recipe) => recipe.id !== 0);
   }
 
   switch (action.type) {
@@ -20,35 +20,26 @@ const cartReducer = (state = initialState, action) => {
       added.play();
 
       // Check if the item is already in the cart
-      const isItemExisting = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
+      const isItemExisting = state.CART.findIndex((item) => item.id === action.payload.id);
 
       let updatedCartAdd;
 
       if (isItemExisting >= 0) {
-        const updatedItem = {
-          ...state.cartItems[isItemExisting],
-          quantity:
-            state.cartItems[isItemExisting].quantity + action.payload.quantity,
-        };
+        const updatedItem = { ...state.CART[isItemExisting], quantity: state.CART[isItemExisting].quantity + 1 };
 
-        updatedCartAdd = [
-          ...state.cartItems.slice(0, isItemExisting),
-          updatedItem,
-          ...state.cartItems.slice(isItemExisting + 1),
-        ];
+        updatedCartAdd = [...state.CART.slice(0, isItemExisting), updatedItem, ...state.CART.slice(isItemExisting + 1)];
       } else {
         action.payload.vat = 0.1;
-        updatedCartAdd = [...state.cartItems, action.payload];
+        action.payload.quantity = 1;
+        updatedCartAdd = [...state.CART, action.payload];
       }
 
       localStorage.setItem("cartItems", JSON.stringify(updatedCartAdd));
       return {
         ...state,
-        cartItems: updatedCartAdd,
-        totalPrice: calculateTotalPrice(updatedCartAdd),
-        totalQuantity: calculateTotalQuantity(updatedCartAdd),
+        CART: updatedCartAdd,
+        TOTAL_PRICE: calculateTotalPrice(updatedCartAdd),
+        TOTAL_QUANTITY: calculateTotalQuantity(updatedCartAdd),
       };
 
     case "REMOVE_ITEM":
@@ -56,15 +47,13 @@ const cartReducer = (state = initialState, action) => {
       removed.volume = 0.02;
       removed.play();
 
-      const updatedCartRemove = state.cartItems.filter(
-        (item) => item.id !== action.payload.id
-      );
+      const updatedCartRemove = state.CART.filter((item) => item.id !== action.payload);
       localStorage.setItem("cartItems", JSON.stringify(updatedCartRemove));
       return {
         ...state,
-        cartItems: updatedCartRemove,
-        totalPrice: calculateTotalPrice(updatedCartRemove),
-        totalQuantity: calculateTotalQuantity(updatedCartRemove),
+        CART: updatedCartRemove,
+        TOTAL_PRICE: calculateTotalPrice(updatedCartRemove),
+        TOTAL_QUANTITY: calculateTotalQuantity(updatedCartRemove),
       };
 
     case "INCREMENT_ITEM":
@@ -72,17 +61,18 @@ const cartReducer = (state = initialState, action) => {
       increment.volume = 0.015;
       increment.play();
 
-      const incrementedItems = state.cartItems.map((cartRecipe) =>
+      const incrementedItems = state.CART.map((cartRecipe) =>
         cartRecipe.id === action.payload.id
           ? { ...cartRecipe, quantity: cartRecipe.quantity + 1 }
           : cartRecipe
       );
+
       localStorage.setItem("cartItems", JSON.stringify(incrementedItems));
       return {
         ...state,
-        cartItems: incrementedItems,
-        totalPrice: calculateTotalPrice(incrementedItems),
-        totalQuantity: calculateTotalQuantity(incrementedItems),
+        CART: incrementedItems,
+        TOTAL_PRICE: calculateTotalPrice(incrementedItems),
+        TOTAL_QUANTITY: calculateTotalQuantity(incrementedItems),
       };
 
     case "DECREMENT_ITEM":
@@ -90,7 +80,7 @@ const cartReducer = (state = initialState, action) => {
       decrement.volume = 0.015;
       decrement.play();
 
-      const decrementedItems = state.cartItems.map((cartRecipe) =>
+      const decrementedItems = state.CART.map((cartRecipe) =>
         cartRecipe.id === action.payload.id
           ? { ...cartRecipe, quantity: Math.max(cartRecipe.quantity - 1, 1) }
           : cartRecipe
@@ -98,35 +88,32 @@ const cartReducer = (state = initialState, action) => {
       localStorage.setItem("cartItems", JSON.stringify(decrementedItems));
       return {
         ...state,
-        cartItems: decrementedItems,
-        totalPrice: calculateTotalPrice(decrementedItems),
-        totalQuantity: calculateTotalQuantity(decrementedItems),
+        CART: decrementedItems,
+        TOTAL_PRICE: calculateTotalPrice(decrementedItems),
+        TOTAL_QUANTITY: calculateTotalQuantity(decrementedItems),
       };
 
     case "RESET_CART":
       localStorage.setItem("cartItems", JSON.stringify([]));
 
-      return { ...state, cartItems: [], totalPrice: 0, totalQuantity: 0 };
+      return { ...state, CART: [], TOTAL_PRICE: 0, TOTAL_QUANTITY: 0 };
     default:
       return state;
   }
 };
 
-// Helper functions
-const calculateTotalPrice = (cartItems) => {
-  return cartItems.reduce(
-    (total, recipe) => total + recipe.price * recipe.quantity,
-    0
-  );
+// helper function
+const calculateTotalPrice = (cart) => {
+  return cart.reduce((total, recipe) => total + recipe.price * recipe.quantity + (recipe.price * recipe.quantity * recipe.vat), 0);
 };
 
-const calculateTotalQuantity = (cartItems) => {
-  return cartItems.reduce((total, recipe) => total + recipe.quantity, 0);
+const calculateTotalQuantity = (cart) => {
+  return cart.reduce((total, recipe) => total + recipe.quantity, 0);
 };
 
-// Set total [ price, quantity ] with open site
-initialState.totalPrice = calculateTotalPrice(initialState.cartItems);
-initialState.totalQuantity = calculateTotalQuantity(initialState.cartItems);
+// Set total [ price,quantity ] with open site
+initialState.TOTAL_PRICE = calculateTotalPrice(initialState.CART);
+initialState.TOTAL_QUANTITY = calculateTotalQuantity(initialState.CART);
 
 // Create the Redux store and export it
 const store = createStore(cartReducer);

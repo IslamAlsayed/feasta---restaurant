@@ -2,107 +2,111 @@
     position: relative;
     padding-block: 50px;
 
-    &::before {
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        background-image: url("../../../../../Assets/images/other/index2/berries.jpg");
-    }
-
-    &::after {
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0.7;
-        z-index: 1;
-        background-color: var(--dark-color);
-    }
-
-    & .discount {
-        gap: 20px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        position: relative;
-        z-index: 3;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-
-        & .img {
-            width: 40%;
-            max-width: 400px;
-            -webkit-filter: drop-shadow(4px 4px 5px #00000066);
-            filter: drop-shadow(4px 4px 5px #00000066);
-
-            & img {
-                border-radius: 50%;
-            }
+    & .container {
+        &::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-image: url("../../../../../Assets/images/other/index2/berries.jpg");
         }
 
-        & .info {
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            max-width: 500px;
-            color: var(--light-color);
-
-            & span {
-                text-transform: uppercase;
-            }
-
-            & h2 {
-                font-size: 36px;
-                margin-block: 10px;
-                color: var(--main-color);
-            }
-
-            & p {
-                font-size: 14px;
-                line-height: 1.6;
-            }
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+            z-index: 1;
+            background-color: var(--dark-color);
         }
 
-        & .actions {
+        & .discount {
             gap: 20px;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            position: relative;
+            z-index: 3;
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
 
-            & button {
-                margin-top: 20px;
-                font-family: Arial;
+            & .image {
+                width: 40%;
+                max-width: 400px;
+                -webkit-filter: drop-shadow(4px 4px 5px #00000066);
+                filter: drop-shadow(4px 4px 5px #00000066);
 
-                &:last-child {
+                & img {
+                    border-radius: 50%;
+                }
+            }
+
+            & .info {
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                max-width: 500px;
+                color: var(--light-color);
+
+                & span {
+                    text-transform: uppercase;
+                }
+
+                & h2 {
+                    font-size: 36px;
+                    margin-block: 10px;
                     color: var(--main-color);
-                    background-color: transparent;
-                    border: 2px solid var(--main-color);
+                }
 
-                    &:hover {
-                        color: var(--light-color);
-                        background-color: var(--main-color);
+                & p {
+                    font-size: 14px;
+                    line-height: 1.6;
+                }
+            }
+
+            & .actions {
+                gap: 20px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                margin-top: 20px;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+
+                & button,
+                & a {
+                    font-family: var(--Roboto);
+
+                    & i {
+                        -webkit-margin-start: 5px;
+                        margin-inline-start: 5px;
                     }
                 }
 
-                & i {
-                    -webkit-margin-start: 5px;
-                    margin-inline-start: 5px;
+                & a {
+                    padding-block: 8px;
+                    color: var(--light-color);
+                    background-color: transparent !important;
+                    border: 2px solid var(--toxic-color);
+
+                    &:hover {
+                        color: var(--light-color);
+                        background-color: var(--toxic-color) !important;
+                    }
                 }
             }
         }
@@ -111,20 +115,22 @@
 
 @media (max-width: 768px) {
     .TheDiscount {
-        & .discount {
-            text-align: center;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-
-            & .actions {
+        & .container {
+            & .discount {
+                text-align: center;
                 -webkit-box-pack: center;
                 -ms-flex-pack: center;
                 justify-content: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+
+                & .actions {
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                }
             }
         }
     }
@@ -132,9 +138,36 @@
 
 @media (max-width: 500px) {
     .TheDiscount {
-        & .discount {
-            & .img {
-                width: 70%;
+        & .container {
+            & .discount {
+                & .img {
+                    width: 70%;
+                }
+
+                & .info {
+                    & h2 {
+                        font-size: 20px;
+                    }
+
+                    & p {
+                        font-size: 12px;
+                    }
+                }
+
+                & .actions {
+                    gap: 10px;
+
+                    & button,
+                    & a {
+                        padding: 8px;
+                        font-size: 10px;
+                    }
+
+                    & a {
+                        padding: 7px;
+                        border: 1px solid var(--toxic-color);
+                    }
+                }
             }
         }
     }

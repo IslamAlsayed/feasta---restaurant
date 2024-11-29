@@ -26,10 +26,7 @@ export default function Footer() {
 
         <div className="social">
           <div className="address">
-            <div>
-              13 Al-Masakin Street, Al-Asadiya Village, Abu Hammad Center,
-              Sharqia Governorate 14466
-            </div>
+            <div>Palestine is free and independent</div>
 
             <Link to={"mailto:support@feastaegyptianRestaurant.com"}>
               support@feastaegyptianRestaurant.com
@@ -39,30 +36,29 @@ export default function Footer() {
           </div>
 
           <div className="icons">
-            <div>
-              <i className="fa-brands fa-facebook facebook"></i>
-            </div>
-            <div>
-              <i className="fa-brands fa-twitter twitter"></i>
-            </div>
-            <div>
-              <i className="fa-brands fa-google-plus-g google"></i>
-            </div>
+            <div><i className="fa-brands fa-facebook facebook"></i></div>
+            <div><i className="fa-brands fa-twitter twitter"></i></div>
+            <div><i className="fa-brands fa-google-plus-g google"></i></div>
           </div>
         </div>
 
         <div className="foot">
           <div className="support">
-            <div>Terms of use</div>
-            <div>Privacy Policy</div>
-            <div>SiteMap</div>
-            <div>Contact</div>
+            <Link to="/terms-of-use">terms of use</Link>
+            <Link to="/privacy-policy">privacy policy</Link>
+            <Link to="/contact">contact</Link>
+            <Link to="/support">support</Link>
           </div>
 
           <div className="copyRight">
-            © 2023 <span>feasta restaurant</span> all right reserved The
-            developer is <span>islamAlsayed</span> 01065438133 but
-            <span className="quote"> the design is quoted</span>
+            <p>
+              © 2023 <span>feasta restaurant</span> all right reserved The developer is
+              <Link to={"mailto: eslamalsayed8133@gmail.com"}>IslamAlsayed</Link>
+            </p>
+            <p>
+              <Link to="tel:+201065438133">(+20) 1065438133</Link> but
+              <span className="quote"> the design is quoted</span>
+            </p>
           </div>
         </div>
       </div>

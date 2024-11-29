@@ -9,7 +9,7 @@
             text-align: center;
             margin-block: 30px;
 
-            & p span {
+            & span {
                 color: var(--main-color);
             }
         }
@@ -95,7 +95,7 @@
             & a {
                 padding: 10px;
                 font-size: 14px;
-                font-family: Arial;
+                font-family: var(--Roboto);
                 border-radius: 3px;
                 color: var(--light-color);
                 background: var(--main-color-50);
@@ -208,7 +208,7 @@
                         align-items: center;
                         white-space: nowrap;
                         margin-block: 10px;
-                        font-family: Arial;
+                        font-family: var(--Roboto);
                         -webkit-box-pack: justify;
                         -ms-flex-pack: justify;
                         justify-content: space-between;
@@ -240,7 +240,7 @@
                             & .btn {
                                 font-size: 12px;
                                 padding: 10px 15px;
-                                font-family: Arial;
+                                font-family: var(--Roboto);
 
                                 & i {
                                     padding-left: 5px;
@@ -269,34 +269,6 @@
                 }
             }
         }
-    }
-}
-
-@-webkit-keyframes loading {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes loading {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
     }
 }
 

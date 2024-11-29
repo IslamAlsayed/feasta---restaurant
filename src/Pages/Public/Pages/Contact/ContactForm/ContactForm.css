@@ -29,7 +29,7 @@
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center;
-                background-image: url("../../../../../Assets/images/cheffs/cheff2.png");
+                background-image: url("../../../../../Assets/images/chefs/chef2.png");
             }
 
             &::after {
@@ -84,12 +84,9 @@
                 }
 
                 & .groups {
-                    margin-bottom: 30px;
+                    margin-bottom: 20px;
 
-                }
-
-                & .groups:has(input) {
-                    & .group {
+                    &:first-child .group {
                         gap: 20px;
                         display: -webkit-box;
                         display: -ms-flexbox;
@@ -136,11 +133,16 @@
                     & textarea::-webkit-scrollbar-thumb {
                         background-color: var(--main-color);
                     }
+                }
+
+                & .group:has(button) {
+                    width: 50%;
+                    margin: auto;
+                    text-align: center;
 
                     & button {
-                        width: 50%;
                         height: 40px;
-                        margin: auto;
+                        text-wrap: nowrap;
                         position: relative;
 
                         &.load {
@@ -182,14 +184,14 @@
                     }
                 }
 
-                & .error_username,
-                & .error_phone,
-                & .error_email,
-                & .error_message {
+                & .error {
                     display: block;
+                    padding: 5px;
                     font-size: 14px;
-                    margin-top: 5px;
-                    color: var(--red-color);
+                    border-radius: 3px;
+                    margin-block: 5px 10px;
+                    color: var(--light-color);
+                    background-color: var(--red-color);
                 }
             }
         }
@@ -292,14 +294,15 @@
                         -ms-flex-align: start;
                         align-items: start;
                         letter-spacing: 0.5px;
-                        color: var(--light-color);
+                        /* color: var(--light-color); */
 
-                        &:hover span {
-                            color: var(--toxic-color);
-                        }
-
-                        &:last-child span {
+                        & a {
+                            color: var(--light-color);
                             text-transform: lowercase;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
                         }
 
                         &:not(:last-child) {
@@ -327,30 +330,17 @@
 }
 
 & input::-webkit-input-placeholder,
-& textarea::-webkit-input-placeholder {
-    font-size: 12px;
-}
-
+& textarea::-webkit-input-placeholder,
 & input::-moz-placeholder,
-& textarea::-moz-placeholder {
-    font-size: 12px;
-}
-
+& textarea::-moz-placeholder,
 & input:-ms-input-placeholder,
-& textarea:-ms-input-placeholder {
-    font-size: 12px;
-}
-
+& textarea:-ms-input-placeholder,
 & input::-ms-input-placeholder,
-& textarea::-ms-input-placeholder {
-    font-size: 12px;
-}
-
+& textarea::-ms-input-placeholder,
 & input::placeholder,
 & textarea::placeholder {
     font-size: 12px;
 }
-
 
 @media(max-width: 768px) {
     .ContactForm {
@@ -396,6 +386,15 @@
                             border: 1px solid var(--main-color);
                         }
                     }
+
+                    & .group:has(button) {
+                        & button {
+                            width: 50%;
+                            height: 30px;
+                            padding: 10px;
+                            font-size: 10px;
+                        }
+                    }
                 }
             }
 
@@ -406,25 +405,13 @@
     }
 
     input::-webkit-input-placeholder,
-    textarea::-webkit-input-placeholder {
-        color: var(--dark-color);
-    }
-
+    textarea::-webkit-input-placeholder,
     input::-moz-placeholder,
-    textarea::-moz-placeholder {
-        color: var(--dark-color);
-    }
-
+    textarea::-moz-placeholder,
     input:-ms-input-placeholder,
-    textarea:-ms-input-placeholder {
-        color: var(--dark-color);
-    }
-
+    textarea:-ms-input-placeholder,
     input::-ms-input-placeholder,
-    textarea::-ms-input-placeholder {
-        color: var(--dark-color);
-    }
-
+    textarea::-ms-input-placeholder,
     input::placeholder,
     textarea::placeholder {
         color: var(--dark-color);

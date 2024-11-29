@@ -1,54 +1,43 @@
 import "./TheStarters.css";
 import React, { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { ADD_ITEM_HELPER } from "../../../../../Store/helper";
 import dishMain from "../../../../../Assets/images/dishes/dishMain.jpg";
 import salads from "../../../../../Assets/images/dishes/salads.png";
 import dessert1 from "../../../../../Assets/images/dishes/dessert1.png";
 import menu1 from "../../../../../Assets/images/icons/white&block/menu1.png";
 import { getData } from "../../../../../axiosConfig/API";
-import { Link } from "react-router-dom";
 
 export default function TheStarters() {
   const dispatch = useDispatch();
   const [breakfast, setBreakfast] = useState([]);
   const [dinner, setDinner] = useState([]);
   const [dessert, setDessert] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchRecipes = useCallback(async () => {
     try {
       const result = await getData("recipes");
+      if (result.status === 200) {
+        const breakfast = result.result.filter((recipe) => recipe.mealType === "breakfast").slice(0, 3);
+        setBreakfast(breakfast);
 
-      const breakfast = result.filter(
-        (recipe) => recipe.mealType === "Breakfast"
-      );
-      setBreakfast(breakfast);
-      const dinner = result.filter((recipe) => recipe.mealType === "Dinner");
-      setDinner(dinner);
-      const dessert = result.filter((recipe) => recipe.mealType === "Dessert");
-      setDessert(dessert);
+        const dinner = result.result.filter((recipe) => recipe.mealType === "dinner").slice(0, 3);
+        setDinner(dinner);
+
+        const dessert = result.result.filter((recipe) => recipe.mealType === "dessert").slice(0, 3);
+        setDessert(dessert);
+        setLoading(true);
+      }
     } catch (error) {
-      console.error(error.response || error.message);
+      setLoading(true);
     }
   }, []);
 
   useEffect(() => {
     fetchRecipes();
   }, [fetchRecipes]);
-
-  const handleAddItem = (item) => {
-    let newItem = {
-      id: item.id ?? 0,
-      name: item.name ?? "null",
-      image: item.image ?? "null",
-      price: parseFloat(item.price) ?? 0,
-      quantity: item.quantity ?? 0,
-    };
-
-    let cartCount = document.getElementById("cart");
-    cartCount.classList.add("added");
-    setTimeout(() => cartCount.classList.remove("added"), 140);
-    dispatch({ type: "ADD_ITEM", payload: newItem });
-  };
 
   return (
     <div className="TheStarters">
@@ -64,42 +53,47 @@ export default function TheStarters() {
             </div>
 
             <div className="cards">
-              {breakfast.map(
-                (recipe, index) =>
-                  index < 3 && (
+              {!loading &&
+                <div className="sky-loading">
+                  {[1, 2, 3].map((_, index) => (
                     <div className="card" key={index}>
-                      <div className="card-img">
-                        <img
-                          src={require(`../../../../../${recipe.image}`)}
-                          alt="recipe"
-                          loading="lazy"
-                        />
-                      </div>
-
+                      <div className="card-img"></div>
                       <div className="card-info">
-                        <div className="title">
-                          {recipe.name} <span>${recipe.price}</span>
-                        </div>
-                        <div className="description">
-                          {String(recipe.description).length >= 30
-                            ? recipe.description.slice(0, 30) + "..."
-                            : recipe.description}
-                        </div>
-                      </div>
-
-                      <div className="actions">
-                        <button
-                          className="add btnAddOrder"
-                          onClick={() => handleAddItem(recipe)}
-                        >
-                          <i className="fas fa-plus"></i>
-                        </button>
-                        <button className="details">
-                          <i className="fas fa-bookmark"></i>
-                        </button>
+                        <div></div>
+                        <div></div>
                       </div>
                     </div>
-                  )
+                  ))}
+                </div>
+              }
+
+              {loading && breakfast.map(
+                (recipe, index) =>
+                  <div className="card" key={index}>
+                    <div className="card-img">
+                      <img src={recipe.image} alt={recipe.title} loading="lazy" />
+                    </div>
+
+                    <div className="card-info">
+                      <div className="title">
+                        {recipe.title} <span>${recipe.price}</span>
+                      </div>
+                      <div className="description">
+                        {String(recipe.description).length >= 30
+                          ? recipe.description.slice(0, 30) + "..."
+                          : recipe.description}
+                      </div>
+                    </div>
+
+                    <div className="actions">
+                      <button className="add btnAddOrder" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
+                        <i className="fas fa-plus"></i>
+                      </button>
+                      <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
+                        <i className="fas fa-bookmark"></i>
+                      </Link>
+                    </div>
+                  </div>
               )}
             </div>
           </div>
@@ -112,42 +106,50 @@ export default function TheStarters() {
 
           <div className="starters">
             <div className="cards">
-              {dinner.map(
-                (recipe, index) =>
-                  index < 3 && (
+              {!loading &&
+                <div className="sky-loading">
+                  {[1, 2, 3].map((_, index) => (
                     <div className="card" key={index}>
-                      <div className="card-img">
-                        <img
-                          src={require(`../../../../../${recipe.image}`)}
-                          alt="recipe"
-                          loading="lazy"
-                        />
-                      </div>
-
+                      <div className="card-img"></div>
                       <div className="card-info">
-                        <div className="title">
-                          {recipe.name} <span>${recipe.price}</span>
-                        </div>
-                        <div className="description">
-                          {String(recipe.description).length >= 30
-                            ? recipe.description.slice(0, 30) + "..."
-                            : recipe.description}
-                        </div>
-                      </div>
-
-                      <div className="actions">
-                        <button
-                          className="add btnAddOrder"
-                          onClick={() => handleAddItem(recipe)}
-                        >
-                          <i className="fas fa-plus"></i>
-                        </button>
-                        <button className="details">
-                          <i className="fas fa-bookmark"></i>
-                        </button>
+                        <div></div>
+                        <div></div>
                       </div>
                     </div>
-                  )
+                  ))}
+                </div>
+              }
+
+              {loading && dinner.map(
+                (recipe, index) =>
+                  <div className="card" key={index}>
+                    <div className="card-img">
+                      <img src={recipe.image} alt={recipe.title} loading="lazy" />
+                    </div>
+
+                    <div className="card-info">
+                      <div className="title">
+                        {recipe.title} <span>${recipe.price}</span>
+                      </div>
+                      <div className="description">
+                        {String(recipe.description).length >= 30
+                          ? recipe.description.slice(0, 30) + "..."
+                          : recipe.description}
+                      </div>
+                    </div>
+
+                    <div className="actions">
+                      <button
+                        className="add btnAddOrder"
+                        onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}
+                      >
+                        <i className="fas fa-plus"></i>
+                      </button>
+                      <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
+                        <i className="fas fa-bookmark"></i>
+                      </Link>
+                    </div>
+                  </div>
               )}
             </div>
 
@@ -168,42 +170,50 @@ export default function TheStarters() {
             </div>
 
             <div className="cards">
-              {dessert.map(
-                (recipe, index) =>
-                  index < 3 && (
+              {!loading &&
+                <div className="sky-loading">
+                  {[1, 2, 3].map((_, index) => (
                     <div className="card" key={index}>
-                      <div className="card-img">
-                        <img
-                          src={require(`../../../../../${recipe.image}`)}
-                          alt="recipe"
-                          loading="lazy"
-                        />
-                      </div>
-
+                      <div className="card-img"></div>
                       <div className="card-info">
-                        <div className="title">
-                          {recipe.name} <span>${recipe.price}</span>
-                        </div>
-                        <div className="description">
-                          {String(recipe.description).length >= 30
-                            ? recipe.description.slice(0, 30) + "..."
-                            : recipe.description}
-                        </div>
-                      </div>
-
-                      <div className="actions">
-                        <button
-                          className="add btnAddOrder"
-                          onClick={() => handleAddItem(recipe)}
-                        >
-                          <i className="fas fa-plus"></i>
-                        </button>
-                        <button className="details">
-                          <i className="fas fa-bookmark"></i>
-                        </button>
+                        <div></div>
+                        <div></div>
                       </div>
                     </div>
-                  )
+                  ))}
+                </div>
+              }
+
+              {loading && dessert.map(
+                (recipe, index) =>
+                  <div className="card" key={index}>
+                    <div className="card-img">
+                      <img src={recipe.image} alt={recipe.title} loading="lazy" />
+                    </div>
+
+                    <div className="card-info">
+                      <div className="title">
+                        {recipe.title} <span>${recipe.price}</span>
+                      </div>
+                      <div className="description">
+                        {String(recipe.description).length >= 30
+                          ? recipe.description.slice(0, 30) + "..."
+                          : recipe.description}
+                      </div>
+                    </div>
+
+                    <div className="actions">
+                      <button
+                        className="add btnAddOrder"
+                        onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}
+                      >
+                        <i className="fas fa-plus"></i>
+                      </button>
+                      <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
+                        <i className="fas fa-bookmark"></i>
+                      </Link>
+                    </div>
+                  </div>
               )}
             </div>
           </div>

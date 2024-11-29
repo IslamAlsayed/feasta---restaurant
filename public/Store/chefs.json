@@ -9,9 +9,9 @@
             "google"
         ],
         "titleJob": "Specialized Chef",
-        "favourate_dish": "Tandoori Chicken",
-        "favourate_dish_image": "Assets/images/recipes/17.webp",
-        "image": "Assets/images/cheffs/cheff1.png"
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/17.webp",
+        "image": "Assets/images/chefs/chef1.png"
     },
     {
         "id": "2",
@@ -23,9 +23,9 @@
             "google"
         ],
         "titleJob": "Head Chef",
-        "favourate_dish": "Tandoori Chicken",
-        "favourate_dish_image": "Assets/images/recipes/10.webp",
-        "image": "Assets/images/cheffs/cheff2.png"
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/10.webp",
+        "image": "Assets/images/chefs/chef2.png"
     },
     {
         "id": "3",
@@ -37,9 +37,9 @@
             "google"
         ],
         "titleJob": "Sous Chef",
-        "favourate_dish": "Tandoori Chicken",
-        "favourate_dish_image": "Assets/images/recipes/4.webp",
-        "image": "Assets/images/cheffs/cheff3.png"
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/4.webp",
+        "image": "Assets/images/chefs/chef3.png"
     },
     {
         "id": "4",
@@ -51,9 +51,9 @@
             "google"
         ],
         "titleJob": "Pastry Chef",
-        "favourate_dish": "Tandoori Chicken",
-        "favourate_dish_image": "Assets/images/recipes/12.webp",
-        "image": "Assets/images/cheffs/cheff4.png"
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/12.webp",
+        "image": "Assets/images/chefs/chef4.png"
     },
     {
         "id": "5",
@@ -65,9 +65,9 @@
             "google"
         ],
         "titleJob": "Vegetarian Chef",
-        "favourate_dish": "Tandoori Chicken",
-        "favourate_dish_image": "Assets/images/recipes/4.webp",
-        "image": "Assets/images/cheffs/cheff5.png"
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/4.webp",
+        "image": "Assets/images/chefs/chef5.png"
     },
     {
         "id": "6",
@@ -79,8 +79,8 @@
             "google"
         ],
         "titleJob": "Grill Chef",
-        "favourate_dish": "Tandoori Chicken",
-        "favourate_dish_image": "Assets/images/recipes/23.webp",
-        "image": "Assets/images/cheffs/cheff6.png"
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/23.webp",
+        "image": "Assets/images/chefs/chef6.png"
     }
 ]

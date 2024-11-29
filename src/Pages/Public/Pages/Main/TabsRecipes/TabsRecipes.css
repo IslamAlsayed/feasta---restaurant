@@ -121,7 +121,7 @@
         & a {
             padding: 5px;
             font-size: 14px;
-            font-family: Arial;
+            font-family: var(--Roboto);
             border-radius: 3px;
             color: var(--main-color);
             background: var(--light-color);
@@ -235,6 +235,15 @@
                 }
 
                 & .rating {
+                    gap: 5px;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    height: fit-content;
+
                     & i {
                         color: var(--main-color);
                     }
@@ -263,34 +272,6 @@
                 }
             }
         }
-    }
-}
-
-@-webkit-keyframes loading {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes loading {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
     }
 }
 

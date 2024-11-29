@@ -2,9 +2,11 @@
     padding-block: 90px 50px;
 
     & .container {
+        position: relative;
+
         & h2 {
             text-align: start;
-            padding-block: 30px;
+            padding-bottom: 30px;
             color: var(--main-color);
         }
 
@@ -23,6 +25,36 @@
             & .image {
                 width: 250px;
                 height: 250px;
+
+                &>img {
+                    cursor: pointer;
+                }
+
+                & .absolute {
+                    width: 100%;
+                    height: 100%;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    display: grid;
+                    z-index: 999;
+                    place-content: center;
+
+                    & .layout {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        background-color: var(--dark-color);
+                        opacity: 0.5;
+                        z-index: -1;
+                    }
+
+                    & img {
+                        width: 50%;
+                        height: auto;
+                        margin: auto;
+                    }
+                }
             }
 
             & .information {
@@ -145,11 +177,20 @@
             }
         }
 
+        & .log_in_to_comment {
+            width: 400px;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 3px;
+            color: var(--light-color);
+            background: var(--main-color);
+        }
+
         & .modelRate {
             & .modelForm {
                 width: 400px;
                 padding: 10px;
-                margin-top: 30px;
+                margin-top: 20px;
                 border-radius: 3px;
                 background-color: #eaeaea;
 
@@ -164,6 +205,7 @@
                         padding: 5px;
                         outline: none;
                         border-radius: 3px;
+                        text-transform: none;
                         border: 1px solid var(--load);
                     }
                 }
@@ -258,6 +300,75 @@
                         -ms-flex-pack: justify;
                         justify-content: space-between;
 
+                        & .profile {
+                            gap: 10px;
+                            display: -webkit-box;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -webkit-box-align: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+
+                            & .edit {
+                                gap: 10px;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                position: relative;
+
+                                &>i {
+                                    cursor: pointer;
+                                }
+
+                                & .list {
+                                    padding: 5px;
+                                    list-style: none;
+                                    gap: 5px;
+                                    display: -webkit-box;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    flex-direction: column;
+                                    position: absolute;
+                                    top: 20px;
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    border-radius: 3px;
+                                    left: calc(100% + 10px);
+                                    color: var(--dark-color);
+                                    backdrop-filter: blur(3px);
+                                    box-shadow: 0 0 1px var(--dark-color);
+
+                                    &.show {
+                                        top: 10px;
+                                        opacity: 1;
+                                        visibility: visible;
+                                    }
+
+                                    & li:first-of-type span {
+                                        background-color: var(--green-color);
+                                    }
+
+                                    & li:nth-of-type(2) span {
+                                        background-color: var(--red-color);
+                                    }
+
+                                    & li span {
+                                        gap: 5px;
+                                        opacity: 0.7;
+                                        padding: 10px;
+                                        display: flex;
+                                        border-radius: 3px;
+                                        text-align: center;
+                                        font-family: var(--Roboto);
+
+                                        &:hover {
+                                            opacity: 1;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         & .rate {
                             font-weight: bold;
                             color: var(--main-color);
@@ -270,15 +381,21 @@
                         }
                     }
 
-                    & .name,
-                    & .date {
+                    & .name {
                         font-weight: bold;
                         color: var(--main-color);
                     }
 
                     & .date {
-                        font-size: 10px;
+                        display: block;
+                        font-size: 8px;
+                        font-weight: bold;
                         margin-bottom: 5px;
+                    }
+
+                    & .comment {
+                        font-size: 12px;
+                        text-transform: none;
                     }
                 }
             }
@@ -304,7 +421,7 @@
         &>a {
             padding: 10px;
             font-size: 14px;
-            font-family: Arial;
+            font-family: var(--Roboto);
             border-radius: 3px;
             display: inline-block;
             color: var(--light-color);
@@ -418,7 +535,7 @@
                     align-items: center;
                     white-space: nowrap;
                     margin-block: 10px;
-                    font-family: Arial;
+                    font-family: var(--Roboto);
                     -webkit-box-pack: justify;
                     -ms-flex-pack: justify;
                     justify-content: space-between;
@@ -450,7 +567,7 @@
                         & .btn {
                             font-size: 12px;
                             padding: 10px 15px;
-                            font-family: Arial;
+                            font-family: var(--Roboto);
 
                             & i {
                                 padding-left: 5px;
@@ -481,34 +598,6 @@
     }
 }
 
-@-webkit-keyframes loading {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes loading {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.7;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 @media (max-width: 992px) {
     .RecipeDetails {
         & .container {
@@ -516,6 +605,10 @@
                 & .image {
                     width: 170px;
                     height: 170px;
+
+                    & .absolute .absoluteImage {
+                        width: 70%;
+                    }
                 }
 
                 & .information {
@@ -578,7 +671,15 @@
             & .row {
                 & .image {
                     width: 100%;
+
+                    & .absolute .absoluteImage {
+                        width: 90%;
+                    }
                 }
+            }
+
+            & .log_in_to_comment {
+                width: 100%;
             }
 
             & .modelRate {
