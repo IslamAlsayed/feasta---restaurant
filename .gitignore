@@ -21,3 +21,8 @@ TODO.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/recycle
+/src/Assets/design
+/Screenshot 2024-01-23 123834.png
+/Screenshot 2024-01-23 123914.png
