@@ -1,77 +1,57 @@
-import axios from "axios";
-import Cookies from "js-cookie";
-const basicURL2 = "http://127.0.0.1:8000/api/";
+// import axios from "axios";
+// import Cookies from "js-cookie";
+// import { basicURL } from "./API";
 
-export const login = async (email, password) => {
-  try {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.add("show");
-    }
+// export const login = async (email, password) => {
+//   try {
+//     if (document.getElementById("Loader")) {
+//       document.getElementById("Loader").classList.add("show");
+//     }
 
-    const response = await axios.post(basicURL2 + "auth/login", {
-      email: email,
-      password: password,
-    });
+//     const response = await axios.post(basicURL + "admin/login", {
+//       email: email,
+//       password: password,
+//     });
 
-    // Setting cookies
-    Cookies.set("feasta_token", response.data.token);
-    Cookies.set("feasta_admin", JSON.stringify(response.data.data));
+//     // Setting cookies
+//     Cookies.set("token_resta", response.data.access_token);
+//     Cookies.set("admin_resta", JSON.stringify(response.data.customer));
+//     setTimeout(() => {
+//       if (Cookies.get("token_resta")) Cookies.remove("token_resta");
+//     }, 86400000);
 
-    // illogical
-    if (!localStorage.getItem("cartItems")) {
-      localStorage.setItem("cartItems", JSON.stringify([]));
-    }
+//     // illogical
+//     if (!localStorage.getItem("cartItems")) {
+//       localStorage.setItem("cartItems", JSON.stringify([]));
+//     }
 
-    return response.data;
-  } catch (error) {
-    return error.response?.data;
-  } finally {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.remove("show");
-    }
-  }
-};
+//     if (!localStorage.getItem("cartTotal")) {
+//       localStorage.setItem("cartTotal", 0);
+//     }
 
-export const register = async (data) => {
-  try {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.add("show");
-    }
+//     return response.data;
+//   } catch (error) {
+//     return error.response?.data;
+//   } finally {
+//     if (document.getElementById("Loader")) {
+//       document.getElementById("Loader").classList.remove("show");
+//     }
+//   }
+// };
 
-    const response = await axios.post(basicURL2 + "auth/register", data);
+// export const logout = () => {
+//   return new Promise((resolve) => {
+//     if (Cookies.get("token_resta")) Cookies.remove("token_resta");
+//     if (Cookies.get("admin_resta")) Cookies.remove("admin_resta");
+//     resolve({ message: "Logged out successfully" });
+//   });
+// };
 
-    // Setting cookies
-    Cookies.set("feasta_token", response.data.token);
-    Cookies.set("feasta_admin", JSON.stringify(response.data.data));
+// export const getUser = () => {
+//   const user = Cookies.get("admin_resta");
+//   return user ? JSON.parse(user) : null;
+// };
 
-    // illogical
-    if (!localStorage.getItem("cartItems")) {
-      localStorage.setItem("cartItems", JSON.stringify([]));
-    }
-
-    return response.data;
-  } catch (error) {
-    return error.response?.data;
-  } finally {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.remove("show");
-    }
-  }
-};
-
-export const logout = () => {
-  return new Promise((resolve) => {
-    if (Cookies.get("feasta_token")) Cookies.remove("feasta_token");
-    if (Cookies.get("feasta_admin")) Cookies.remove("feasta_admin");
-    resolve({ status: 200, message: "Logged out successfully" });
-  });
-};
-
-export const getUser = () => {
-  const user = Cookies.get("feasta_admin");
-  return user ? user : null;
-};
-
-export const isAuth = () => {
-  return !!Cookies.get("feasta_token");
-};
+// export const isAuth = () => {
+//   return !!Cookies.get("token_resta");
+// };

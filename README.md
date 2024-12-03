@@ -13,7 +13,7 @@ Services, Book Table, Single Chefs, All Recipes, Recipe Details, Check Out, and 
 First, clone the repository to your local machine:
 
 ```bash
-git clone -b version_0_2_0 https://github.com/IslamAlsayed/feasta-restaurant-site.git
+git clone https://github.com/IslamAlsayed/feasta-restaurant-site.git
 cd feasta-restaurant-site
 ```
 
@@ -50,16 +50,6 @@ Main page of site.
 ## Menu page
 
 ![Menu](./src/Assets/preview/menu.png)
-Menu page of site.
-
-## Checkout page when shopping cart is empty
-
-![checkout](./src/Assets/preview/checkout.png)
-Menu page of site.
-
-## Checkout page when shopping cart isn't empty
-
-![checkout2](./src/Assets/preview/checkout2.png)
 Menu page of site.
 
 ## Contact me

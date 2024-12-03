@@ -66,12 +66,12 @@
             justify-content: space-between;
             background-color: var(--blue-color);
 
-            &.special {
+            &.spical {
                 background-color: var(--main-color);
             }
 
-            &.special::after {
-                content: "special";
+            &.spical::after {
+                content: "spical";
                 width: -webkit-fit-content;
                 width: -moz-fit-content;
                 width: fit-content;

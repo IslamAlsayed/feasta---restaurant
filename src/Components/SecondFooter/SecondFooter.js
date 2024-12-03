@@ -92,7 +92,10 @@ export default function SecondFooter() {
               <ul>
                 <li>
                   <i className="fas fa-location-dot"></i>
-                  <div>Palestine is free and independent</div>
+                  <div>
+                    13 Al-Masaken Street, Port Al-Asadiya Abu Hammad, Sharqia
+                    14466
+                  </div>
                 </li>
                 <li>
                   <i className="fas fa-phone"></i>
@@ -133,27 +136,16 @@ export default function SecondFooter() {
           </div>
         </div>
 
-        <div className="foot">
-          <div className="support">
-            <Link to="/terms-of-use">terms of use</Link>
-            <Link to="/privacy-policy">privacy policy</Link>
-            <Link to="/contact">contact</Link>
-            <Link to="/support">support</Link>
-          </div>
-
-          <div className="copyRight">
-            <p>
-              © 2023 <span>feasta restaurant</span> all right reserved The
-              developer is
-              <Link to={"mailto: eslamalsayed8133@gmail.com"}>
-                IslamAlsayed
-              </Link>
-            </p>
-            <p>
-              <Link to="tel:+201065438133">(+20) 1065438133</Link> but
-              <span className="quote"> the design is quoted</span>
-            </p>
-          </div>
+        <div className="copyRight">
+          <p>
+            © 2023 <span>feasta restaurant</span> all right reserved The
+            developer is
+            <Link to={"mailto: eslamalsayed8133@gmail.com"}>IslamAlsayed</Link>
+          </p>
+          <p>
+            <Link to="tel:+201065438133">(+20) 1065438133</Link> but
+            <span className="quote"> the design is quoted</span>
+          </p>
         </div>
       </div>
 

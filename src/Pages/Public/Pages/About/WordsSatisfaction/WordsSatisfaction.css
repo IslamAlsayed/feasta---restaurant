@@ -105,16 +105,6 @@
                         }
                     }
 
-                    & .rate {
-                        display: block;
-                        margin: 12px 10px 0;
-
-                        & i {
-                            margin-inline: 5px;
-                            color: var(--main-color);
-                        }
-                    }
-
                     & .card-info {
                         height: auto;
                         margin-top: 10px;

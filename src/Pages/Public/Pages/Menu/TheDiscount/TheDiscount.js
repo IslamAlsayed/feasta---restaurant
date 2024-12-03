@@ -1,9 +1,7 @@
 import "./TheDiscount.css";
 import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ADD_ITEM_HELPER } from "../../../../../Store/helper";
-import { getData } from "../../../../../axiosConfig/API";
+import { getData, getDataById } from "../../../../../axiosConfig/API";
 
 export default function TheDiscount() {
   const dispatch = useDispatch();
@@ -12,13 +10,15 @@ export default function TheDiscount() {
 
   const fetchRecipes = useCallback(async () => {
     try {
-      const result = await getData("offers/1");
-      if (result.status === 200) {
-        setRecipes(result.result);
-        setLoading(true);
-      }
-    } catch (error) {
+      const recipes = await getData("recipes");
+      const result = await getDataById(
+        "recipes",
+        Math.floor(Math.random() * recipes.length)
+      );
+      setRecipes(result);
       setLoading(true);
+    } catch (error) {
+      console.error(error.response || error.message);
     }
   }, []);
 
@@ -26,35 +26,56 @@ export default function TheDiscount() {
     fetchRecipes();
   }, [fetchRecipes]);
 
-  if (!loading) return;
+  const handleAddItem = (item) => {
+    let newItem = {
+      id: item.id ?? 0,
+      name: item.name ?? "null",
+      image: item.image ?? "null",
+      price: parseFloat(item.price) ?? 0,
+      quantity: item.quantity ?? 0,
+    };
+
+    let cartCount = document.getElementById("cart");
+    cartCount.classList.add("added");
+    setTimeout(() => cartCount.classList.remove("added"), 140);
+    dispatch({ type: "ADD_ITEM", payload: newItem });
+  };
+
+  if (!loading) return <p>loading...</p>;
 
   return (
     <div className="TheDiscount">
       <div className="container">
         {recipe && (
           <div className="discount">
-            <div className="image">
-              <img src={recipe.menu?.image} alt={recipe.menu?.title} loading="lazy" />
+            <div className="img">
+              <img
+                src={require(`../../../../../${recipe.image}`)}
+                alt="offer"
+                loading="lazy"
+              />
             </div>
 
             <div className="info">
-              <span>{recipe.menu?.title}</span>
-              <h2>discount {recipe.discount}%</h2>
+              <span>{recipe.name}</span>
+              <h2>discount {"50"}%</h2>
               <p>
                 {String(recipe.description).length >= 140
                   ? recipe.description.slice(0, 140) + "..."
                   : recipe.description}
               </p>
               <div className="actions">
-                <button className="btn btnActive btnAddOrder" onClick={(recipe) => ADD_ITEM_HELPER(recipe, dispatch)}>
+                <button
+                  className="btn btnActive btnAddOrder"
+                  onClick={(recipe) => handleAddItem(recipe)}
+                >
                   add order
                   <i className="fas fa-plus"></i>
                 </button>
-
-                <Link to={`/recipe-details/${recipe.menu?.id}`} className="btn btnActive details">
+                <button className="btn btnActive">
                   show details
                   <i className="fas fa-bookmark"></i>
-                </Link>
+                </button>
               </div>
             </div>
           </div>

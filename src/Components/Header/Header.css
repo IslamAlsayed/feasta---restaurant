@@ -85,7 +85,6 @@
         }
 
         & .navbar {
-            gap: 10px;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -115,11 +114,7 @@
                         color: var(--light-color);
                     }
 
-                    & i {
-                        color: var(--light-color);
-                    }
-
-                    &:not(.active, .parentOptions):hover a {
+                    &:not(.active, .dropdown):hover a {
                         background-color: #f9923850;
                     }
 
@@ -192,11 +187,10 @@
                         padding: 5px 10px;
                         border-radius: 3px;
                         white-space: nowrap;
-                        font-weight: normal;
                         color: var(--light-color);
 
                         & i {
-                            font-size: 14px;
+                            font-size: 20px;
                             pointer-events: none;
                             color: var(--mainColor);
                             -webkit-margin-start: 5px;
@@ -207,27 +201,27 @@
                         }
 
                         &:not(.active):hover {
-                            background-color: #006dc150;
+                            background-color: #f9923850;
                         }
 
                         &.active {
-                            background: var(--toxic-color);
+                            background: var(--main-color);
                         }
                     }
                 }
 
-                & .parentOptions {
+                & .dropdown {
                     position: relative;
 
                     & .dropList {
                         width: 200px;
                         gap: 7px !important;
                         position: absolute;
-                        top: 45px;
+                        top: 40px;
                         left: 0;
                         z-index: 100;
                         padding: 10px;
-                        border-radius: 0 0 7px 7px;
+                        border-radius: 7px;
                         -webkit-box-orient: vertical;
                         -webkit-box-direction: normal;
                         -ms-flex-direction: column;
@@ -297,92 +291,56 @@
                 }
             }
 
-            & .navActions {
-                gap: 20px;
+            & .menu {
+                opacity: 0.7;
+                display: none;
+                cursor: pointer;
+                font-size: 24px;
+                color: var(--light-color);
 
-                & .menu {
-                    opacity: 0.7;
-                    display: none;
+                &:hover {
+                    opacity: 1;
+                }
+
+                & i {
+                    pointer-events: none;
+                }
+            }
+
+            & .cart {
+                margin-inline: 15px;
+                position: relative;
+                color: var(--light-color);
+
+                & .fa-cart-shopping {
+                    font-size: 20px;
                     cursor: pointer;
-                    font-size: 24px;
-                    color: var(--light-color);
-
-                    &:hover {
-                        opacity: 1;
-                    }
-
-                    & i {
-                        pointer-events: none;
-                    }
                 }
 
-                & .cart {
-                    position: relative;
-                    color: var(--light-color);
+                &[data-count]::after {
+                    width: 15px;
+                    height: 15px;
+                    content: attr(data-count);
+                    font-size: 9px;
+                    background: red;
+                    position: absolute;
+                    top: -50%;
+                    right: -30%;
+                    display: -ms-grid;
+                    display: grid;
+                    -webkit-transition: 0.3s;
+                    -o-transition: 0.3s;
+                    transition: 0.3s;
+                    border-radius: 25px;
+                    place-content: center;
+                    border: 1px solid var(--light-color);
+                }
 
-                    & .fa-cart-shopping {
-                        cursor: pointer;
-                    }
-
+                &.added {
                     &[data-count]::after {
-                        width: fit-content;
-                        height: fit-content;
-                        content: attr(data-count);
-                        font-size: 7px;
-                        padding-inline: 2px;
-                        background: red;
-                        position: absolute;
-                        top: -20%;
-                        right: -30%;
-                        display: -ms-grid;
-                        display: grid;
-                        -webkit-transition: 0.3s;
-                        -o-transition: 0.3s;
-                        transition: 0.3s;
-                        border-radius: 25px;
-                        place-content: center;
-                        border: 1px solid var(--light-color);
-                    }
-
-                    &.added {
-                        &[data-count]::after {
-                            -webkit-transform: translateY(-7px) scale(1.4);
-                            -ms-transform: translateY(-7px) scale(1.4);
-                            transform: translateY(-7px) scale(1.4);
-                        }
-                    }
-                }
-
-                & .user {
-                    transform: translateY(-3px);
-
-                    & b {
-                        width: 24px;
-                        height: 24px;
-                        cursor: pointer;
-                        font-size: 12px;
-                        border-radius: 50%;
-                        text-align: center;
-                        display: inline-block;
-                        place-content: center;
-                        background-color: var(--toxic-color);
-                    }
-
-                    & .dropList {
-                        width: 140px !important;
-                        top: 47px !important;
-                        left: auto !important;
-                        right: 0 !important;
-                        box-shadow: 0 0 3px -1px var(--light-color);
-
-                        & li {
-                            text-align: start;
-
-                            &,
-                            & a {
-                                width: 120px;
-                            }
-                        }
+                        -webkit-transform: translateY(-7px) scale(1.4);
+                        -ms-transform: translateY(-7px) scale(1.4);
+                        transform: translateY(-7px) scale(1.4);
                     }
                 }
             }
@@ -419,7 +377,7 @@
                 align-items: start;
                 position: relative;
 
-                &>ul:first-of-type {
+                & ul:first-of-type {
                     width: 100%;
                     padding-block: 15px;
                     -webkit-box-orient: vertical;
@@ -441,7 +399,6 @@
                         -webkit-transform: translateY(0);
                         -ms-transform: translateY(0);
                         transform: translateY(0);
-                        box-shadow: 0 5px 9px -8px var(--light-color);
                     }
 
                     &::before {
@@ -491,37 +448,9 @@
                     }
                 }
 
-                & .navActions {
-                    & .user {
-                        transform: translateY(0);
-                    }
-
-                    & .menu {
-                        opacity: 1;
-                        display: block;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-    .Header {
-        & .container {
-            & .navbar {
-                & ul {
-                    & .options {
-                        & b {
-                            font-size: 10px;
-                        }
-                    }
-
-                    & li {
-                        & a {
-                            font-size: 10px;
-                        }
-                    }
+                & .menu {
+                    opacity: 1;
+                    display: block;
                 }
             }
         }

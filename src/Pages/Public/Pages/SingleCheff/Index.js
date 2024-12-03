@@ -1,12 +1,12 @@
 import React from "react";
 import Banner from "./Banner/Banner";
-import EatBetter from "./EatBetter/EatBetter";
+import SingleCheff from "./SingleCheff/SingleCheff";
 
 export default function Index() {
   return (
-    <div className="Index" style={{ overflow: "hidden" }}>
+    <div className="Index">
       <Banner />
-      <EatBetter />
+      <SingleCheff />
     </div>
   );
 }

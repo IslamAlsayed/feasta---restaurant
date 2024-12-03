@@ -2,9 +2,7 @@ import "./App.css";
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./Pages/Public/Index";
-import Auth from "./Pages/Auth/Index";
 import Dashboard from "./Pages/Dashboard/Index";
-import Cookies from "js-cookie";
 
 export default function App() {
   const ScrollToTop = () => {
@@ -17,24 +15,13 @@ export default function App() {
     return null;
   };
 
-  useEffect(() => {
-    if (!localStorage.getItem("cartItems")) {
-      localStorage.setItem("cartItems", JSON.stringify([]));
-    }
-
-    if (!Cookies.get("feasta_admin")) {
-      Cookies.set("feasta_admin", JSON.stringify([]));
-    }
-  }, [])
-
   return (
     <div className="App">
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
           <Route exact path="/*" element={<Index />} />
-          <Route path="/auth/*" element={<Auth />} />
-          <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

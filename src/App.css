@@ -22,15 +22,9 @@
 
   /* social colors */
   --facebook-color: #1877F2;
-  --instagram-color: #C13584;
   --twitter-color: #1DA1F2;
   --linkedin-color: #0077B5;
   --google-color: #DB4437;
-  --green-color: #27b51a;
-
-  --pending-color: #0077B5;
-  --confirmed-color: #27b51a;
-  --cancelled-color: #DB4437;
 }
 
 * {
@@ -106,16 +100,10 @@ body {
 }
 
 /* Phones */
-@media (max-width: 500px) {
-  .container {
-    padding-inline: 10px;
-  }
-}
 
 img {
   width: 100%;
   height: 100%;
-  font-size: 10px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -129,6 +117,11 @@ img {
 
 & input::-moz-placeholder,
 & textarea::-moz-placeholder {
+  color: var(--dark-color-50);
+}
+
+& input:-ms-input-placeholder,
+& textarea:-ms-input-placeholder {
   color: var(--dark-color-50);
 }
 
@@ -156,6 +149,13 @@ img {
   transition: opacity 0.3s;
 }
 
+& input:focus:-ms-input-placeholder,
+& textarea:focus:-ms-input-placeholder {
+  opacity: 0;
+  -ms-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
 & input:focus::-ms-input-placeholder,
 & textarea:focus::-ms-input-placeholder {
   opacity: 0;
@@ -171,11 +171,6 @@ img {
   transition: opacity 0.3s;
 }
 
-& input[type="email"] {
-  text-transform: lowercase;
-}
-
-& input,
 & textarea {
   resize: none;
 }
@@ -192,7 +187,7 @@ img {
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 3px;
-  font-family: var(--Roboto);
+  font-family: Arial;
   text-transform: uppercase;
   color: var(--light-color);
   background-color: var(--main-color-50);
@@ -218,7 +213,6 @@ img {
 
 & .btnActive:hover,
 & .facebook,
-& .instagram,
 & .twitter,
 & .linkedin,
 & .google {
@@ -227,10 +221,6 @@ img {
 
 & .facebook {
   color: var(--facebook-color);
-}
-
-& .instagram {
-  color: var(--instagram-color);
 }
 
 & .twitter {
@@ -243,34 +233,6 @@ img {
 
 & .google {
   color: var(--google-color);
-}
-
-& .pending,
-& .confirmed,
-& .cancelled {
-  padding: 2px 5px;
-  border-radius: 3px;
-  color: var(--light-color);
-}
-
-& .pending {
-  background-color: var(--pending-color);
-}
-
-& .confirmed {
-  background-color: var(--confirmed-color);
-}
-
-& .cancelled {
-  background-color: var(--cancelled-color);
-}
-
-& .red {
-  color: var(--red-color);
-}
-
-& .green {
-  color: var(--green-color);
 }
 
 /* swiper pagination bullet */
@@ -322,47 +284,5 @@ img {
       -ms-flex-direction: column;
       flex-direction: column;
     }
-  }
-}
-
-@media (max-width: 500px) {
-  & .swiper-pagination-bullet {
-    width: 14px !important;
-    height: 5px !important;
-  }
-}
-
-#support {
-  width: 100%;
-  min-height: 50svh;
-  text-align: center;
-  place-content: center;
-}
-
-@-webkit-keyframes loading {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes loading {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-
-  100% {
-    opacity: 1;
   }
 }
