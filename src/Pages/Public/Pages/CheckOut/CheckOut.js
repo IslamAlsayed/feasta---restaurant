@@ -1,13 +1,9 @@
 import "./CheckOut.css";
-import Pusher from "pusher-js";
-import Cookies from "js-cookie";
 import Swal from "sweetalert2";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DECREMENT_OR_INCREMENT_HELPER, WAYSEAT, WAYSPAY } from "../../../../Store/helper";
+import { WAYSEAT, WAYSPAY } from "../../../../Store/helper";
 import { addData } from "../../../../axiosConfig/API";
-import { isAuth } from "../../../../axiosConfig/Auth";
 
 export default function CheckOut() {
   const dispatch = useDispatch();
