@@ -68,7 +68,7 @@ export default function PopularDishes() {
 
                 <div className="action">
                   <button className="btn btnActive add" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
-                    <i className="fa-solid fa-plus"></i>
+                    <i className="fa-solid fa-cart-plus"></i>
                     order
                   </button>
 

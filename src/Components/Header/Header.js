@@ -8,7 +8,7 @@ import { isAuth, logout } from "../../axiosConfig/Auth";
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { TOTAL_QUANTITY } = useSelector((state) => state);
+  const TOTAL_QUANTITY = useSelector((state) => state.TOTAL_QUANTITY);
   const [dropListActive, setDropListActive] = useState(false);
   const [userActive, setUserActive] = useState(false);
   const [listActive, setListActive] = useState(false);
@@ -22,24 +22,49 @@ export default function Header() {
       if (!e.target.closest("#userOptions")) setUserActive(false);
     });
 
-    window.addEventListener("scroll", () => {
+    // window.addEventListener("scroll", () => {
+    //   setDropListActive(false);
+    //   setListActive(false);
+    //   setUserActive(false);
+
+    //   var prevScroll = window.pageYOffset;
+
+    //   document.addEventListener("scroll", () => {
+    //     var currentScrollPos = window.pageYOffset;
+    //     let header = document.getElementById("Header");
+    //     if (prevScroll > currentScrollPos) {
+    //       if (header) header.style.transform = "translateY(0)";
+    //     } else {
+    //       if (header) header.style.transform = "translateY(-100%)";
+    //     }
+    //     prevScroll = currentScrollPos;
+    //   });
+    // });
+
+    let prevScroll = window.pageYOffset;
+    let header = document.getElementById("Header");
+    const handleScroll = () => {
       setDropListActive(false);
       setListActive(false);
       setUserActive(false);
 
-      var prevScroll = window.pageYOffset;
+      let currentScrollPos = window.pageYOffset;
+      let condition = prevScroll <= 50 ? 100 : 10;
 
-      document.addEventListener("scroll", () => {
-        var currentScrollPos = window.pageYOffset;
-        let Header = document.getElementById("Header");
-        if (prevScroll > currentScrollPos) {
-          if (Header) Header.style.transform = "translateY(0)";
-        } else {
-          if (Header) Header.style.transform = "translateY(-100%)";
-        }
+      if (prevScroll > currentScrollPos + 10) {
+        if (header) header.style.transform = "translateY(0)";
         prevScroll = currentScrollPos;
-      });
-    });
+      } else if (currentScrollPos > prevScroll + condition) {
+        if (header) header.style.transform = "translateY(-100%)";
+        prevScroll = currentScrollPos;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -185,6 +210,7 @@ export default function Header() {
           </ul>
         </div>
       </div>
+
     </div>
   );
 }

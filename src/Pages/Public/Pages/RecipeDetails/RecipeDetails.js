@@ -59,6 +59,7 @@ export default function RecipeDetails() {
   const fetchRecipeReviews = useCallback(async (id) => {
     try {
       const result = await getData(`recipe/${id}/comments`);
+      console.log(result.result)
       if (result.status === 200) {
         setReviews(result.result);
       }
@@ -226,7 +227,7 @@ export default function RecipeDetails() {
             <div className="price_and_rating">
               <div className="price">
                 <b>price: </b>
-                <span>${recipe.selling_price}</span>
+                <span>${recipe.price}</span>
               </div>
 
               <div className="rating">
@@ -241,7 +242,7 @@ export default function RecipeDetails() {
             <div className="action">
               <button className="btn btnActive btnAddOrder" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)} >
                 add order
-                <i className="fas fa-plus"></i>
+                <i className="fas fa-cart-plus"></i>
               </button>
             </div>
           </div>
@@ -288,9 +289,9 @@ export default function RecipeDetails() {
         )}
 
         <div className="reviews">
-          <h2>reviews <span>{reviews.length}</span></h2>
+          {userAuth && <h2>reviews <span>{reviews.length}</span></h2>}
 
-          {reviews.length > 0 ? (
+          {reviews.length > 0 &&
             reviews.map((review, index) => (
               <div className="review" key={index} id={review.id}>
                 <div className="image">
@@ -334,14 +335,15 @@ export default function RecipeDetails() {
                   <small className="date">{review.updated_at}</small>
                   <div className="comment">{review.comment}</div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <div className="reviews">
-              There are no reviews yet, try it yourself.
-            </div>
-          )}
+              </div>))
+          }
         </div>
+
+        {userAuth && reviews.length <= 0 &&
+          <div className="reviews">
+            There are no reviews yet, try it yourself.
+          </div>
+        }
 
         <div className="RandomRecipes">
           <div className="head">

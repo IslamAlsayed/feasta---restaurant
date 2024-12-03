@@ -87,7 +87,7 @@ export default function TheStarters() {
 
                     <div className="actions">
                       <button className="add btnAddOrder" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
-                        <i className="fas fa-plus"></i>
+                        <i className="fas fa-cart-plus"></i>
                       </button>
                       <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
                         <i className="fas fa-bookmark"></i>
@@ -139,11 +139,8 @@ export default function TheStarters() {
                     </div>
 
                     <div className="actions">
-                      <button
-                        className="add btnAddOrder"
-                        onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}
-                      >
-                        <i className="fas fa-plus"></i>
+                      <button className="add btnAddOrder" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)} >
+                        <i className="fas fa-cart-plus"></i>
                       </button>
                       <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
                         <i className="fas fa-bookmark"></i>
@@ -203,11 +200,8 @@ export default function TheStarters() {
                     </div>
 
                     <div className="actions">
-                      <button
-                        className="add btnAddOrder"
-                        onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}
-                      >
-                        <i className="fas fa-plus"></i>
+                      <button className="add btnAddOrder" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)} >
+                        <i className="fas fa-cart-plus"></i>
                       </button>
                       <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
                         <i className="fas fa-bookmark"></i>

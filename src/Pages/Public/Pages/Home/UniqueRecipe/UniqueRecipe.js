@@ -76,8 +76,7 @@ export default function UniqueRecipe() {
                 </div>
 
                 <div className="actions">
-                  <button className="btn btnActive add" disabled={!recipe}
-                    onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
+                  <button className="btn btnActive add" disabled={!recipe} onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
                     <span>add order</span>
                     <i className="fa-solid fa-cart-plus"></i>
                   </button>

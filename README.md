@@ -52,6 +52,16 @@ Main page of site.
 ![Menu](./src/Assets/preview/menu.png)
 Menu page of site.
 
+## Checkout page when shopping cart is empty
+
+![checkout](./src/Assets/preview/checkout.png)
+Menu page of site.
+
+## Checkout page when shopping cart isn't empty
+
+![checkout2](./src/Assets/preview/checkout2.png)
+Menu page of site.
+
 ## Contact me
 
 ### If you have any questions or need further assistance, you can reach out to me:

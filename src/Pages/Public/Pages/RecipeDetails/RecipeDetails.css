@@ -180,17 +180,17 @@
         & .log_in_to_comment {
             width: 400px;
             padding: 10px;
-            margin-top: 20px;
             border-radius: 3px;
-            color: var(--light-color);
-            background: var(--main-color);
+            margin-block: 20px 10px;
+            color: var(--dark-color);
+            background: var(--load);
         }
 
         & .modelRate {
             & .modelForm {
                 width: 400px;
                 padding: 10px;
-                margin-top: 20px;
+                margin-block: 20px;
                 border-radius: 3px;
                 background-color: #eaeaea;
 
@@ -252,6 +252,12 @@
         }
 
         & .reviews {
+            margin-bottom: 20px;
+
+            & h2 {
+                padding-bottom: 10px;
+            }
+
             & .review {
                 gap: 20px;
                 display: -webkit-box;

@@ -110,8 +110,7 @@ export default function TabsRecipes() {
                   </div>
 
                   <div className="actions">
-                    <button className="btn btnActive add"
-                      onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
+                    <button className="btn btnActive add" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
                       <i className="fas fa-cart-plus"></i>
                     </button>
                     <Link to={`recipe-details/${recipe.id}`}

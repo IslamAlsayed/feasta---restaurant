@@ -4,6 +4,7 @@ import { createStore } from "redux";
 const initialState = {
   CART: JSON.parse(localStorage.getItem("cartItems")) || [],
   TOTAL_PRICE: 0,
+  TOTAL_PRICE_WITH_VAT: 0,
   TOTAL_QUANTITY: 0,
 }
 
@@ -29,16 +30,18 @@ const cartReducer = (state = initialState, action) => {
 
         updatedCartAdd = [...state.CART.slice(0, isItemExisting), updatedItem, ...state.CART.slice(isItemExisting + 1)];
       } else {
-        action.payload.vat = 0.1;
         action.payload.quantity = 1;
+        action.payload.vat = action.payload.vat / 100;
         updatedCartAdd = [...state.CART, action.payload];
       }
 
       localStorage.setItem("cartItems", JSON.stringify(updatedCartAdd));
+
       return {
         ...state,
         CART: updatedCartAdd,
         TOTAL_PRICE: calculateTotalPrice(updatedCartAdd),
+        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(updatedCartAdd),
         TOTAL_QUANTITY: calculateTotalQuantity(updatedCartAdd),
       };
 
@@ -53,6 +56,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         CART: updatedCartRemove,
         TOTAL_PRICE: calculateTotalPrice(updatedCartRemove),
+        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(updatedCartRemove),
         TOTAL_QUANTITY: calculateTotalQuantity(updatedCartRemove),
       };
 
@@ -72,6 +76,7 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         CART: incrementedItems,
         TOTAL_PRICE: calculateTotalPrice(incrementedItems),
+        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(incrementedItems),
         TOTAL_QUANTITY: calculateTotalQuantity(incrementedItems),
       };
 
@@ -90,13 +95,14 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         CART: decrementedItems,
         TOTAL_PRICE: calculateTotalPrice(decrementedItems),
+        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(decrementedItems),
         TOTAL_QUANTITY: calculateTotalQuantity(decrementedItems),
       };
 
     case "RESET_CART":
       localStorage.setItem("cartItems", JSON.stringify([]));
 
-      return { ...state, CART: [], TOTAL_PRICE: 0, TOTAL_QUANTITY: 0 };
+      return { ...state, CART: [], TOTAL_PRICE: 0, TOTAL_PRICE_WITH_VAT: 0, TOTAL_QUANTITY: 0 };
     default:
       return state;
   }
@@ -104,15 +110,20 @@ const cartReducer = (state = initialState, action) => {
 
 // helper function
 const calculateTotalPrice = (cart) => {
-  return cart.reduce((total, recipe) => total + recipe.price * recipe.quantity + (recipe.price * recipe.quantity * recipe.vat), 0);
+  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
+const calculateTotalPriceWithVat = (cart) => {
+  return cart.reduce((total, item) => total + item.price * item.quantity + (item.price * item.quantity * item.vat), 0);
 };
 
 const calculateTotalQuantity = (cart) => {
-  return cart.reduce((total, recipe) => total + recipe.quantity, 0);
+  return cart.reduce((total, item) => total + item.quantity, 0);
 };
 
 // Set total [ price,quantity ] with open site
 initialState.TOTAL_PRICE = calculateTotalPrice(initialState.CART);
+initialState.TOTAL_PRICE_WITH_VAT = calculateTotalPriceWithVat(initialState.CART);
 initialState.TOTAL_QUANTITY = calculateTotalQuantity(initialState.CART);
 
 // Create the Redux store and export it

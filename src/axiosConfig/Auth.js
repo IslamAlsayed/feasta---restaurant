@@ -22,10 +22,6 @@ export const login = async (email, password) => {
       localStorage.setItem("cartItems", JSON.stringify([]));
     }
 
-    if (!localStorage.getItem("cartTotal")) {
-      localStorage.setItem("cartTotal", 0);
-    }
-
     return response.data;
   } catch (error) {
     return error.response?.data;
@@ -51,10 +47,6 @@ export const register = async (data) => {
     // illogical
     if (!localStorage.getItem("cartItems")) {
       localStorage.setItem("cartItems", JSON.stringify([]));
-    }
-
-    if (!localStorage.getItem("cartTotal")) {
-      localStorage.setItem("cartTotal", 0);
     }
 
     return response.data;

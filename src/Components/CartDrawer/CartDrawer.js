@@ -9,7 +9,9 @@ export default function CartDrawer() {
   const navigate = useNavigate();
   const location = useLocation();
   const [cartNotEmpty, setCartNotEmpty] = useState(false);
-  const { CART, TOTAL_PRICE, TOTAL_QUANTITY } = useSelector((state) => state);
+  const CART = useSelector((state) => state.CART);
+  const TOTAL_PRICE = useSelector((state) => state.TOTAL_PRICE);
+  const TOTAL_QUANTITY = useSelector((state) => state.TOTAL_QUANTITY);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -69,39 +71,39 @@ export default function CartDrawer() {
         {!CART.length > 0 && (<h3 className="cart-empty">'The cart is empty'</h3>)}
 
         <div className="content">
-          <div className="cart-recipes">
-            <div className="recipes">
-              {CART.map((recipe, index) => (
-                <div className="recipe" id={`recipe_${recipe.id}`} key={index}>
+          <div className="cart-items">
+            <div className="items">
+              {CART.map((item, index) => (
+                <div className="item" id={`item_${item.id}`} key={index}>
                   <div className="img">
-                    <img src={recipe.image} alt={recipe.title} loading="lazy" />
+                    <img src={item.image} alt={item.title} loading="lazy" />
                   </div>
 
                   <div className="text">
-                    <div className="title">{recipe.title}</div>
+                    <div className="title">{item.title}</div>
 
                     <div className="price">
-                      price: <span>${recipe.price.toFixed(2)}</span>
+                      price: <span>${parseFloat(item.price).toFixed(2)}</span>
                     </div>
 
                     <div className="total">
-                      total: <span>${(recipe.price * recipe.quantity).toFixed(2)}</span>
-                      to <span>{recipe.quantity}s</span>
+                      total: <span>${(parseFloat(item.price) * item.quantity).toFixed(2)}</span>
+                      to <span>{item.quantity}s</span>
                     </div>
                   </div>
 
                   <div className="action">
-                    <button className="deleteItem btnActive" id={`delete-recipe_${recipe.id}`}
-                      onClick={() => REMOVE_ITEM_HELPER(recipe.id, dispatch)}>
+                    <button className="deleteItem btnActive" id={`delete-item_${item.id}`}
+                      onClick={() => REMOVE_ITEM_HELPER(item.id, dispatch)}>
                       <i className="fas fa-trash-can"></i>
                     </button>
 
                     <div className="quantity">
-                      <span className={`btnActive ${recipe.quantity === 1 && "disabled"}`} onClick={() => DECREMENT_OR_INCREMENT_HELPER(recipe, "DECREMENT_ITEM", dispatch)}>
+                      <span className={`btnActive ${item.quantity === 1 && "disabled"}`} onClick={() => DECREMENT_OR_INCREMENT_HELPER(item, "DECREMENT_ITEM", dispatch)}>
                         <b>-</b>
                       </span>
 
-                      <span className="btnActive" onClick={() => DECREMENT_OR_INCREMENT_HELPER(recipe, "INCREMENT_ITEM", dispatch)}>
+                      <span className="btnActive" onClick={() => DECREMENT_OR_INCREMENT_HELPER(item, "INCREMENT_ITEM", dispatch)}>
                         <b>+</b>
                       </span>
                     </div>
@@ -113,9 +115,9 @@ export default function CartDrawer() {
 
           <div className="actions">
             {CART.length > 0 && (
-              <div className="totalAllRecipe">
-                <strong>total:</strong>
-                <span> ${TOTAL_PRICE.toFixed(2)}</span>
+              <div className="totalAllitem">
+                <strong>total: </strong>
+                <span>${TOTAL_PRICE.toFixed(2)}</span>
               </div>
             )}
 

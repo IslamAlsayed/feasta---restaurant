@@ -6,7 +6,6 @@ export const storageURL = "http://127.0.0.1:8000/storage/images/";
 
 export const getData = async (url) => {
   try {
-    // const response = await axios.get("/Store/" + url + ".json");
     const response = await axios.get(basicURL + url, {
       headers: {
         Accept: "application/json",
@@ -15,6 +14,25 @@ export const getData = async (url) => {
     });
     return response.data;
   } catch (error) {
+    if (error.response) {
+      const { status, data } = error.response;
+
+      if (status === 404) return;
+
+      if (status === 401 && data.message === "You are not Superadmin") {
+        Cookies.remove("feasta_token");
+        Cookies.remove("feasta_admin");
+        window.location.href = "/auth/login";
+      } else if (status >= 500) {
+        console.error("Server error. Please try again later.");
+      } else {
+        console.error(`Error response (${status}):`, data);
+      }
+    } else if (error.request) {
+      console.error("Network error: No response received", error.request);
+    } else {
+      console.error("Error occurred:", error.message);
+    }
     throw error;
   }
 };
@@ -25,6 +43,25 @@ export const getDataById = async (url, id) => {
     let alone = response.data.find((data) => data.id === parseInt(id));
     return alone;
   } catch (error) {
+    if (error.response) {
+      const { status, data } = error.response;
+
+      if (status === 404) return;
+
+      if (status === 401 && data.message === "You are not Superadmin") {
+        Cookies.remove("feasta_token");
+        Cookies.remove("feasta_admin");
+        window.location.href = "/auth/login";
+      } else if (status >= 500) {
+        console.error("Server error. Please try again later.");
+      } else {
+        console.error(`Error response (${status}):`, data);
+      }
+    } else if (error.request) {
+      console.error("Network error: No response received", error.request);
+    } else {
+      console.error("Error occurred:", error.message);
+    }
     throw error;
   }
 };

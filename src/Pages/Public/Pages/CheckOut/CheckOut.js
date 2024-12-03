@@ -1,248 +1,221 @@
 import "./CheckOut.css";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Pusher from "pusher-js";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { DECREMENT_OR_INCREMENT_HELPER } from "../../../../Store/helper";
+import { DECREMENT_OR_INCREMENT_HELPER, WAYSEAT, WAYSPAY } from "../../../../Store/helper";
 import { addData } from "../../../../axiosConfig/API";
+import { isAuth } from "../../../../axiosConfig/Auth";
 
 export default function CheckOut() {
   const dispatch = useDispatch();
-  const [makeOrder, setMakeOrder] = useState(false);
-  const { CART, TOTAL_PRICE, TOTAL_QUANTITY } = useSelector((state) => state);
-  const [order, setOrder] = useState({ items: JSON.stringify(CART), total: TOTAL_PRICE, client_id: "", table_id: "" });
-  const [userDiscount, setUserDiscount] = useState();
+  const CART = useSelector((state) => state.CART);
+  const TOTAL_PRICE_WITH_VAT = useSelector((state) => state.TOTAL_PRICE_WITH_VAT);
+  const [errors, setErrors] = useState({});
+  const [code, setCode] = useState("");
   const [discount, setDiscount] = useState(0);
-
-  const handleDiscount = () => {
-    if (userDiscount === "islam1") {
-      setDiscount(7);
-    } else if (userDiscount === "islam2") {
-      setDiscount(15);
-    } else if (userDiscount === "islam3") {
-      setDiscount(45);
-    } else {
-      setDiscount(0);
-    }
-  };
+  const [order, setOrder] = useState({
+    wayEat: "",
+    wayPay: "cash",
+    client: { name: "", email: "", phone: "" },
+    address: { country: "", village: "", street: "" },
+    items: JSON.stringify(CART),
+    total: parseFloat(TOTAL_PRICE_WITH_VAT.toFixed(2)),
+    discount: 0,
+    client_id: 1
+  });
 
   useEffect(() => {
-    setOrder({
-      ...order,
-      items: JSON.stringify(CART),
-      total: parseFloat(TOTAL_PRICE.toFixed(2)),
-      discount: discount,
-      client_id: JSON.parse(Cookies.get("feasta_admin")).id,
-      table_id: 1
-    });
-  }, [CART, discount])
+    let totalWithDiscount = (TOTAL_PRICE_WITH_VAT - (TOTAL_PRICE_WITH_VAT * discount) / 100);
+    setOrder((prev) => ({ ...prev, total: parseFloat(totalWithDiscount.toFixed(2)), discount: discount }));
+  }, [TOTAL_PRICE_WITH_VAT, discount]);
 
-  const handleMakeOrder = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await addData("orders", order);
-      localStorage.removeItem("orderId")
-
-      if (response.status === 200) {
-        // setOrder({ items: "", total: 0, discount: 0, client_id: "", table_id: "" });
-
-        localStorage.setItem("orderId", response.data.id);
-
-        handleLoad("#confirm");
-
-        // setTimeout(() => setMakeOrder(true), 1000);
-
-        // setTimeout(() => {
-        // setMakeOrder(false);
-        // dispatch({ type: "RESET_CART" });
-        // }, 7000);
-
-        Swal.fire("Saved!", response.result, "success");
-      }
-    } catch (error) {
-      Swal.fire("Error!", error.response?.data?.result, "error");
-    }
+  const handleClick = (name, value) => {
+    setOrder({ ...order, [name]: value });
+    setErrors({ ...errors, [name]: "" });
   };
 
-  // useEffect(() => {
-  //   const pusher = new Pusher("96467a2e5f59e964e43f", {
-  //     cluster: "eu",
-  //     encrypted: true,
-  //     // auth: {
-  //     //   headers: {
-  //     //     Authorization: `Bearer ${Cookies.get("feasta_token")}`,
-  //     //   }
-  //     // }
-  //   });
+  const handleChange = (e, section) => {
+    const { name, value } = e.target;
+    setOrder((prev) => ({ ...prev, [section]: { ...prev[section], [name]: value } }));
+    setErrors({ ...errors, [name]: "" });
+  };
 
-  //   // pusher.connect();
-  //   const orderId = 18;
-  //   // const channel = pusher.subscribe(`private-orders.${orderId}`);
-  //   const channel = pusher.subscribe(`chat`);
-  //   channel.bind("Message", (data) => {
-  //     console.log(data);
-  //   });
+  const handlePayNow = async (e) => {
+    e.preventDefault();
+    const newErrors = {};
 
-  //   return () => {
-  //     pusher.unsubscribe(`chat`);
-  //     // pusher.disconnect();
-  //   };
-  // }, []);
+    if (!order.wayEat) newErrors.wayEat = "The way eat is required";
+    if (!order.wayPay) newErrors.wayPay = "The way pay is required";
+    if (!order.client.name) newErrors.name = "The name is required";
+    if (!order.client.email) newErrors.email = "The email is required";
+    if (!order.client.phone) newErrors.phone = "The phone is required";
+    if (order.wayEat === "delivery" && !order.address.country) newErrors.country = "The country is required";
+    if (order.wayEat === "delivery" && !order.address.village) newErrors.village = "The village is required";
+    if (order.wayEat === "delivery" && !order.address.street) newErrors.street = "The street is required";
 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      const newOrder = { ...order, client: JSON.stringify(order.client), address: JSON.stringify(order.address) };
 
-  // useEffect(() => {
-  //   let pusher = new Pusher("96467a2e5f59e964e43f", { cluster: "eu", encrypted: true });
+      try {
+        const response = await addData("orders", newOrder);
 
-  //   let channel = pusher.subscribe("chat");
+        if (response.status === 200) {
+          setOrder({
+            wayEat: "",
+            wayPay: "cash",
+            client: { name: "", email: "", phone: "" },
+            address: { country: "", village: "", street: "" },
+            items: JSON.stringify(CART),
+            total: 0,
+            discount: 0,
+            client_id: 1
+          });
 
-  //   channel.bind("Message", (message) => console.log(message));
-
-  //   return () => { pusher.unsubscribe("chat") };
-  // }, []);
-
-  const handleLoad = (element) => {
-    const load = document.createElement("div");
-    load.className = "load";
-    load.style.background = "var(--toxic-color)";
-
-    const span = document.createElement("span");
-    load.appendChild(span);
-    document.querySelector(element).appendChild(load);
-
-    setTimeout(() => {
-      const loaderElement = document.querySelector(`${element} .load`);
-      if (loaderElement) loaderElement.remove();
-    }, 1000);
+          Swal.fire("Saved!", response.result, "success");
+        }
+      } catch (error) {
+        Swal.fire("Error!", error?.result || error?.message, "error");
+      }
+    }
   };
 
   return (
     <div className="CheckOut">
       <div className="container">
-        <h1 className="title">your orders</h1>
+        <h1>checkout</h1>
 
-        <table className="orders">
-          <thead className="orders-head">
-            <tr>
-              <th>orders</th>
-              <th>quantity</th>
-              <th>price</th>
-              <th>vat</th>
-              <th>total</th>
-              {!makeOrder && <th className="wait">delete</th>}
-            </tr>
-          </thead>
+        <div className="alert-code-discount">Use this code <i>islam</i> to get 25% discount</div>
 
-          <tbody className="orders-body">
-            {CART.map((item, index) => (
-              <tr className="product" key={index}>
-                <td className="img">
-                  <img src={item.image} alt={item.title} loading="lazy" />
-                  <p>{item.title}</p>
-                </td>
+        <form className="form" onSubmit={(e) => e.preventDefault()}>
+          <div className="information">
+            <h2>shipping information</h2>
 
-                <td className="quantity">
-                  <span className="btnActive"
-                    onClick={() => DECREMENT_OR_INCREMENT_HELPER(item, "DECREMENT_ITEM", dispatch)} >
-                    <b>-</b>
-                  </span>
+            {/* [ way eat, way pay ] */}
+            <div className="wayPays">
+              {/* way eat */}
+              <div className="wayPay-info">
+                <h3>way eat</h3>
 
-                  <b>{item.quantity}</b>
-
-                  <span className="btnActive"
-                    onClick={() => DECREMENT_OR_INCREMENT_HELPER(item, "INCREMENT_ITEM", dispatch)} >
-                    <b>+</b>
-                  </span>
-                </td>
-
-                <td className="price">${item.price}</td>
-
-                <td className="vat">{item.vat}%</td>
-
-                <td className="total">
-                  $ {((item.vat) * (item.price * item.quantity) + item.price * item.quantity).toFixed(2)}
-                </td>
-
-                {!makeOrder &&
-                  <td className="action">
-                    <button className="btn btnActive delete">
-                      <i className="fas fa-trash"></i>
-                    </button>
-                  </td>
-                }
-              </tr>
-            ))}
-          </tbody>
-
-          <tfoot className="orders-foot">
-            <tr>
-              <td>Total All</td>
-              <td><span>{TOTAL_QUANTITY}</span> Dishes</td>
-              <td colSpan="3">Pay <span className="total">${TOTAL_PRICE.toFixed(2)}</span></td>
-              {!makeOrder && <td className="wait">--</td>}
-            </tr>
-          </tfoot>
-        </table>
-
-        {makeOrder && (
-          <div className="waitEndOrder">
-            <i className="fa-solid fa-stopwatch"></i>
-            <span>...please wait to end order</span>
-          </div>
-        )}
-
-        {CART.length > 0 && !makeOrder && (
-          <div className="discount">
-            {discount !== 0 && (
-              <div className="note-discount">
-                <span>discount: {discount}%</span>
-                <b>-${(TOTAL_PRICE - (TOTAL_PRICE - (TOTAL_PRICE * discount) / 100)).toFixed(2)}</b>
-              </div>
-            )}
-
-            <form className="formDiscount" onSubmit={(e) => e.preventDefault()}>
-              <input type="text" name="userDiscount" id="userCoupon" value={userDiscount} onChange={(e) => setUserDiscount(e.target.value)} placeholder="Enter your coupon code" />
-              <button
-                className={`btn btnActive ${userDiscount !== "islam1" && userDiscount !== "islam2" && userDiscount !== "islam3" && "disabled"}`}
-                onClick={() => handleDiscount()}>
-                apply
-              </button>
-            </form>
-
-            <div className="coupons">
-              You can use these coupons:
-              <span>
-                <small data-discount="7">islam1</small>
-                <small data-discount="15">islam2</small>
-                <small data-discount="45">islam3</small>
-              </span>
-            </div>
-          </div>
-        )}
-
-        <div className="payment">
-          {CART.length > 0 && (
-            <div className="address">
-              <h2>address shipping</h2>
-              <form action="">
-                <input type="text" placeholder="united kingdom (UK)" />
-                <div className="group">
-                  <input type="text" placeholder="state / country" />
-                  <input type="text" placeholder="post code / zip" />
+                <div className={`ways ${errors?.wayEat ? 'red' : ''}`}>
+                  {WAYSEAT.map((way, index) => (way.active &&
+                    <div className={`way ${order.wayEat === way.key && "active"}`} onClick={() => handleClick("wayEat", way.key)} key={index}>
+                      <input type="radio" name="wayEat" value={order.wayEat} id={way.key} checked={order.wayEat === way.key} readOnly />
+                      <label htmlFor={way.key}></label>
+                      <i className={`fas ${way.icon}`}></i>
+                      <span>{way.title}</span>
+                    </div>
+                  ))}
                 </div>
-                <button className="btn btnActive">update address</button>
-              </form>
+              </div>
+
+              {/* way pay */}
+              <div className="wayPay-info">
+                <h3>way pay</h3>
+
+                <div className={`ways ${errors?.wayPay ? 'red' : ''}`}>
+                  {WAYSPAY.map((way, index) => (way.active &&
+                    <div className={`way ${order.wayPay === way.key && "active"}`} onClick={() => handleClick("wayPay", way.key)} key={index}>
+                      <input type="radio" name="wayPay" value={order.wayPay} id={way.key} checked={order.wayPay === way.key} readOnly />
+                      <label htmlFor={way.key}></label>
+                      <i className={`fas ${way.icon}`}></i>
+                      <span>{way.title}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          )}
 
-          <div className="confirm-order">
-            <h2>cart total</h2>
+            {/* [ name, email, phone ] */}
+            <div className="client-info">
+              {/* name */}
+              <div className="group">
+                <input type="text" name="name" id="name" className={errors?.name ? 'red' : ''} value={order.client.name} placeholder=" "
+                  onChange={(e) => handleChange(e, "client")} />
+                <label htmlFor="name">name <span>*</span></label>
+              </div>
 
+              {/* email */}
+              <div className="group">
+                <input type="email" name="email" id="email" className={errors?.email ? 'red' : ''} value={order.client.email} placeholder=" "
+                  onChange={(e) => handleChange(e, "client")} />
+                <label htmlFor="email">email <span>*</span></label>
+              </div>
+
+              {/* phone */}
+              <div className="group">
+                <input type="text" name="phone" id="phone" className={errors?.phone ? 'red' : ''} value={order.client.phone} placeholder=" "
+                  onChange={(e) => handleChange(e, "client")} />
+                <label htmlFor="phone">phone <span>*</span></label>
+              </div>
+            </div>
+
+            {/* [ country, village, street ] */}
+            {order.wayEat === "delivery" &&
+              <div className="address-info">
+                <h3>address shipping</h3>
+
+                <div className="groups">
+                  {/* country */}
+                  <div className="group">
+                    <input type="text" name="country" id="country" className={errors?.country ? 'red' : ''} value={order.address.country} placeholder=" "
+                      onChange={(e) => handleChange(e, "address")} />
+                    <label htmlFor="country">country <span>*</span></label>
+                  </div>
+
+                  {/* village */}
+                  <div className="group">
+                    <input type="text" name="village" id="village" className={errors?.village ? 'red' : ''} value={order.address.village} placeholder=" "
+                      onChange={(e) => handleChange(e, "address")} />
+                    <label htmlFor="village">village <span>*</span></label>
+                  </div>
+                </div>
+
+                {/* street */}
+                <div className="group">
+                  <input type="text" name="street" id="street" className={errors?.street ? 'red' : ''} value={order.address.street} placeholder=" "
+                    onChange={(e) => handleChange(e, "address")} />
+                  <label htmlFor="street">street <span>*</span></label>
+                </div>
+              </div>
+            }
+          </div>
+
+          <div className="cartItems">
+            <h3>your cart items</h3>
+
+            {/* items */}
+            <div className="items">
+              {CART.map((item, index) => (
+                <div className="item" key={index}>
+                  <div className="image">
+                    <img src={item.image} alt={item.title} />
+                  </div>
+                  <div className="text">
+                    <p>{item.title}</p>
+                    <p>{item.quantity}x</p>
+                    <p>${(item.quantity > 1 ? item.price * item.quantity : item.price).toFixed(2)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* discount */}
+            <div className="discount">
+              <input type="text" name="discount" id="discount" value={code} placeholder="discount code"
+                onChange={(e) => setCode(e.target.value)} />
+              <button type="click" onClick={() => setDiscount(code === "islam" ? 25 : 0)}>apply</button>
+            </div>
+
+            {/* order totals */}
             <div className="order">
               <div className="row">
                 <div className="col">subTotal</div>
-                <div className={discount > 0 ? "s" : ""}>${TOTAL_PRICE.toFixed(2)}</div>
+                <div className={discount && discount > 0 ? "s" : ""}>${TOTAL_PRICE_WITH_VAT.toFixed(2)}</div>
               </div>
 
               <div className="row">
@@ -254,46 +227,21 @@ export default function CheckOut() {
                 <div className="col">total:</div>
                 <div className="col total">
                   <span className="pay-discount">
-                    ${(TOTAL_PRICE - (TOTAL_PRICE * discount) / 100).toFixed(2)}
+                    ${(discount && discount > 0 ?
+                      (TOTAL_PRICE_WITH_VAT - (TOTAL_PRICE_WITH_VAT * discount) / 100) :
+                      TOTAL_PRICE_WITH_VAT).toFixed(2)}
                   </span>
                 </div>
               </div>
-
-              {!makeOrder && (
-                <select name="foodTable_id" id="foodTable_id">
-                  <option value="-1">--</option>
-                  {[1, 2, 3, 4, 5, 6, 7].map((table, index) => (
-                    <option value={table} key={index}>
-                      table {table}
-                    </option>
-                  ))}
-                </select>
-              )}
             </div>
 
-            <div className="confirm">
-              <Link to="/all-recipes" className="btn btnActive">
-                continue shopping
-              </Link>
-
-              <button className={`btn btnActive details ${CART.length <= 0 || makeOrder ? "disabled" : ""}`}
-                id="confirm" onClick={(e) => handleMakeOrder(e)} >
-                confirm order
-              </button>
+            {/* pay now */}
+            <div className="pay-now">
+              <button type="click" className="btnActive" onClick={(e) => handlePayNow(e)}>pay now</button>
             </div>
           </div>
-        </div>
-
-        <div className="payment-popup">
-          <div className="inner">
-            <i className="fas fa-check"></i>
-            <h2>are you sure?</h2>
-            <p> knowledge! The order cannot be canceled otherwise the added tax will be charged</p>
-            <button className="ok btnActive">ok</button>
-            <i className="fas fa-xmark"></i>
-          </div>
-        </div>
-      </div>
-    </div>
+        </form>
+      </div >
+    </div >
   );
 }
