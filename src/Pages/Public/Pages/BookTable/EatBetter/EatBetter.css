@@ -118,14 +118,14 @@
 
             & p:last-of-type {
                 font-size: 18px;
-                font-family: Arial;
+                font-family: var(--Roboto);
                 margin-block: 15px 10px;
             }
 
             & a {
                 gap: 5px;
                 font-weight: bold;
-                font-family: Arial;
+                font-family: var(--Roboto);
                 display: -webkit-inline-box;
                 display: -ms-inline-flexbox;
                 display: inline-flex;

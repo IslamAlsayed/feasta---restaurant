@@ -1,7 +1,7 @@
 import "./WeDo.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import Chef from "../../../../../Assets/images/cheffs/cheff2.png";
+import Chef from "../../../../../Assets/images/chefs/chef2.png";
 
 export default function WeDo() {
   return (

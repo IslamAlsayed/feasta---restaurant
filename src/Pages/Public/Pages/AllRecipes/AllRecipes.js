@@ -2,6 +2,7 @@ import "./AllRecipes.css";
 import { Link } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { ADD_ITEM_HELPER } from "../../../../Store/helper";
 import cooking from "../../../../Assets/images/icons/main-colors/cooking.png";
 import menu from "../../../../Assets/images/icons/main-colors/menu.png";
 import daily from "../../../../Assets/images/icons/main-colors/daily.png";
@@ -12,7 +13,7 @@ import { getData } from "../../../../axiosConfig/API";
 export default function AllRecipes() {
   const dispatch = useDispatch();
   const [recipes, setRecipes] = useState([]);
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState("all");
   const [filterRecipes, setFilterRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -21,12 +22,13 @@ export default function AllRecipes() {
 
     try {
       const result = await getData("recipes");
-      setRecipes(result);
-      setFilterRecipes(result);
-      setLoading(true);
+      if (result.status === 200) {
+        setRecipes(result.result);
+        setFilterRecipes(result.result);
+        setLoading(true);
+      }
     } catch (error) {
       setLoading(true);
-      console.error(error.response || error.message);
     }
   }, []);
 
@@ -38,25 +40,10 @@ export default function AllRecipes() {
     setActiveTab(meal);
     setFilterRecipes([]);
     let recipesFilter =
-      meal === "All"
+      meal === "all"
         ? recipes
         : recipes.filter((recipe) => recipe.mealType === meal);
     setTimeout(() => setFilterRecipes(recipesFilter), 1000);
-  };
-
-  const handleAddItem = (item) => {
-    let newItem = {
-      id: item.id ?? 0,
-      name: item.name ?? "null",
-      image: item.image ?? "null",
-      price: parseFloat(item.price) ?? 0,
-      quantity: item.quantity ?? 0,
-    };
-
-    let cartCount = document.getElementById("cart");
-    cartCount.classList.add("added");
-    setTimeout(() => cartCount.classList.remove("added"), 140);
-    dispatch({ type: "ADD_ITEM", payload: newItem });
   };
 
   return (
@@ -64,37 +51,23 @@ export default function AllRecipes() {
       {loading && (
         <div className="container">
           <div className="summery">
-            <p>
-              <span>discover</span> menu <br />
-              choose your <span>dish from menu</span>
-            </p>
+            <span>discover</span> menu <br />
+            choose your <span>dish from menu</span>
           </div>
 
           {filterRecipes.length > 0 && (
             <div className="tabs">
-              {["All", "Breakfast", "Dinner", "Lunch", "Dessert"].map(
+              {["all", "breakfast", "dinner", "lunch", "dessert"].map(
                 (meal) => (
-                  <div
-                    key={meal}
+                  <div key={meal} data-filter={meal}
                     className={`tab ${activeTab === meal ? "active" : ""}`}
-                    data-filter={meal}
-                    onClick={() => handleFilter(meal)}
-                  >
-                    <img
-                      src={
-                        meal === "All"
-                          ? cooking
-                          : meal === "Breakfast"
-                          ? dinner1
-                          : meal === "Dinner"
-                          ? daily
-                          : meal === "Lunch"
-                          ? menu
-                          : dishes
-                      }
-                      alt={meal}
-                      loading="lazy"
-                    />
+                    onClick={() => handleFilter(meal)} >
+                    <img src={
+                      meal === "all" ? cooking
+                        : meal === "breakfast" ? dinner1
+                          : meal === "dinner" ? daily
+                            : meal === "lunch" ? menu : dishes
+                    } alt={meal} loading="lazy" />
                     <span>{meal.toLowerCase()}</span>
                   </div>
                 )
@@ -128,12 +101,7 @@ export default function AllRecipes() {
                 {filterRecipes.map((recipe, index) => (
                   <div className="card" key={index}>
                     <div className="card-image">
-                      <img
-                        src={require(`../../../../${recipe.image}`)}
-                        className="images"
-                        alt="recipe"
-                        loading="lazy"
-                      />
+                      <img src={recipe.image} className="images" alt={recipe.title} loading="lazy" />
                       <span className="rating">
                         {recipe.rating}
                         <i className="fa-solid fa-star"></i>
@@ -141,24 +109,18 @@ export default function AllRecipes() {
                     </div>
 
                     <div className="card-title">
-                      <span className="name">{recipe.name}</span>
+                      <span className="name">{recipe.title}</span>
                       <span className="price">${recipe.price}</span>
                     </div>
 
                     <div className="card-body">
                       <div className="actions">
-                        <button
-                          className="btn btnActive add"
-                          onClick={() => handleAddItem(recipe)}
-                        >
+                        <button className="btn btnActive add" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
                           add order
                           <i className="fa-solid fa-cart-plus"></i>
                         </button>
 
-                        <Link
-                          to={`/recipe-details/${recipe.id}`}
-                          className="btn btnActive details"
-                        >
+                        <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
                           details
                           <i className="fa-solid fa-bookmark"></i>
                         </Link>

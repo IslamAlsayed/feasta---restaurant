@@ -1,77 +1,116 @@
 import "./TheCounter.css";
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { getData } from "../../../../../axiosConfig/API";
 
 export default function TheCounter() {
-  useEffect(() => {
-    const sectionCounter = document.querySelector(".TheCounter");
-    const counters = document.querySelectorAll(".count");
-    let started = false;
+  const [counter, setCounter] = useState([]);
+  const [started, setStarted] = useState(false);
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY + 350 >= sectionCounter.offsetTop && !started) {
-        counters.forEach(startCount);
-        started = true;
+  const fetchRecipes = useCallback(async () => {
+    try {
+      const result = await getData("subscribes/counter");
+      if (result.status === 200) {
+        setCounter([
+          {
+            key: 'clients',
+            icon: "face-smile-beam",
+            target: result.result.clients,
+            title: "happy clients",
+          },
+          {
+            key: 'ratings',
+            icon: "heart",
+            target: result.result.ratings,
+            title: "rating people",
+          },
+          {
+            key: 'orders',
+            icon: "mug-hot",
+            target: result.result.orders,
+            title: "orders",
+          },
+          {
+            key: 'recipes',
+            icon: "book",
+            target: result.result.recipes,
+            title: "cooked recipes",
+          },
+        ])
       }
-    });
-
-    function startCount(element) {
-      const goal = parseInt(element.dataset.count) || 0;
-      let increment = goal >= 1000 ? Math.floor(goal / 1000) : goal;
-
-      if (goal > 0) {
-        const intervalTime = 1 / goal;
-        let count = 0;
-
-        const counterInterval = setInterval(() => {
-          element.textContent = count < increment ? ++count : increment;
-
-          if (count === increment) {
-            if (goal >= 1000) {
-              element.textContent += "k";
-            }
-            clearInterval(counterInterval);
-            element.parentElement.querySelector("i").classList.remove("count");
-          }
-        }, intervalTime);
-      }
+    } catch (error) {
+      console.error(error.response || error.message);
     }
   }, []);
 
+  useEffect(() => {
+    fetchRecipes();
+  }, [fetchRecipes]);
+
+  const startCount = (element) => {
+    const goal = parseInt(element.dataset.target) || 0;
+    let increment = goal >= 1000 ? Math.floor(goal / 1000) : goal;
+    let target = 0;
+
+    if (goal > 0) {
+      const intervalTime = goal > 0 ? Math.floor(2000 / goal) : 1;
+
+      const counterInterval = setInterval(() => {
+        target += increment;
+        element.textContent = target;
+
+        if (target >= goal) {
+          element.textContent = goal;
+          if (goal >= 1000) {
+            element.textContent = (goal / 1000).toFixed(1) + "k";
+          }
+          clearInterval(counterInterval);
+        }
+      }, intervalTime);
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionCounter = document.getElementById("TheCounter");
+      if (sectionCounter && window.scrollY + 300 >= sectionCounter.offsetTop && !started) {
+        const counters = document.querySelectorAll(".counter-target");
+        counters.forEach((counter) => startCount(counter));
+        setStarted(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [started]);
+
   return (
-    <div className="TheCounter">
+    <div className="TheCounter" id="TheCounter">
       <div className="container">
+        {!Object(counter).length > 0 && (
+          <div className="sky-loading">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <div className="card" key={index}>
+                <i></i>
+                <span></span>
+                <p></p>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="row">
-          <div className="col">
-            <i className="far fa-face-smile-beam"></i>
-            <p className="count" data-count="5150">
-              0
-            </p>
-            <span>happy clients</span>
-          </div>
-
-          <div className="col">
-            <i className="fas fa-heart"></i>
-            <p className="count" data-count="947">
-              0
-            </p>
-            <span>rating people</span>
-          </div>
-
-          <div className="col">
-            <i className="fas fa-mug-hot"></i>
-            <p className="count" data-count="2">
-              0
-            </p>
-            <span>orders</span>
-          </div>
-
-          <div className="col">
-            <i className="fas fa-book"></i>
-            <p className="count" data-count="349">
-              0
-            </p>
-            <span>cooked recipes</span>
-          </div>
+          {counter.map((count, index) => (
+            <div className="col" key={index}>
+              <i className={`fas fa-${count.icon}`}></i>
+              <span className="counter-target" data-target={count.target}>
+                0
+              </span>
+              <p>{count.title}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

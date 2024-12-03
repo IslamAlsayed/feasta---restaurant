@@ -1,5 +1,6 @@
 import "./BestCoffee.css";
 import React from "react";
+import { Link } from "react-router-dom";
 import beans from "../../../../../Assets/images/other/beans.png";
 import coffeeMan from "../../../../../Assets/images/other/coffeeMan.jpg";
 
@@ -14,8 +15,9 @@ export default function BestCoffee() {
             <p>09:00AM - 10:00PM</p>
 
             <div className="contact">
-              <button className="btn btnActive">0106543133</button>
-              <button className="btn btnActive">www.fixion.com</button>
+              <Link to={"tel:+204864536465"} className="btnActive">(+20) 4864536465</Link>
+
+              <Link to={"mailto:support@feastaegyptianRestaurant.com"} className="btnActive">www@feasta.com</Link>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "./Banner/Banner";
-import Resewation from "./Resewation/Resewation";
+import Reservation from "./Reservation/Reservation";
 import Recipes from "./Recipes/Recipes";
 import Discount from "./Discount/Discount";
 import UniqueRecipe from "./UniqueRecipe/UniqueRecipe";
@@ -11,7 +11,7 @@ export default function Index() {
   return (
     <div className="Index">
       <Banner />
-      <Resewation />
+      <Reservation />
       <Recipes />
       <Discount />
       <UniqueRecipe />

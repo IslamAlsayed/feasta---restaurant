@@ -1,7 +1,7 @@
-.DiscountBannner {
+.DiscountBanner {
     width: 100%;
-    height: 100svh;
     position: relative;
+    padding-block: 50px;
     margin-block: 50px 100px;
     background-image: url("../../../../../Assets/images/backgrounds/background20.jpg");
 
@@ -14,19 +14,15 @@
 
     & .box-voucher {
         width: 70%;
-        position: relative;
-        top: 50%;
-        left: 50%;
+        margin: auto;
         padding: 10px;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
+        transform: scale(0.8);
         border: 4px solid var(--main-color);
 
         & .content-voucher {
             width: 100%;
             height: 100%;
-            padding: 50px;
+            padding: 20px 50px;
             text-align: center;
             font-family: var(--Roboto);
             background-color: var(--light-color);
@@ -74,6 +70,14 @@
                 }
             }
 
+            & .image {
+                width: 150px;
+                height: auto;
+                margin: 0 auto 10px;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+
             & .discount {
                 font-size: 28px;
 
@@ -85,7 +89,6 @@
 
             & .voucher {
                 & h2 {
-                    font-size: 34px;
                     margin-bottom: 20px;
                     color: var(--main-color);
                     text-transform: uppercase;
@@ -95,6 +98,12 @@
                     width: 70%;
                     margin: auto;
                     line-height: 1.6;
+                }
+            }
+
+            & .action {
+                & button i {
+                    margin-inline-start: 5px;
                 }
             }
 
@@ -123,31 +132,60 @@
     }
 }
 
+@media (max-width: 992px) {
+    .DiscountBanner {
+        & .box-voucher {
+            transform: scale(0.9);
+        }
+    }
+}
+
 @media (max-width: 768px) {
-    .DiscountBannner {
+    .DiscountBanner {
         padding-inline: 15px;
 
         & .box-voucher {
             width: 100%;
+            transform: scale(1);
+
+            & .content-voucher {
+                padding-inline: 30px;
+
+                & .voucher {
+                    & h2 {
+                        font-size: 20px;
+                    }
+                }
+            }
         }
     }
 }
 
 @media (max-width: 500px) {
-    .DiscountBannner {
+    .DiscountBanner {
         & .box-voucher {
             & .content-voucher {
+                padding-inline: 20px;
+
+                & .image {
+                    width: 100px;
+                }
+
                 & .discount {
                     font-size: 20px;
                 }
 
                 & .voucher {
+                    margin-bottom: 20px;
+
                     & h2 {
-                        font-size: 24px;
+                        font-size: 14px;
+                        margin-bottom: 10px;
                     }
 
                     & p {
                         width: 100%;
+                        font-size: 12px;
                     }
                 }
             }

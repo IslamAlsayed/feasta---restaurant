@@ -44,7 +44,7 @@ export default function LatestNews() {
             </div>
           </div>
 
-          <div className="card spical">
+          <div className="card special">
             <div className="card-img">
               <img src={React2} alt="latest new in blog" loading="lazy" />
             </div>
