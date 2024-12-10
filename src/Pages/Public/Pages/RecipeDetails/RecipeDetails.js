@@ -32,11 +32,13 @@ export default function RecipeDetails() {
     const fetch = getUser();
     setUser(JSON.parse(fetch));
     setUserAuth(isAuth());
+  }, [location, id]);
 
+  useEffect(() => {
     if (user) {
-      setNewComment({ ...newComment, name: user.name, client_id: user.id, stock_id: id });
+      setNewComment((prevComment) => ({ ...prevComment, name: user.name, client_id: user.id, stock_id: id }));
     }
-  }, [location, newComment, user, id]);
+  }, [user, id]);
 
   const fetchRecipes = useCallback(async (id) => {
     setLoading(false);

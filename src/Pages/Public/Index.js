@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import CartDrawer from "../../Components/CartDrawer/CartDrawer";
 import Home from "./Pages/Home/Index";

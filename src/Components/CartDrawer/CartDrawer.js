@@ -1,8 +1,10 @@
 import "./CartDrawer.css";
+import QRCode from "react-qr-code";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { DECREMENT_OR_INCREMENT_HELPER, REMOVE_ITEM_HELPER } from "../../Store/helper";
+import { siteURL } from "../../axiosConfig/API";
 
 export default function CartDrawer() {
   const dispatch = useDispatch();
@@ -12,6 +14,7 @@ export default function CartDrawer() {
   const CART = useSelector((state) => state.CART);
   const TOTAL_PRICE = useSelector((state) => state.TOTAL_PRICE);
   const TOTAL_QUANTITY = useSelector((state) => state.TOTAL_QUANTITY);
+  const [qrCode, setQrCode] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -62,9 +65,18 @@ export default function CartDrawer() {
       <div className="cart-content">
 
         <div className="head">
-          <span>your orders</span>
-          <i className="fas fa-cart-shopping"></i>
+          <span>your orders...<i className="fas fa-cart-shopping"></i></span>
+          {CART.length > 0 && <i className="fas fa-qrcode btnActive" onClick={() => { setQrCode(!qrCode); console.log(qrCode) }}></i>}
         </div>
+
+        {qrCode && CART.length > 0 &&
+          <div className="qr-code">
+            <b>Share cart</b>
+            <div>
+              <QRCode className="code" fgColor={"var(--toxic-color)"} value={siteURL + localStorage.getItem("orderId") + '/' + localStorage.getItem("code")} />
+            </div>
+          </div>
+        }
 
         <p className="count-dishes"><span>{TOTAL_QUANTITY}</span> dishes</p>
 
@@ -88,23 +100,22 @@ export default function CartDrawer() {
 
                     <div className="total">
                       total: <span>${(parseFloat(item.price) * item.quantity).toFixed(2)}</span>
-                      to <span>{item.quantity}s</span>
+                      to <span>{item.quantity}x</span>
                     </div>
                   </div>
 
                   <div className="action">
-                    <button className="deleteItem btnActive" id={`delete-item_${item.id}`}
-                      onClick={() => REMOVE_ITEM_HELPER(item.id, dispatch)}>
+                    <button className="deleteItem btnActive" onClick={() => REMOVE_ITEM_HELPER(item.id, dispatch)}>
                       <i className="fas fa-trash-can"></i>
                     </button>
 
                     <div className="quantity">
                       <span className={`btnActive ${item.quantity === 1 && "disabled"}`} onClick={() => DECREMENT_OR_INCREMENT_HELPER(item, "DECREMENT_ITEM", dispatch)}>
-                        <b>-</b>
+                        <i className="fas fa-minus"></i>
                       </span>
 
                       <span className="btnActive" onClick={() => DECREMENT_OR_INCREMENT_HELPER(item, "INCREMENT_ITEM", dispatch)}>
-                        <b>+</b>
+                        <i className="fas fa-plus"></i>
                       </span>
                     </div>
                   </div>
@@ -115,7 +126,7 @@ export default function CartDrawer() {
 
           <div className="actions">
             {CART.length > 0 && (
-              <div className="totalAllitem">
+              <div className="totalAllItem">
                 <strong>total: </strong>
                 <span>${TOTAL_PRICE.toFixed(2)}</span>
               </div>

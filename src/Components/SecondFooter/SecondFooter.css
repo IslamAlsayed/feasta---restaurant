@@ -107,18 +107,20 @@
     }
 
     & .contact {
-        margin-bottom: 50px;
+        /* margin-bottom: 50px; */
 
         & .row {
             gap: 30px;
-            display: -ms-grid;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            display: flex;
+
+            & .side:first-child {
+                gap: 20px;
+                display: flex;
+                text-wrap: balance;
+                flex-direction: column;
+            }
 
             & .col {
-                -webkit-box-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
                 font-size: 10px;
 
                 & h3 {
@@ -150,32 +152,6 @@
                         & b {
                             color: var(--main-color);
                         }
-
-                        & i {
-                            color: var(--main-color);
-                        }
-                    }
-
-                    & ul {
-                        list-style: none;
-
-                        & li {
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-                            margin-bottom: 10px;
-                            -webkit-box-align: center;
-                            -ms-flex-align: center;
-                            align-items: center;
-                            -webkit-box-pack: justify;
-                            -ms-flex-pack: justify;
-                            justify-content: space-between;
-
-                            & .closed {
-                                font-size: 20px;
-                                color: var(--main-color);
-                            }
-                        }
                     }
                 }
 
@@ -188,10 +164,13 @@
                             display: -webkit-box;
                             display: -ms-flexbox;
                             display: flex;
-                            margin-bottom: 15px;
                             -webkit-box-align: center;
                             -ms-flex-align: center;
                             align-items: center;
+
+                            &:not(:last-of-type) {
+                                margin-bottom: 10px;
+                            }
 
                             & div {
                                 text-transform: lowercase;
@@ -207,8 +186,8 @@
 
                 &.gallery {
                     & ul {
-                        width: 170px;
                         gap: 5px;
+                        width: 240px;
                         display: -ms-grid;
                         display: grid;
                         list-style: none;
@@ -234,6 +213,10 @@
                         }
                     }
                 }
+
+                & .closed {
+                    color: var(--main-color);
+                }
             }
         }
     }
@@ -250,10 +233,12 @@
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            flex-wrap: wrap;
             padding-block: 20px;
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
+            text-align: center;
             -webkit-box-pack: center;
             -ms-flex-pack: center;
             justify-content: center;
@@ -434,6 +419,22 @@
     }
 }
 
+@media (max-width: 992px) {
+    .SecondFooter {
+        & .contact {
+            & .row {
+                & .col {
+                    &.gallery {
+                        & ul {
+                            width: 170px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 768px) {
     .SecondFooter {
         & .foot {
@@ -470,18 +471,39 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
     .SecondFooter {
         & .contact {
             & .row {
-                & .col {
-                    margin-bottom: 50px;
+                flex-direction: column;
 
+                & .col {
                     &.gallery {
                         & ul {
                             gap: 14px;
-                            width: 90%;
-                            margin: auto;
+                            width: 60%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .SecondFooter {
+        & .title {
+            gap: 45px;
+        }
+
+        & .contact {
+            margin-bottom: 0;
+
+            & .row {
+                & .col {
+                    &.gallery {
+                        & ul {
+                            width: 100%;
                         }
                     }
                 }
@@ -490,6 +512,10 @@
 
         & .foot {
             & .support {
+                gap: 10px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
                 &::after {
                     width: 100%;
                 }

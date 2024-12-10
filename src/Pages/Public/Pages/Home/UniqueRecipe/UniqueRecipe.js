@@ -60,8 +60,8 @@ export default function UniqueRecipe() {
                   <div className="title">
                     <h3>special</h3>
                     <div className="rate">
-                      {recipe ? recipe.rating : "N/A"}
                       <i className="fa-solid fa-star"></i>
+                      {recipe ? recipe.rating : "N/A"}
                     </div>
                   </div>
                   <div className="price">

@@ -1,14 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const basicURL2 = "http://127.0.0.1:8000/api/";
+const basicURL = "http://127.0.0.1:8000/api/";
 
 export const login = async (email, password) => {
   try {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.add("show");
-    }
-
-    const response = await axios.post(basicURL2 + "auth/login", {
+    const response = await axios.post(basicURL + "auth/login", {
       email: email,
       password: password,
     });
@@ -17,45 +13,23 @@ export const login = async (email, password) => {
     Cookies.set("feasta_token", response.data.token);
     Cookies.set("feasta_admin", JSON.stringify(response.data.data));
 
-    // illogical
-    if (!localStorage.getItem("cartItems")) {
-      localStorage.setItem("cartItems", JSON.stringify([]));
-    }
-
     return response.data;
   } catch (error) {
     return error.response?.data;
-  } finally {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.remove("show");
-    }
   }
 };
 
 export const register = async (data) => {
   try {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.add("show");
-    }
-
-    const response = await axios.post(basicURL2 + "auth/register", data);
+    const response = await axios.post(basicURL + "auth/register", data);
 
     // Setting cookies
     Cookies.set("feasta_token", response.data.token);
     Cookies.set("feasta_admin", JSON.stringify(response.data.data));
 
-    // illogical
-    if (!localStorage.getItem("cartItems")) {
-      localStorage.setItem("cartItems", JSON.stringify([]));
-    }
-
     return response.data;
   } catch (error) {
     return error.response?.data;
-  } finally {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.remove("show");
-    }
   }
 };
 

@@ -1,7 +1,6 @@
 import "./Reservation.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import Pizza from "../../../../../Assets/images/other/index2/pizza3.png";
 import FoodDelivery from "../../../../../Assets/images/icons/main-colors/food-delivery1.png";
@@ -9,6 +8,7 @@ import Daily from "../../../../../Assets/images/icons/main-colors/daily.png";
 import CallCenter from "../../../../../Assets/images/icons/main-colors/call-center.png";
 import Catering from "../../../../../Assets/images/icons/main-colors/catering.png";
 import { addData } from "../../../../../axiosConfig/API";
+import { USER_HELPER } from "../../../../../Store/helper";
 
 export default function Reservation() {
   const [message, setMessage] = useState();
@@ -44,7 +44,7 @@ export default function Reservation() {
       formData.append("date", reservation.date);
       formData.append("time", reservation.time);
       formData.append("phone", reservation.phone);
-      formData.append("client_id", JSON.parse(Cookies.get("feasta_admin")).id);
+      formData.append("client_id", USER_HELPER.id);
 
       try {
         const response = await addData("reservations", formData);

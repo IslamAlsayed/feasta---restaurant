@@ -38,7 +38,6 @@ const cartReducer = (state = initialState, action) => {
           ...state.cartItems.slice(isItemExisting + 1),
         ];
       } else {
-        action.payload.vat = 0.1;
         action.payload.quantity = 1;
         updatedCartAdd = [...state.cartItems, action.payload];
       }
