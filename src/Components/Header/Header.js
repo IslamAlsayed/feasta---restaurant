@@ -17,29 +17,9 @@ export default function Header() {
   useEffect(() => {
     document.addEventListener("click", (e) => {
       if (!e.target.closest("#parentOptions")) setDropListActive(false);
-      if (e.target.id !== "menu" && e.target.id !== "parentOptions_b")
-        setListActive(false);
+      if (e.target.id !== "menu" && e.target.id !== "parentOptions_b") setListActive(false);
       if (!e.target.closest("#userOptions")) setUserActive(false);
     });
-
-    // window.addEventListener("scroll", () => {
-    //   setDropListActive(false);
-    //   setListActive(false);
-    //   setUserActive(false);
-
-    //   var prevScroll = window.pageYOffset;
-
-    //   document.addEventListener("scroll", () => {
-    //     var currentScrollPos = window.pageYOffset;
-    //     let header = document.getElementById("Header");
-    //     if (prevScroll > currentScrollPos) {
-    //       if (header) header.style.transform = "translateY(0)";
-    //     } else {
-    //       if (header) header.style.transform = "translateY(-100%)";
-    //     }
-    //     prevScroll = currentScrollPos;
-    //   });
-    // });
 
     let prevScroll = window.pageYOffset;
     let header = document.getElementById("Header");
@@ -68,7 +48,8 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    setUserAuth(isAuth());
+    let is_auth = isAuth();
+    setUserAuth(is_auth);
   }, [location]);
 
   const handleLogout = async (e) => {
@@ -87,7 +68,7 @@ export default function Header() {
     return currentPath === path ? "active" : "";
   };
 
-  function handleClassActive(id) {
+  const handleClassActive = (id) => {
     let links = document.querySelectorAll(".link");
     links.forEach((link) => link.classList.remove("active"));
 

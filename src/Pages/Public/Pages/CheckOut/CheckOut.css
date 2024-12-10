@@ -2,7 +2,7 @@
     padding-top: 90px;
     position: relative;
 
-    &::before {
+    &.existOrder::before {
         content: '';
         width: 1px;
         height: 100%;
@@ -57,12 +57,12 @@
                 & .wayPays {
                     gap: 20px;
                     display: flex;
+                    margin-bottom: 20px;
                     align-items: center;
                     flex-direction: column;
 
                     & .wayPay-info {
                         width: 100%;
-                        margin-bottom: 20px;
 
                         & .ways {
                             gap: 20px;
@@ -209,6 +209,18 @@
             }
 
             & .cartItems {
+                &.flex {
+                    gap: 20px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+
+                    &>div {
+                        min-width: 300px;
+                        height: fit-content;
+                    }
+                }
+
                 & .items {
                     & .item {
                         gap: 20px;
@@ -229,8 +241,47 @@
                             justify-content: space-between;
 
                             & p {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+
                                 &:last-of-type {
                                     font-weight: bold;
+                                }
+                            }
+
+                            & .quantity {
+                                gap: 10px;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                margin-top: 5px;
+
+                                & span {
+                                    width: 18px;
+                                    height: 18px;
+                                    display: -ms-grid;
+                                    display: grid;
+                                    cursor: pointer;
+                                    font-size: 12px;
+                                    -webkit-user-select: none;
+                                    -moz-user-select: none;
+                                    -ms-user-select: none;
+                                    user-select: none;
+                                    border-radius: 50%;
+                                    place-content: center;
+                                    color: var(--light-color);
+                                    background-color: var(--toxic-color-50);
+
+                                    &:hover {
+                                        background-color: var(--toxic-color);
+                                    }
+
+                                    &.disabled {
+                                        opacity: 0.5;
+                                        pointer-events: none;
+                                        transform: translateY(2px) scale(0.8);
+                                    }
                                 }
                             }
                         }
@@ -400,6 +451,30 @@
                 font-family: var(--Roboto);
             }
         }
+
+        & .waitEndOrder {
+            text-align: center;
+            margin-block: 20px;
+            color: var(--toxic-color);
+
+            & i {
+                font-size: 66px;
+                -webkit-animation: waitOrder 1.4s infinite linear;
+                animation: waitOrder 1.4s infinite linear;
+            }
+
+            & span {
+                height: -webkit-fit-content;
+                height: -moz-fit-content;
+                height: fit-content;
+                display: inline-block;
+                margin-inline-start: 10px;
+            }
+
+            &.show {
+                display: block;
+            }
+        }
     }
 
     & .message {
@@ -489,6 +564,16 @@
             padding-inline: 10px;
 
             & .form {
+                &>div {
+                    & h2 {
+                        font-size: 14px;
+                    }
+
+                    & h3 {
+                        font-size: 12px;
+                    }
+                }
+
                 & .information {
                     & .wayPays {
                         & .wayPay-info {
@@ -509,9 +594,27 @@
                     }
                 }
 
+                & .cartItems {
+                    &.flex {
+                        &>div {
+                            min-width: 100%;
+                        }
+                    }
+                }
+
                 & .groups {
                     gap: 0;
                     flex-direction: column;
+                }
+            }
+
+            & .waitEndOrder {
+                & i {
+                    font-size: 46px;
+                }
+
+                & span {
+                    font-size: 12px;
                 }
             }
         }
@@ -537,6 +640,16 @@
                             }
                         }
                     }
+                }
+            }
+
+            & .waitEndOrder {
+                & i {
+                    font-size: 30px;
+                }
+
+                & span {
+                    font-size: 10px;
                 }
             }
         }

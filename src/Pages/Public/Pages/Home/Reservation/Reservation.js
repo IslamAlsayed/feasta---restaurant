@@ -14,10 +14,10 @@ export default function Reservation() {
   const [reservation, setReservation] = useState({
     name: "",
     email: "",
+    phone: "",
     capacity: "",
     date: "",
     time: "0",
-    phone: "",
   });
 
   useEffect(() => {
@@ -35,18 +35,17 @@ export default function Reservation() {
     if (
       reservation.name !== "" &&
       reservation.email !== "" &&
+      reservation.phone !== "" &&
       reservation.capacity !== "" &&
       reservation.date !== "" &&
-      reservation.time !== "0" &&
-      reservation.phone !== ""
-    ) {
+      reservation.time !== "0") {
       const formData = new FormData();
       formData.append("name", reservation.name);
       formData.append("email", reservation.email);
+      formData.append("phone", reservation.phone);
       formData.append("capacity", reservation.capacity);
       formData.append("date", reservation.date);
       formData.append("time", reservation.time);
-      formData.append("phone", reservation.phone);
       formData.append("client_id", JSON.parse(user).id);
 
       try {
@@ -56,10 +55,10 @@ export default function Reservation() {
           setReservation({
             name: "",
             email: "",
+            phone: "",
             capacity: "",
             date: "",
             time: "0",
-            phone: "",
           });
           Swal.fire("Saved!", response.result, "success");
         }
@@ -93,18 +92,15 @@ export default function Reservation() {
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="groups">
                 <div className="group">
-                  <input
-                    type="text"
-                    name="name"
-                    value={reservation.name}
-                    placeholder="your name"
-                    onChange={(e) => handleChange(e)}
-                    required
-                  />
+                  <input type="text" name="name" value={reservation.name} placeholder="your name" onChange={(e) => handleChange(e)} required />
                 </div>
 
                 <div className="group">
                   <input type="text" name="email" value={reservation.email} placeholder="your email" onChange={(e) => handleChange(e)} required />
+                </div>
+
+                <div className="group">
+                  <input type="number" name="phone" value={reservation.phone} placeholder="phone number" onChange={(e) => handleChange(e)} required />
                 </div>
 
                 <div className="group">
@@ -125,15 +121,10 @@ export default function Reservation() {
                     <option value="3">dinner</option>
                   </select>
                 </div>
-
-                <div className="group">
-                  <input type="number" name="phone" value={reservation.phone} placeholder="phone number" onChange={(e) => handleChange(e)} required />
-                </div>
               </div>
 
               <div className="last-group">
-                <button className="btn btnActive"
-                  onClick={() => handleReservation()} >
+                <button className="btn btnActive" onClick={() => handleReservation()} >
                   book a table
                 </button>
               </div>

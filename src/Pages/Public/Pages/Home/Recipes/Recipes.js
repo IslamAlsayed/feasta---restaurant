@@ -71,12 +71,8 @@ export default function Recipes() {
 
         <div className="tabs">
           {["breakfast", "dinner", "lunch", "dessert"].map((meal) => (
-            <div
-              key={meal}
-              className={`tab ${activeTab === meal ? "active" : ""}`}
-              data-filter={meal}
-              onClick={handleFilter}
-            >
+            <div key={meal} data-filter={meal} onClick={handleFilter}
+              className={`tab ${activeTab === meal ? "active" : ""}`}>
               <img src={meal === "breakfast" ? menu : meal === "dinner"
                 ? daily : meal === "lunch" ? dishes : dinner1
               } alt={meal} loading="lazy" />

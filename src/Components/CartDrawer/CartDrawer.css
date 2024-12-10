@@ -1,4 +1,11 @@
 .CartDrawer {
+    position: relative;
+
+    & *:not(i) {
+        user-select: none;
+        font-family: var(--Roboto);
+    }
+
     &.open {
         & .cart-content {
             -webkit-transform: translateX(0);
@@ -31,6 +38,35 @@
         -webkit-box-shadow: 5px 0px 10px -10px inset var(--dark-color);
         box-shadow: 5px 0px 10px -10px inset var(--dark-color);
 
+        & .qr-code {
+            width: 100%;
+            padding-bottom: 15px;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            z-index: 999;
+            background-color: var(--light-color);
+            box-shadow: 0px 0px 14px -7px inset var(--dark-color);
+            box-shadow: 0px -10px 10px -15px inset var(--dark-color);
+
+            & b {
+                padding: 10px;
+                display: block;
+                text-align: center;
+                color: var(--main-color);
+            }
+
+            & div {
+                width: 35%;
+                margin: auto;
+
+                & svg {
+                    width: 100%;
+                    height: auto !important;
+                }
+            }
+        }
+
         & .head {
             width: 100%;
             font-size: 20px;
@@ -40,14 +76,21 @@
             top: 0;
             left: 0;
             z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             -webkit-transform: translateY(-15px);
             -ms-transform: translateY(-15px);
             transform: translateY(-15px);
             background: var(--light-color);
 
-            & i {
+            & span i {
                 font-size: 24px;
-                margin-inline: 10px;
+            }
+
+            & .fa-qrcode {
+                font-size: 24px;
+                cursor: pointer;
             }
         }
 
@@ -67,12 +110,16 @@
         & .cart-items {
             & .items {
                 padding-bottom: 20px;
-                margin-bottom: 15px;
                 height: calc(100svh - 200px);
                 overflow-y: scroll;
+                overflow-x: hidden;
 
                 &::-webkit-scrollbar {
-                    width: 0;
+                    width: 5px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: red;
                 }
 
                 & .item {
@@ -82,7 +129,6 @@
                     display: -webkit-box;
                     display: -ms-flexbox;
                     display: flex;
-                    /* padding-bottom: 10px; */
                     margin-bottom: 20px;
                     -webkit-box-align: start;
                     -ms-flex-align: start;
@@ -185,7 +231,7 @@
                                 display: -ms-grid;
                                 display: grid;
                                 cursor: pointer;
-                                font-size: 22px;
+                                font-size: 14px;
                                 -webkit-user-select: none;
                                 -moz-user-select: none;
                                 -ms-user-select: none;
@@ -197,18 +243,6 @@
 
                                 &:hover {
                                     background-color: var(--toxic-color);
-                                }
-
-                                &:first-child b {
-                                    -webkit-transform: translateY(-3px);
-                                    -ms-transform: translateY(-3px);
-                                    transform: translateY(-3px);
-                                }
-
-                                &:nth-child(2) b {
-                                    -webkit-transform: translateY(-2px);
-                                    -ms-transform: translateY(-2px);
-                                    transform: translateY(-2px);
                                 }
 
                                 &.disabled {
@@ -252,13 +286,8 @@
             background: var(--light-color);
             border-top: 2px solid var(--toxic-color);
 
-            & .totalAllitem {
+            & .totalAllItem {
                 margin-bottom: 15px;
-
-                & strong,
-                & span {
-                    font-family: var(--Roboto);
-                }
 
                 & span {
                     font-size: 20px;
@@ -282,7 +311,6 @@
                     border: none;
                     overflow: hidden;
                     position: relative;
-                    font-family: var(--Roboto);
                     border-radius: 25px;
                     color: var(--light-color);
 

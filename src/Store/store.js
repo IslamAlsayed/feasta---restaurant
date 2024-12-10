@@ -1,10 +1,15 @@
 import { createStore } from "redux";
+import { CART_HELPER } from "./helper";
+const added = new Audio(require("../Assets/Sounds/add.mp3"));
+added.volume = 0.015;
+
+const removed = new Audio(require("../Assets/Sounds/remove.m4a"));
+removed.volume = 0.02;
 
 // Initial state
 const initialState = {
-  CART: JSON.parse(localStorage.getItem("cartItems")) || [],
+  CART: CART_HELPER,
   TOTAL_PRICE: 0,
-  TOTAL_PRICE_WITH_VAT: 0,
   TOTAL_QUANTITY: 0,
 }
 
@@ -16,10 +21,6 @@ const cartReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "ADD_ITEM":
-      const added = new Audio(require("../Assets/Sounds/add.mp3"));
-      added.volume = 0.015;
-      added.play();
-
       // Check if the item is already in the cart
       const isItemExisting = state.CART.findIndex((item) => item.id === action.payload.id);
 
@@ -31,7 +32,6 @@ const cartReducer = (state = initialState, action) => {
         updatedCartAdd = [...state.CART.slice(0, isItemExisting), updatedItem, ...state.CART.slice(isItemExisting + 1)];
       } else {
         action.payload.quantity = 1;
-        action.payload.vat = action.payload.vat / 100;
         updatedCartAdd = [...state.CART, action.payload];
       }
 
@@ -41,68 +41,60 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         CART: updatedCartAdd,
         TOTAL_PRICE: calculateTotalPrice(updatedCartAdd),
-        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(updatedCartAdd),
         TOTAL_QUANTITY: calculateTotalQuantity(updatedCartAdd),
       };
 
     case "REMOVE_ITEM":
-      const removed = new Audio(require("../Assets/Sounds/remove.m4a"));
-      removed.volume = 0.02;
-      removed.play();
-
       const updatedCartRemove = state.CART.filter((item) => item.id !== action.payload);
+
+      // removed.play();
       localStorage.setItem("cartItems", JSON.stringify(updatedCartRemove));
+
       return {
         ...state,
         CART: updatedCartRemove,
         TOTAL_PRICE: calculateTotalPrice(updatedCartRemove),
-        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(updatedCartRemove),
         TOTAL_QUANTITY: calculateTotalQuantity(updatedCartRemove),
       };
 
     case "INCREMENT_ITEM":
-      const increment = new Audio(require("../Assets/Sounds/add.mp3"));
-      increment.volume = 0.015;
-      increment.play();
-
       const incrementedItems = state.CART.map((cartRecipe) =>
         cartRecipe.id === action.payload.id
           ? { ...cartRecipe, quantity: cartRecipe.quantity + 1 }
           : cartRecipe
       );
 
+      // added.play();
       localStorage.setItem("cartItems", JSON.stringify(incrementedItems));
+
       return {
         ...state,
         CART: incrementedItems,
         TOTAL_PRICE: calculateTotalPrice(incrementedItems),
-        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(incrementedItems),
         TOTAL_QUANTITY: calculateTotalQuantity(incrementedItems),
       };
 
     case "DECREMENT_ITEM":
-      const decrement = new Audio(require("../Assets/Sounds/remove.m4a"));
-      decrement.volume = 0.015;
-      decrement.play();
-
       const decrementedItems = state.CART.map((cartRecipe) =>
         cartRecipe.id === action.payload.id
           ? { ...cartRecipe, quantity: Math.max(cartRecipe.quantity - 1, 1) }
           : cartRecipe
       );
+
+      // removed.play();
       localStorage.setItem("cartItems", JSON.stringify(decrementedItems));
+
       return {
         ...state,
         CART: decrementedItems,
         TOTAL_PRICE: calculateTotalPrice(decrementedItems),
-        TOTAL_PRICE_WITH_VAT: calculateTotalPriceWithVat(decrementedItems),
         TOTAL_QUANTITY: calculateTotalQuantity(decrementedItems),
       };
 
     case "RESET_CART":
       localStorage.setItem("cartItems", JSON.stringify([]));
 
-      return { ...state, CART: [], TOTAL_PRICE: 0, TOTAL_PRICE_WITH_VAT: 0, TOTAL_QUANTITY: 0 };
+      return { ...state, CART: [], TOTAL_PRICE: 0, TOTAL_QUANTITY: 0 };
     default:
       return state;
   }
@@ -110,11 +102,8 @@ const cartReducer = (state = initialState, action) => {
 
 // helper function
 const calculateTotalPrice = (cart) => {
-  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-};
-
-const calculateTotalPriceWithVat = (cart) => {
-  return cart.reduce((total, item) => total + item.price * item.quantity + (item.price * item.quantity * item.vat), 0);
+  let cachedShipping = parseFloat(sessionStorage.getItem("cachedShipping")) || 0;
+  return cart.reduce((total, item) => total + item.price * item.quantity, 0) + cachedShipping;
 };
 
 const calculateTotalQuantity = (cart) => {
@@ -123,7 +112,6 @@ const calculateTotalQuantity = (cart) => {
 
 // Set total [ price,quantity ] with open site
 initialState.TOTAL_PRICE = calculateTotalPrice(initialState.CART);
-initialState.TOTAL_PRICE_WITH_VAT = calculateTotalPriceWithVat(initialState.CART);
 initialState.TOTAL_QUANTITY = calculateTotalQuantity(initialState.CART);
 
 // Create the Redux store and export it

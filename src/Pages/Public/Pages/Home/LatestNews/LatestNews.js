@@ -1,11 +1,36 @@
 import "./LatestNews.css";
-import React from "react";
-import React1 from "../../../../../Assets/images/reacts/react1.jpg";
-import React2 from "../../../../../Assets/images/reacts/react2.jpg";
-import React3 from "../../../../../Assets/images/reacts/react3.jpg";
-import React4 from "../../../../../Assets/images/reacts/react4.jpg";
+import React, { useCallback, useEffect, useState } from "react";
+import { getData } from "../../../../../axiosConfig/API";
 
 export default function LatestNews() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchArticles = useCallback(async () => {
+    try {
+      const result = await getData("articles");
+
+      result.result.map(article => {
+        article['likeCount'] = article.article_comments.reduce((total, comment) => {
+          return comment.like === 1 ? total + 1 : total;
+        }, 0);
+      });
+
+      if (result.status === 200) {
+        setArticles(result.result)
+        setLoading(true);
+      }
+    } catch (error) {
+      setLoading(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchArticles();
+  }, [fetchArticles]);
+
+  if (!loading) return;
+
   return (
     <div className="LatestNews">
       <div className="container">
@@ -22,29 +47,33 @@ export default function LatestNews() {
         </div>
 
         <div className="cards">
-          <div className="card">
-            <div className="card-img">
-              <img src={React1} alt="latest new in blog" loading="lazy" />
+          {articles.map((article, index) => (
+            index < 4 &&
+            <div className={`card ${index === 1 && 'special'}`} key={index}>
+              <div className="card-img">
+                <img src={article.image} alt={article.title} loading="lazy" />
+              </div>
+              <div className="card-info">
+                <small>{article.updated_at}, admin</small>
+                <p>{article.title}</p>
+                <p>
+                  {String(article.description).length > 90
+                    ? String(article.description).slice(0, 90) + "..."
+                    : article.description}
+                </p>
+              </div>
+              <div className="card-react">
+                <span>
+                  <i className="fa-solid fa-message"></i> {article.article_comments.length}
+                </span>
+                <span>
+                  <i className="fa-solid fa-heart"></i> {article.likeCount}
+                </span>
+              </div>
             </div>
-            <div className="card-info">
-              <small>28 jan, 2018, admin</small>
-              <p>radio commercial marketing</p>
-              <p>
-                a collection textile samples spread out on the table was a
-                travel.
-              </p>
-            </div>
-            <div className="card-react">
-              <span>
-                <i className="fa-solid fa-message"></i>14
-              </span>
-              <span>
-                <i className="fa-solid fa-heart"></i>25
-              </span>
-            </div>
-          </div>
+          ))}
 
-          <div className="card special">
+          {/* <div className="card special">
             <div className="card-img">
               <img src={React2} alt="latest new in blog" loading="lazy" />
             </div>
@@ -108,7 +137,7 @@ export default function LatestNews() {
                 <i className="fa-solid fa-heart"></i>16
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -88,6 +88,7 @@
                     }
 
                     & .info {
+                        width: 100%;
                         color: var(--light-color);
                         -webkit-transform: translateX(-40px);
                         -ms-transform: translateX(-40px);
@@ -119,7 +120,7 @@
 
                         & .price {
                             font-size: 16px;
-                            margin-block: 15px 25px;
+                            margin-block: 15px 5px;
 
                             & span:last-of-type {
                                 font-weight: bold;

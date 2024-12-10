@@ -1,12 +1,14 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const basicURL = "http://127.0.0.1:8000/api/";
-export const storageURL = "http://127.0.0.1:8000/storage/images/";
+export const siteURL = "http://192.168.1.63:3000/";
+// export const basic_URL_API = "http://192.168.1.63:8000/api/";
+export const basic_URL_API = "http://127.0.0.1:8000/api/";
+export const storageURL = basic_URL_API + "storage/images/";
 
 export const getData = async (url) => {
   try {
-    const response = await axios.get(basicURL + url, {
+    const response = await axios.get(basic_URL_API + url, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${Cookies.get("feasta_token") || null}`,
@@ -68,7 +70,7 @@ export const getDataById = async (url, id) => {
 
 export const addData = async (url, data) => {
   try {
-    const response = await axios.post(basicURL + url, data, {
+    const response = await axios.post(basic_URL_API + url, data, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${Cookies.get("feasta_token") || null}`,
@@ -83,7 +85,7 @@ export const addData = async (url, data) => {
 
 export const updateData = async (url, data) => {
   try {
-    const response = await axios.put(basicURL + url, data, {
+    const response = await axios.put(basic_URL_API + url, data, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${Cookies.get("feasta_token") || null}`,
@@ -98,7 +100,7 @@ export const updateData = async (url, data) => {
 
 export const deleteData = async (url) => {
   try {
-    const response = await axios.delete(basicURL + url, {
+    const response = await axios.delete(basic_URL_API + url, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${Cookies.get("feasta_token") || null}`,
@@ -119,7 +121,7 @@ export const deleteData = async (url) => {
 
 //     const response = await axios({
 //       method: method,
-//       url: basicURL + url,
+//       url: basic_URL_API + url,
 //       data: data,
 //       headers: {
 //         Accept: "application/json",
@@ -162,7 +164,7 @@ export const deleteData = async (url) => {
 //   try {
 //     if (loader) loader.classList.add("show");
 
-//     const response = await axios.delete(basicURL + url, {
+//     const response = await axios.delete(basic_URL_API + url, {
 //       headers: {
 //         Accept: "application/json",
 //         Authorization: `Bearer ${Cookies.get("token_resta") || null}`,

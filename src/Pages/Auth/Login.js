@@ -15,7 +15,7 @@ export default function Login() {
 
     if (!email || !password) {
       setError("Both email and password are required");
-      setTimeout(() => setError(""), 3000);
+      setTimeout(() => setError(""), 5000);
       return;
     }
 
@@ -33,7 +33,7 @@ export default function Login() {
       }
     } catch (error) {
       setError(error.message);
-      setTimeout(() => setError(""), 3000);
+      setTimeout(() => setError(""), 5000);
     }
   };
 
@@ -55,23 +55,12 @@ export default function Login() {
             {error && <div className="alert">{error}</div>}
             <div className="group-input">
               <label htmlFor="email">email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
+              <input type="email" name="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} />
             </div>
+
             <div className="group-input">
               <label htmlFor="password">password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              <input type="password" name="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)} />
             </div>
             <div className="group-input">
               <button type="submit">Login</button>
@@ -91,13 +80,7 @@ export default function Login() {
         </div>
 
         <footer className="footer">
-          <p>
-            © 2024 For support
-            <a href="https://www.linkedin.com/in/islam-alsayed7">
-              IslamAlsayed
-            </a>
-            , Inc.
-          </p>
+          <p> © 2024 For support <a href="https://www.linkedin.com/in/islam-alsayed7">IslamAlsayed</a> , Inc.</p>
           <p>
             Please check out our <Link to="#">Help Site</Link>,
             <Link to="/terms-of-use"> Terms of Use</Link>, and
