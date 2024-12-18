@@ -1,0 +1,100 @@
+.AllRecipes {
+    min-height: 100svh;
+    padding-block: 70px 50px;
+    position: relative;
+
+    & .container {
+        & .summery {
+            font-size: 32px;
+            text-align: center;
+            margin-block: 30px;
+
+            & span {
+                color: var(--main-color);
+            }
+        }
+
+        & .random-recipe {
+            & .sky-loading {
+                gap: 20px;
+                display: -ms-grid;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+                & .card {
+                    -webkit-animation: loading 0.7s infinite;
+                    animation: loading 0.7s infinite;
+
+                    & .card-image {
+                        width: 100%;
+                        height: 250px;
+                        background: var(--load);
+                    }
+
+                    & .card-title {
+                        width: 100%;
+                        height: 30px;
+                        margin-block: 10px;
+                        background: var(--load);
+                    }
+
+                    & .card-body {
+                        gap: 20px;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-align: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        -webkit-box-pack: justify;
+                        -ms-flex-pack: justify;
+                        justify-content: space-between;
+
+                        & div {
+                            width: 100%;
+                            height: 30px;
+                            background: var(--load);
+                        }
+                    }
+                }
+            }
+
+            & .recipes {
+                gap: 20px;
+                display: -ms-grid;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .AllRecipes {
+        & .container {
+            & .summery {
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .AllRecipes {
+        & .container {
+            & .summery {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .AllRecipes {
+        & .container {
+            & .summery {
+                font-size: 14px;
+            }
+        }
+    }
+}

@@ -1,0 +1,245 @@
+.WordsSatisfaction {
+    margin-block: 50px 100px;
+
+    & .satisfaction {
+        text-align: center;
+        color: var(--dark-color-50);
+
+        & .title {
+            & h2 {
+                font-size: 32px;
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+
+                & span {
+                    color: var(--main-color);
+                }
+            }
+
+            & p {
+                margin-bottom: 5px;
+            }
+        }
+
+        & .slider {
+            margin-block: 50px;
+
+            & .cards {
+                width: 100%;
+                height: 530px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                gap: 30px;
+                position: relative;
+
+                & .card {
+                    width: 350px;
+                    padding: 20px;
+                    background-color: var(--light-color-90);
+                    -webkit-box-shadow: 0 0 1px var(--dark-color-50);
+                    box-shadow: 0 0 1px var(--dark-color-50);
+                    position: absolute;
+                    cursor: pointer;
+                    -webkit-transition: 0.3s 0.1s;
+                    -o-transition: 0.3s 0.1s;
+                    transition: 0.3s 0.1s;
+
+                    &:first-child {
+                        left: 0;
+                        z-index: 5;
+                        -webkit-filter: blur(3px);
+                        filter: blur(3px);
+                        -webkit-transform: translateX(0) scale(0.7) perspective(16px) rotateY(1deg);
+                        transform: translateX(0) scale(0.7) perspective(16px) rotateY(1deg);
+                    }
+
+                    &:nth-child(2) {
+                        left: 35%;
+                        z-index: 7;
+                        -webkit-filter: blur(1px);
+                        filter: blur(1px);
+                        -webkit-transform: translateX(-50%) scale(0.9) perspective(16px) rotateY(0.5deg);
+                        transform: translateX(-50%) scale(0.9) perspective(16px) rotateY(0.5deg);
+                    }
+
+                    &:nth-child(3) {
+                        left: 50%;
+                        z-index: 9;
+                        -webkit-filter: blur(0);
+                        filter: blur(0);
+                        -webkit-transform: translateX(-50%) scale(1);
+                        -ms-transform: translateX(-50%) scale(1);
+                        transform: translateX(-50%) scale(1);
+                    }
+
+                    &:nth-child(4) {
+                        left: 65%;
+                        z-index: 7;
+                        -webkit-filter: blur(1px);
+                        filter: blur(1px);
+                        -webkit-transform: translateX(-50%) scale(0.9) perspective(16px) rotateY(-0.5deg);
+                        transform: translateX(-50%) scale(0.9) perspective(16px) rotateY(-0.5deg);
+                    }
+
+                    &:last-child {
+                        left: 100%;
+                        z-index: 5;
+                        -webkit-filter: blur(1px);
+                        filter: blur(1px);
+                        -webkit-transform: translateX(-100%) scale(0.7) perspective(16px) rotateY(-1deg);
+                        transform: translateX(-100%) scale(0.7) perspective(16px) rotateY(-1deg);
+                    }
+
+                    & .card-img {
+                        & img {
+                            -webkit-transform: scale(1.05);
+                            -ms-transform: scale(1.05);
+                            transform: scale(1.05);
+
+                            &:hover {
+                                -webkit-transition: 0.3s;
+                                -o-transition: 0.3s;
+                                transition: 0.3s;
+                            }
+                        }
+                    }
+
+                    & .rate {
+                        display: block;
+                        margin: 12px 10px 0;
+
+                        & i {
+                            margin-inline: 5px;
+                            color: var(--main-color);
+                        }
+                    }
+
+                    & .card-info {
+                        height: auto;
+                        margin-top: 10px;
+
+                        & p {
+                            display: block;
+                            padding-top: 10px;
+                            margin-top: 15px;
+                            font-size: 14px;
+                            line-height: 1.6;
+                            position: relative;
+
+                            &::before {
+                                content: "";
+                                width: 50%;
+                                position: absolute;
+                                top: 0;
+                                left: 50%;
+                                -webkit-transform: translateX(-50%);
+                                -ms-transform: translateX(-50%);
+                                transform: translateX(-50%);
+                                border-top: 2px solid var(--main-color);
+                            }
+                        }
+
+                        & h2 {
+                            margin-block: 10px;
+                            color: var(--main-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .WordsSatisfaction {
+        & .satisfaction {
+            & .slider {
+                & .cards {
+                    height: 430px;
+
+                    & .card {
+                        width: 300px;
+
+                        & .card-info {
+                            & h2 {
+                                font-size: 18px;
+                            }
+
+                            & p {
+                                font-size: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .WordsSatisfaction {
+        & .satisfaction {
+            & .slider {
+                & .cards {
+                    height: 350px;
+
+                    & .card {
+                        width: 250px;
+
+                        & .card-info {
+                            & h2 {
+                                font-size: 16px;
+                            }
+
+                            & p {
+                                font-size: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .WordsSatisfaction {
+        & .satisfaction {
+            & .slider {
+                & .cards {
+                    height: 300px;
+
+                    & .card {
+                        width: 200px;
+
+                        & .card-info {
+                            & h2 {
+                                font-size: 14px;
+                            }
+
+                            & p {
+                                font-size: 6px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .WordsSatisfaction {
+        & .satisfaction {
+            & .slider {
+                & .cards {
+                    & .card {
+                        padding: 10px;
+                        width: 200px;
+                    }
+                }
+            }
+        }
+    }
+}

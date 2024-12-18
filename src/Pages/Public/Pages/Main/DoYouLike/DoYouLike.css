@@ -1,0 +1,146 @@
+.DoYouLike {
+    text-align: center;
+    position: relative;
+    padding-block: 100px;
+    font-family: var(--Roboto);
+
+    &::before {
+        content: "";
+        width: 200px;
+        height: 170px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("../../../../../Assets/images/other/index2/mango.png");
+        -webkit-filter: drop-shadow(3px 10px 5px rgb(0 0 0 / 0.4));
+        filter: drop-shadow(3px 10px 5px rgb(0 0 0 / 0.4));
+    }
+
+    &::after {
+        content: "";
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        z-index: 500;
+        -webkit-transform: rotate(65deg);
+        -ms-transform: rotate(65deg);
+        transform: rotate(65deg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("../../../../../Assets/images/other/index2/spices3.png");
+    }
+
+    & .container {
+        & .title {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-bottom: 50px;
+
+            & h2 {
+                font-size: 30px;
+                margin-bottom: 10px;
+                font-family: var(--Playball);
+
+                & span {
+                    color: var(--main-color);
+                }
+            }
+
+            & .description {
+                width: 70%;
+                margin: auto;
+                font-size: 14px;
+
+                & span {
+                    color: var(--main-color);
+                }
+            }
+        }
+
+        & .actions {
+            gap: 20px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+
+            & a {
+                outline: 2px solid var(--main-color);
+
+                &:hover {
+                    color: var(--light-color);
+                    background-color: var(--main-color);
+                }
+            }
+
+            & a:last-child {
+                color: var(--main-color);
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .DoYouLike {
+
+        &::before {
+            width: 150px;
+            height: 120px;
+        }
+
+        &::after {
+            width: 250px;
+            height: 250px;
+            bottom: -50px;
+            right: -50px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .DoYouLike {
+        &::before {
+            width: 100px;
+            height: 90px;
+        }
+
+        &::after {
+            width: 150px;
+            height: 150px;
+            bottom: -30px;
+            right: -30px;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .DoYouLike {
+        &::before {
+            width: 70px;
+            height: 50px;
+            top: 15px;
+            left: 15px;
+        }
+
+        &::after {
+            width: 100px;
+            height: 100px;
+            bottom: -20px;
+            right: -20px;
+        }
+    }
+}

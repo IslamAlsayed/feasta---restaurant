@@ -1,0 +1,86 @@
+[
+    {
+        "id": "1",
+        "name": "aleta m.payne",
+        "description": "a collection of textile samples lay spread out on the table-samsa was a travelling salesman.",
+        "media": [
+            "facebook",
+            "twitter",
+            "google"
+        ],
+        "titleJob": "Specialized Chef",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/17.webp",
+        "image": "Assets/images/chefs/chef1.png"
+    },
+    {
+        "id": "2",
+        "name": "aleta m.payne",
+        "description": "a collection of textile samples lay spread out on the table-samsa was a travelling salesman.",
+        "media": [
+            "facebook",
+            "twitter",
+            "google"
+        ],
+        "titleJob": "Head Chef",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/10.webp",
+        "image": "Assets/images/chefs/chef2.png"
+    },
+    {
+        "id": "3",
+        "name": "aleta m.payne",
+        "description": "a collection of textile samples lay spread out on the table-samsa was a travelling salesman.",
+        "media": [
+            "facebook",
+            "twitter",
+            "google"
+        ],
+        "titleJob": "Sous Chef",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/4.webp",
+        "image": "Assets/images/chefs/chef3.png"
+    },
+    {
+        "id": "4",
+        "name": "aleta m.payne",
+        "description": "a collection of textile samples lay spread out on the table-samsa was a travelling salesman.",
+        "media": [
+            "facebook",
+            "twitter",
+            "google"
+        ],
+        "titleJob": "Pastry Chef",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/12.webp",
+        "image": "Assets/images/chefs/chef4.png"
+    },
+    {
+        "id": "5",
+        "name": "aleta m.payne",
+        "description": "a collection of textile samples lay spread out on the table-samsa was a travelling salesman.",
+        "media": [
+            "facebook",
+            "twitter",
+            "google"
+        ],
+        "titleJob": "Vegetarian Chef",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/4.webp",
+        "image": "Assets/images/chefs/chef5.png"
+    },
+    {
+        "id": "6",
+        "name": "aleta m.payne",
+        "description": "a collection of textile samples lay spread out on the table-samsa was a travelling salesman.",
+        "media": [
+            "facebook",
+            "twitter",
+            "google"
+        ],
+        "titleJob": "Grill Chef",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/23.webp",
+        "image": "Assets/images/chefs/chef6.png"
+    }
+]

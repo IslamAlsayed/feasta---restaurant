@@ -1,0 +1,128 @@
+.Recipes {
+    margin-top: 100px;
+    position: relative;
+    font-family: var(--Roboto);
+
+    & .summery {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: var(--Playball);
+
+        & span {
+            color: var(--main-color);
+        }
+    }
+
+    & .random-recipe {
+        & .sky-loading {
+            gap: 20px;
+            display: -ms-grid;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+            & .card {
+                -webkit-animation: loading 0.7s infinite;
+                animation: loading 0.7s infinite;
+
+                & .image {
+                    width: 100%;
+                    height: 250px;
+                    background: var(--load);
+                }
+
+                & .text {
+                    width: 100%;
+                    height: 30px;
+                    margin-block: 10px;
+                    background: var(--load);
+                }
+
+                & .btns {
+                    gap: 20px;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: justify;
+                    -ms-flex-pack: justify;
+                    justify-content: space-between;
+
+                    & div {
+                        width: 100%;
+                        height: 30px;
+                        background: var(--load);
+                    }
+                }
+            }
+        }
+
+        & .recipes {
+            gap: 20px;
+            display: -ms-grid;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+    }
+
+    & .main-menu {
+        margin-top: 50px;
+        position: relative;
+
+        &::after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            z-index: -1;
+            border-bottom: 3px dotted var(--main-color);
+        }
+
+        & img {
+            width: 25px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        & a {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-transition: 0.2s;
+            -o-transition: 0.2s;
+            transition: 0.2s;
+            font-family: var(--Roboto);
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+
+            &:hover {
+                padding-inline: 30px;
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .Recipes {
+        & .summery {
+            font-size: 26px;
+        }
+
+        & .main-menu {
+            & a {
+                width: 100%;
+
+                &:hover {
+                    padding-inline: 15px;
+                }
+            }
+        }
+    }
+}

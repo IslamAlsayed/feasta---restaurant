@@ -1,0 +1,314 @@
+[
+    {
+        "id": 1,
+        "name": "Samuel Serif",
+        "title": "Valentino Morose",
+        "age": "42",
+        "years_experience": "05 hears",
+        "specialization": "beef chicken",
+        "phone": "45643513254",
+        "email": "samuelserif@gmail.com",
+        "experience": [
+            {
+                "title": "grill chicken with roasted garlic",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "soup with peppers",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "lime & mandarin juice",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "multivitamin salad",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            }
+        ],
+        "skills": [
+            {
+                "title": "happy clients",
+                "progressWidth": "90%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "76%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "57%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "85%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "94%"
+            }
+        ],
+        "description": "A Collection Of Textile Samples Lay Spread Out On Table - Samsa Was A Travelling Salesman - And Above It There Hung A Picture That He Had Recently.",
+        "information": "A Wonderful Sere Has Take Possession Of My Entire Soul, Like These Sweet Mornings Of Spring Which I Enjoy With My Whole I Am Feel Existencewas Created",
+        "address": "A Small River Named Duden Flows By Their Place And Supplies It With Necessary Regelialia. It Is Paradisematic Country.",
+        "about": "He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked. He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked.",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/17.webp",
+        "media": [
+            "facebook",
+            "instagram",
+            "linkedin",
+            "google"
+        ],
+        "image": "Assets/images/chefs/chef1.png"
+    },
+    {
+        "id": 2,
+        "name": "Samuel Serif",
+        "title": "Valentino Morose",
+        "age": "42",
+        "years_experience": "05 hears",
+        "specialization": "beef chicken",
+        "phone": "45643513254",
+        "email": "samuelserif@gmail.com",
+        "experience": [
+            {
+                "title": "grill chicken with roasted garlic",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "soup with peppers",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "lime & mandarin juice",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "multivitamin salad",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            }
+        ],
+        "skills": [
+            {
+                "title": "happy clients",
+                "progressWidth": "90%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "76%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "57%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "85%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "94%"
+            }
+        ],
+        "description": "A Collection Of Textile Samples Lay Spread Out On Table - Samsa Was A Travelling Salesman - And Above It There Hung A Picture That He Had Recently.",
+        "information": "A Wonderful Sere Has Take Possession Of My Entire Soul, Like These Sweet Mornings Of Spring Which I Enjoy With My Whole I Am Feel Existencewas Created",
+        "address": "A Small River Named Duden Flows By Their Place And Supplies It With Necessary Regelialia. It Is Paradisematic Country.",
+        "about": "He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked. He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked.",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/10.webp",
+        "media": [
+            "facebook",
+            "linkedin",
+            "google"
+        ],
+        "image": "Assets/images/chefs/chef2.png"
+    },
+    {
+        "id": 3,
+        "name": "Samuel Serif",
+        "title": "Valentino Morose",
+        "age": "42",
+        "years_experience": "05 hears",
+        "specialization": "beef chicken",
+        "phone": "45643513254",
+        "email": "samuelserif@gmail.com",
+        "experience": [
+            {
+                "title": "grill chicken with roasted garlic",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "soup with peppers",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "lime & mandarin juice",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "multivitamin salad",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            }
+        ],
+        "skills": [
+            {
+                "title": "happy clients",
+                "progressWidth": "90%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "76%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "57%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "85%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "94%"
+            }
+        ],
+        "description": "A Collection Of Textile Samples Lay Spread Out On Table - Samsa Was A Travelling Salesman - And Above It There Hung A Picture That He Had Recently.",
+        "information": "A Wonderful Sere Has Take Possession Of My Entire Soul, Like These Sweet Mornings Of Spring Which I Enjoy With My Whole I Am Feel Existencewas Created",
+        "address": "A Small River Named Duden Flows By Their Place And Supplies It With Necessary Regelialia. It Is Paradisematic Country.",
+        "about": "He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked. He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked.",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/12.webp",
+        "media": [
+            "facebook",
+            "instagram",
+            "google"
+        ],
+        "image": "Assets/images/chefs/chef3.png"
+    },
+    {
+        "id": 4,
+        "name": "Samuel Serif",
+        "title": "Valentino Morose",
+        "age": "42",
+        "years_experience": "05 hears",
+        "specialization": "beef chicken",
+        "phone": "45643513254",
+        "email": "samuelserif@gmail.com",
+        "experience": [
+            {
+                "title": "grill chicken with roasted garlic",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "soup with peppers",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "lime & mandarin juice",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "multivitamin salad",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            }
+        ],
+        "skills": [
+            {
+                "title": "happy clients",
+                "progressWidth": "90%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "76%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "57%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "85%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "94%"
+            }
+        ],
+        "description": "A Collection Of Textile Samples Lay Spread Out On Table - Samsa Was A Travelling Salesman - And Above It There Hung A Picture That He Had Recently.",
+        "information": "A Wonderful Sere Has Take Possession Of My Entire Soul, Like These Sweet Mornings Of Spring Which I Enjoy With My Whole I Am Feel Existencewas Created",
+        "address": "A Small River Named Duden Flows By Their Place And Supplies It With Necessary Regelialia. It Is Paradisematic Country.",
+        "about": "He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked. He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked.",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/23.webp",
+        "media": [
+            "facebook",
+            "instagram",
+            "linkedin"
+        ],
+        "image": "Assets/images/chefs/chef4.png"
+    },
+    {
+        "id": 5,
+        "name": "Samuel Serif",
+        "title": "Valentino Morose",
+        "age": "42",
+        "years_experience": "05 hears",
+        "specialization": "beef chicken",
+        "phone": "45643513254",
+        "email": "samuelserif@gmail.com",
+        "experience": [
+            {
+                "title": "grill chicken with roasted garlic",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "soup with peppers",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "lime & mandarin juice",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            },
+            {
+                "title": "multivitamin salad",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Laboriosam ratione eligendi ab, quaerat esse reprehenderitrepellat unde minima porro tempora."
+            }
+        ],
+        "skills": [
+            {
+                "title": "happy clients",
+                "progressWidth": "90%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "76%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "57%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "85%"
+            },
+            {
+                "title": "happy clients",
+                "progressWidth": "94%"
+            }
+        ],
+        "description": "A Collection Of Textile Samples Lay Spread Out On Table - Samsa Was A Travelling Salesman - And Above It There Hung A Picture That He Had Recently.",
+        "information": "A Wonderful Sere Has Take Possession Of My Entire Soul, Like These Sweet Mornings Of Spring Which I Enjoy With My Whole I Am Feel Existencewas Created",
+        "address": "A Small River Named Duden Flows By Their Place And Supplies It With Necessary Regelialia. It Is Paradisematic Country.",
+        "about": "He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked. He Lay On His Armour-Like Back, And If He Lifted His Head A Little He Could See His Brown Belly, Slightly Domed And Divided By Arches Into Stiff Sections. The Bedding Was Hardly Able To Cover It And Seemed Ready To Slide Off Any Moment. His Many Legs, Pitifully Thin Compared With The Size Of The Rest Of Him, Waved About Helplessly As He Looked.",
+        "favorite_dish": "Tandoori Chicken",
+        "favorite_dish_image": "Assets/images/recipes/4.webp",
+        "media": [
+            "facebook",
+            "instagram",
+            "linkedin",
+            "google"
+        ],
+        "image": "Assets/images/chefs/chef5.png"
+    }
+]

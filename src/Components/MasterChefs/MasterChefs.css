@@ -1,0 +1,206 @@
+.MasterChefs {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../../Assets/images/backgrounds/background9.jpg");
+
+    &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+        background-color: var(--dark-color);
+    }
+
+    & .container {
+        & .title {
+            gap: 20px;
+            z-index: 3;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            position: relative;
+            padding-block: 30px;
+            color: var(--main-color);
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        & .cards {
+            height: 300px;
+
+            & .card {
+                gap: 20px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                position: relative;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+
+                & .card-info {
+                    padding-top: 15px;
+                    color: var(--light-color);
+
+                    & h2 {
+                        font-size: 32px;
+                    }
+
+                    & h3 {
+                        padding-bottom: 10px;
+                        position: relative;
+                        margin-bottom: 15px;
+
+                        &::after {
+                            content: "";
+                            width: 50px;
+                            height: 1px;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            background-color: var(--main-color);
+                        }
+                    }
+
+                    & .description {
+                        width: 60%;
+                        opacity: 0.7;
+                        font-size: 14px;
+                        line-height: 2;
+                        text-wrap: balance;
+                        margin-block: 5px 25px;
+
+                        & span {
+                            color: var(--main-color);
+                        }
+                    }
+
+                    & .social {
+                        gap: 15px;
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        font-size: 22px;
+                        width: -webkit-fit-content;
+                        width: -moz-fit-content;
+                        width: fit-content;
+
+                        & a {
+                            cursor: pointer;
+
+                            &:hover {
+                                margin-top: -5px;
+                            }
+                        }
+
+                        & button {
+                            padding: 10px;
+                        }
+                    }
+
+                    & .go_details {
+                        display: inline-block;
+                        padding: 5px;
+                        margin-top: 20px;
+                        font-family: var(--Roboto);
+                        border-radius: 3px;
+                        color: var(--light-color);
+                        background-color: var(--toxic-color-50);
+
+                        &:hover {
+                            background-color: var(--toxic-color);
+                        }
+                    }
+                }
+
+                /* start style component slider [ card image ] */
+                & .card-img {
+                    width: auto;
+                    height: 280px;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    -webkit-box-flex: 1;
+                    -ms-flex: 1;
+                    flex: 1;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .MasterChefs {
+        & .container {
+            & .title {
+                font-size: 18px;
+            }
+
+            & .cards {
+                height: 230px;
+
+                & .card {
+                    & .card-info {
+                        & .description {
+                            font-size: 10px;
+                        }
+                    }
+
+                    & .card-img {
+                        height: 200px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .MasterChefs {
+        & .container {
+            & .title {
+                font-size: 14px;
+            }
+
+            & .cards {
+                height: 180px;
+
+                & .card {
+                    & .card-info {
+                        & h3 {
+                            font-size: 14px;
+                        }
+
+                        & .description {
+                            width: 60%;
+                            font-size: 8px;
+                            line-height: 1.6;
+                            margin-block: 5px 10px;
+                        }
+
+                        & .social {
+                            font-size: 14px;
+                        }
+                    }
+
+                    & .card-img {
+                        height: 150px;
+                    }
+                }
+            }
+        }
+    }
+}

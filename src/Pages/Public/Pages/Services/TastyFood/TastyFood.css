@@ -1,0 +1,63 @@
+.TastyFood {
+    padding-block: 70px;
+    text-align: center;
+
+    & .tasty-food {
+        & h2 {
+            font-size: 32px;
+
+            & span {
+                color: var(--main-color);
+            }
+        }
+
+        & p {
+            width: 50%;
+            margin: auto;
+            line-height: 1.6;
+            margin-block: 10px 30px;
+        }
+
+        & .routes {
+            gap: 20px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+
+            & a {
+                display: -ms-grid;
+                display: grid;
+                place-content: center;
+
+                &:last-child {
+                    color: var(--main-color);
+                    background-color: transparent;
+                    border: 2px solid var(--main-color);
+
+                    &:hover {
+                        color: var(--light-color);
+                        background-color: var(--main-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .TastyFood {
+        & .tasty-food {
+            & h2 {
+                font-size: 24px;
+            }
+
+            & p {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
+    }
+}

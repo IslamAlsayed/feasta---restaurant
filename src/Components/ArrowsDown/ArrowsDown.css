@@ -1,0 +1,58 @@
+.ArrowsDown {
+    & .arrows-down {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        z-index: 3;
+        transform: translateX(-50%);
+
+        & span {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            opacity: 0.3;
+            border-width: 5px;
+            border-style: solid;
+            border-radius: 7px;
+            transform: translateX(-50%) rotate(-45deg);
+            animation: opacity-border 0.5s infinite linear;
+            animation-delay: calc(0.1s * var(--span));
+            border-color: transparent transparent var(--main-color-50) var(--main-color-50);
+
+            &:first-of-type {
+                bottom: 45px;
+                transform: scale(0.4) translateX(-128%) rotate(-45deg);
+            }
+
+            &:nth-child(2) {
+                bottom: 40px;
+                transform: scale(0.7) translateX(-72%) rotate(-45deg);
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .ArrowsDown {
+        .arrows-down {
+            transform: translateX(-50%) scale(0.7);
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .ArrowsDown {
+        .arrows-down {
+            transform: translateX(-50%) scale(0.5);
+        }
+    }
+}
+
+@keyframes opacity-border {
+    100% {
+        opacity: 1;
+    }
+}

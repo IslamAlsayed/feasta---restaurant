@@ -1,0 +1,122 @@
+.ServicesSpical {
+    text-align: center;
+    padding-block: 50px;
+    position: relative;
+    background-color: var(--light-color-90);
+
+    &::after {
+        content: "";
+        width: 150px;
+        height: 120px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("../../../../../Assets/images/other/mango.png");
+    }
+
+    & .services {
+        & .title {
+            margin-bottom: 30px;
+            color: var(--dark-color-50);
+
+            & h2 {
+                margin-bottom: 10px;
+                letter-spacing: 1px;
+
+                & span {
+                    color: var(--main-color);
+                }
+            }
+
+            & p {
+                width: 70%;
+                margin: auto;
+                font-size: 12px;
+                line-height: 1.6;
+                text-wrap: balance;
+            }
+        }
+
+        & .cards {
+            display: -ms-grid;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+
+            & .card {
+                padding: 40px;
+                border-radius: 7px;
+                text-decoration: none;
+                color: var(--dark-color-50);
+                -webkit-box-shadow: 0 0 1px 0 var(--blue-color);
+                box-shadow: 0 0 1px 0 var(--blue-color);
+                background-color: var(--dark-color-90);
+
+                &:hover,
+                &.active {
+                    background-color: var(--light-color);
+                    -webkit-box-shadow: 0 0 7px 0 #00000020;
+                    box-shadow: 0 0 7px 0 #00000020;
+                }
+
+                & i {
+                    font-size: 40px;
+                    margin-bottom: 20px;
+                }
+
+                & h4 {
+                    color: var(--main-color);
+                }
+
+                & img {
+                    width: 70px;
+                    height: 70px;
+                }
+
+                & span {
+                    display: inline-block;
+                    font-size: 12px;
+                    position: relative;
+                    padding-bottom: 5px;
+                    margin-bottom: 10px;
+                    color: var(--dark-color-50);
+
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        border-bottom: 1px solid var(--main-color);
+                    }
+                }
+
+                & p {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .ServicesSpical {
+        &::after {
+            width: 90px;
+            height: 80px;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .ServicesSpical {
+        &::after {
+            width: 65px;
+            height: 55px;
+        }
+    }
+}

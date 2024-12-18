@@ -1,0 +1,224 @@
+.EatBetter {
+    margin-block: 50px;
+
+    & .eat-better {
+        margin-bottom: 50px;
+        position: relative;
+
+        &::after {
+            content: "";
+            width: 350px;
+            height: 300px;
+            position: absolute;
+            top: 50px;
+            left: -250px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-image: url("../../../../../Assets/images/other/better.png");
+        }
+
+        &>div::after,
+        &>div::before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        & .img {
+            height: 350px;
+            position: relative;
+            -webkit-transform: scaleX(-1);
+            -ms-transform: scaleX(-1);
+            transform: scaleX(-1);
+
+            &::after {
+                background-color: var(--dark-color);
+            }
+        }
+
+        & .info {
+            position: absolute;
+            width: 400px;
+            padding-block: 20px;
+            top: 50%;
+            left: 50%;
+            display: -ms-grid;
+            display: grid;
+            overflow: hidden;
+            border-radius: 3px;
+            text-align: center;
+            place-content: center;
+            color: var(--light-color);
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+
+            &::before {
+                z-index: -1;
+                background-color: var(--main-color);
+            }
+
+            & h2 {
+                letter-spacing: 2px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    & .row {
+        gap: 20px;
+        display: -ms-grid;
+        display: grid;
+        text-align: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-grid-columns: 1fr 5px 1fr 5px 1fr;
+        grid-template-columns: repeat(3, 1fr);
+
+        & .col {
+            &>i {
+                width: 30px;
+                height: 30px;
+                display: -ms-grid;
+                display: grid;
+                font-size: 14px;
+                margin: 10px auto;
+                border-radius: 50%;
+                place-content: center;
+                color: var(--main-color);
+                border: 1px solid var(--main-color);
+                position: relative;
+
+                &::after {
+                    content: "";
+                    width: 50px;
+                    height: 2px;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    -webkit-transform: translate(120%, -50%);
+                    -ms-transform: translate(120%, -50%);
+                    transform: translate(120%, -50%);
+                    background-color: var(--main-color);
+                    -webkit-box-shadow: -100px 0 0 0 var(--main-color);
+                    box-shadow: -100px 0 0 0 var(--main-color);
+                }
+            }
+
+            & .description {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
+            & p:last-of-type {
+                font-size: 18px;
+                font-family: var(--Roboto);
+                margin-block: 15px 10px;
+            }
+
+            & a {
+                gap: 5px;
+                font-weight: bold;
+                font-family: var(--Roboto);
+                display: -webkit-inline-box;
+                display: -ms-inline-flexbox;
+                display: inline-flex;
+                color: var(--toxic-color-50);
+
+                &:hover {
+                    color: var(--toxic-color);
+                }
+            }
+
+            & .img {
+                -webkit-transform: scale(0.7);
+                -ms-transform: scale(0.7);
+                transform: scale(0.7);
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .EatBetter {
+        & .eat-better {
+            &::after {
+                width: 250px;
+                height: 200px;
+                left: -150px;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .EatBetter {
+        & .eat-better {
+            &::after {
+                width: 170px;
+                height: 130px;
+                top: 90px;
+                left: -70px;
+            }
+
+            & .info {
+                width: 300px;
+
+                & h2 {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .EatBetter {
+        & .row {
+            -ms-grid-columns: auto;
+            grid-template-columns: auto;
+
+            & .col {
+                & .img {
+                    width: 50%;
+                    margin: auto;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .EatBetter {
+        & .eat-better {
+            & .img {
+                height: 250px;
+            }
+
+            &::after {
+                width: 130px;
+                height: 80px;
+                top: 120px;
+                left: -70px;
+            }
+
+            & .info {
+                width: 250px;
+
+                & h2 {
+                    font-size: 12px;
+                }
+
+                & p {
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
