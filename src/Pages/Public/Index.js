@@ -32,7 +32,6 @@ export default function Index() {
     setTimeout(() => {
       setFooter(location.pathname === "/" ? <Footer /> : <SecondFooter />);
     }, 3000);
-
   }, [location]);
 
   return (

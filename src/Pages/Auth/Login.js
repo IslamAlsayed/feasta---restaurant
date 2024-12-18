@@ -66,8 +66,8 @@ export default function Login() {
             </div>
             <div className="group-input">
               <button type="submit" id="submitForm">Login</button>
-            </div>
-          </form>
+            </div >
+          </form >
 
           <div className="otherForm">
             <a href="/auth/resetPassword" className="resetPassword">
@@ -79,7 +79,7 @@ export default function Login() {
             <span>I don't have account?</span>
             <a href="/auth/register">register</a>
           </div>
-        </div>
+        </div >
 
         <footer className="footer">
           <p> © 2024 For support <a href="https://www.linkedin.com/in/islam-alsayed7">IslamAlsayed</a> , Inc.</p>
@@ -89,7 +89,7 @@ export default function Login() {
             <Link to="/privacy-policy"> Privacy Policy</Link>.
           </p>
         </footer>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
