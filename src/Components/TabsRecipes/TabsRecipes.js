@@ -1,11 +1,11 @@
 import "./TabsRecipes.css";
 import React, { useCallback, useEffect, useState } from 'react';
-
 import random from "../../Assets/images/icons/main-colors/cooking.png";
 import breakfast from "../../Assets/images/icons/main-colors/menu.png";
 import dinner from "../../Assets/images/icons/main-colors/daily.png";
 import lunch from "../../Assets/images/icons/main-colors/dishes.png";
 import dessert from "../../Assets/images/icons/main-colors/dinner.png";
+import { randomIntArrayInRange } from "../../Store/helper";
 
 export default function TabsRecipes({ data, setFilterRecipes }) {
     const [activeTab, setActiveTab] = useState("random");
@@ -27,8 +27,21 @@ export default function TabsRecipes({ data, setFilterRecipes }) {
 
     const handleFilter = useCallback((meal) => {
         setActiveTab(meal);
-        let dataFilter = meal === "random" ? data : data.filter((recipe) => recipe.mealType === meal);
-        setTimeout(() => setFilterRecipes(dataFilter.slice(0, stateLength)), 250);
+        const randomIds = randomIntArrayInRange(1, data.length, stateLength);
+
+        let dataFilter = meal === "random"
+            ? data.filter((recipe) => randomIds.includes(recipe.id))
+            : data.filter((recipe) => recipe.mealType === meal && randomIds.includes(recipe.id));
+
+        if (dataFilter.length < stateLength) {
+            const remainingData = data.filter((recipe) => recipe.mealType === meal);
+            dataFilter = [
+                ...dataFilter,
+                ...remainingData.filter((recipe) => !randomIds.includes(recipe.id)).slice(0, stateLength - dataFilter.length)
+            ];
+        }
+
+        setTimeout(() => setFilterRecipes(dataFilter), 250);
     }, [data, setFilterRecipes, stateLength]);
 
     return (

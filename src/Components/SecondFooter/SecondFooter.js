@@ -11,6 +11,7 @@ import dish15_1 from "../../Assets/images/dishes/dish15.jpg";
 import dish15_2 from "../../Assets/images/dishes/dish15.jpg";
 import dish15_3 from "../../Assets/images/dishes/dish15.jpg";
 import dish15_4 from "../../Assets/images/dishes/dish15.jpg";
+import { SITE_HELPER } from "../../Store/helper";
 
 export default function SecondFooter() {
   const [image, setImage] = useState();
@@ -21,20 +22,15 @@ export default function SecondFooter() {
         <div className="title">
           <Link to="/" className="logo">
             <div className="logo-img">
-              <img className="logoImg" src={bibimbap} alt="logo" />
+              <img className="logoImg" src={SITE_HELPER.logo} alt={SITE_HELPER.site_name} />
             </div>
             <div className="logo-title">
-              <span>feasta</span>
-              <span>egyptian restaurant</span>
+              <span>{SITE_HELPER.site_name?.split(' ')[0]}</span>
+              <span>{SITE_HELPER.site_name?.split(' ').slice(1).join(' ')}</span>
             </div>
           </Link>
 
-          <div className="description">
-            To achieve this, it would be necessary to have uniform grammar,
-            pronunciation and more common words. I should be incapable of
-            drawing a single stroke at the present moment; and yet I feel that I
-            never was a greater artist than now.
-          </div>
+          <div className="description">{SITE_HELPER.about_us}</div>
         </div>
 
         <div className="contact">
@@ -42,11 +38,7 @@ export default function SecondFooter() {
             <div className="side">
               <div className="col about">
                 <h3>about us</h3>
-                <div className="description">
-                  To achieve this, it would be necessary to have uniform grammar,
-                  pronunciation and more if a common words When, while the lovely
-                  valley teems with Tuesday Wednesday Thursday
-                </div>
+                <div className="description">{SITE_HELPER.about_us}</div>
               </div>
 
               <div className="col contact">
@@ -54,22 +46,23 @@ export default function SecondFooter() {
                 <ul>
                   <li>
                     <i className="fas fa-location-dot"></i>
-                    <div>Palestine is free and independent</div>
-                  </li>
-                  <li>
-                    <i className="fas fa-phone"></i>
-                    <div>(+20) 6549845645</div>
+                    <div>{SITE_HELPER.address}</div>
                   </li>
                   <li>
                     <i className="fas fa-envelope"></i>
-                    <div>info@feastaegyptianRestaurant.com</div>
+                    <Link to={`mailto:${SITE_HELPER.email}`}>{SITE_HELPER.email}</Link>
+                  </li>
+                  <li>
+                    <i className="fas fa-phone"></i>
+                    <Link to={`tel:${SITE_HELPER.phone}`}>{SITE_HELPER.phone}</Link>
                   </li>
                 </ul>
               </div>
 
               <div className="col work">
                 <h3>working hours</h3>
-                <p>Every day from <b>10am</b> to <b>8pm</b>, sunday is <span className="closed">closed</span></p>
+                <p>{SITE_HELPER.address}</p>
+                {/* <p>Every day from <b>10am</b> to <b>8pm</b>, sunday is <span className="closed">closed</span></p> */}
               </div>
             </div>
 
@@ -98,13 +91,11 @@ export default function SecondFooter() {
           </div>
 
           <div className="copyRight">
-            <p> © 2023 <span>feasta restaurant</span> all right reserved The developer is
-              <Link to={"mailto: eslamalsayed8133@gmail.com"}> IslamAlsayed </Link>
-            </p>
-            <p>
-              <Link to="tel:+201065438133">(+20) 1065438133</Link> but
-              <span className="quote"> the design is quoted</span>
-            </p>
+            <p>© 2023 <span>feasta restaurant</span> all right reserved The developer is
+              <Link to={`mailto: ${JSON.parse(SITE_HELPER.developer)?.email}`}>{JSON.parse(SITE_HELPER.developer)?.name}</Link></p>
+
+            <p><Link to={`tel:${JSON.parse(SITE_HELPER.developer)?.phone}`}>{JSON.parse(SITE_HELPER.developer)?.phone}</Link> but
+              <span className="quote"> the design is quoted</span></p>
           </div>
         </div>
       </div>

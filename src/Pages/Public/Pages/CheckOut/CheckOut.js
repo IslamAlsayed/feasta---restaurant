@@ -31,8 +31,8 @@ export default function CheckOut() {
   });
 
   useEffect(() => {
-    if (USER_HELPER) setOrder({ ...order, client_id: USER_HELPER.id });
-  }, [USER_HELPER, location]);
+    if (USER_HELPER) setOrder((prev) => ({ ...prev, client_id: USER_HELPER.id }));
+  }, [location]);
 
   useEffect(() => {
     if (CART.length > 0) {
@@ -133,7 +133,7 @@ export default function CheckOut() {
             }
           }
         } catch (error) {
-          console.log('error', error);
+          console.log(error);
         }
       }
 
@@ -197,7 +197,7 @@ export default function CheckOut() {
                 localStorage.removeItem("cartId");
               }
             } catch (error) {
-              console.log('error', error);
+              console.log(error);
             }
           }
 
@@ -379,7 +379,7 @@ export default function CheckOut() {
             <div className="order">
               <div className="row">
                 <div className="col">subTotal</div>
-                <div className={discount && discount > 0 || shipping > 0 ? "s" : ""}>${(TOTAL_PRICE - shipping).toFixed(2)}</div>
+                <div className={discount && discount > 0 && shipping > 0 ? "s" : ""}>${(TOTAL_PRICE - shipping).toFixed(2)}</div>
               </div>
 
               <div className="row">

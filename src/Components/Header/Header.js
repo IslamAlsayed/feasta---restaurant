@@ -1,9 +1,9 @@
 import "./Header.css";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../../Assets/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuth, logout } from "../../axiosConfig/Auth";
+import { SITE_HELPER } from "../../Store/helper";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -99,11 +99,11 @@ export default function Header() {
       <div className="container">
         <Link to="/" id="home" className="logo" onClick={() => handleClassActive("logo")} >
           <div className="img">
-            <img className="logoImg" src={Logo} alt="site logo" />
+            <img className="logoImg" src={SITE_HELPER.logo} alt={SITE_HELPER.site_name} />
           </div>
           <div className="title">
-            <span>feasta</span>
-            <span>egyptian restaurant</span>
+            <span>{SITE_HELPER.site_name.split(' ')[0]}</span>
+            <span>{SITE_HELPER.site_name.split(' ').slice(1).join(' ')}</span>
           </div>
         </Link>
 
@@ -124,32 +124,26 @@ export default function Header() {
               </b>
 
               <ul className={`dropList ${dropListActive ? "active" : ""}`}>
-                <li>
-                  <Link to="/chefs" className={isActive("/chefs")} onClick={() => setDropListActive(!dropListActive)} >
-                    <i className="fas fa-person-dots-from-line"></i>
-                    <span>chefs</span>
-                  </Link>
-                </li>
+                <li><Link to="/chefs" className={isActive("/chefs")} onClick={() => setDropListActive(!dropListActive)} >
+                  <i className="fas fa-person-dots-from-line"></i>
+                  <span>chefs</span>
+                </Link></li>
 
-                <li>
-                  <Link to="/services" className={isActive("/services")} onClick={() => setDropListActive(!dropListActive)} >
-                    <i className="fas fa-microchip"></i>
-                    <span>services</span>
-                  </Link>
-                </li>
+                <li><Link to="/services" className={isActive("/services")} onClick={() => setDropListActive(!dropListActive)} >
+                  <i className="fas fa-microchip"></i>
+                  <span>services</span>
+                </Link></li>
 
-                <li>
-                  <Link to="/book-table" className={isActive("/book-table")} onClick={() => setDropListActive(!dropListActive)} >
-                    <i className="fas fa-utensils"></i>
-                    <span>book table</span>
-                  </Link>
-                </li>
-                {userAuth && <li>
-                  <Link to="/blogger" className={isActive("/blogger")} onClick={() => setDropListActive(!dropListActive)} >
+                <li><Link to="/book-table" className={isActive("/book-table")} onClick={() => setDropListActive(!dropListActive)} >
+                  <i className="fas fa-utensils"></i>
+                  <span>book table</span>
+                </Link></li>
+
+                {userAuth &&
+                  <li><Link to="/blogger" className={isActive("/blogger")} onClick={() => setDropListActive(!dropListActive)} >
                     <i className="fab fa-blogger"></i>
                     <span>blogger</span>
-                  </Link>
-                </li>}
+                  </Link></li>}
               </ul>
             </li>
 
@@ -178,26 +172,21 @@ export default function Header() {
 
               <ul className={`dropList ${userActive ? "active" : ""}`}>
                 {!userAuth ? (
-                  <li>
-                    <Link to="/auth/login" className={isActive("/login")}>
-                      <i className="fas fa-unlock"></i>
-                      <span>login</span>
-                    </Link>
-                  </li>
+                  <li><Link to="/auth/login" className={isActive("/login")}>
+                    <i className="fas fa-unlock"></i>
+                    <span>login</span>
+                  </Link></li>
                 ) : (
                   <>
-                    <li>
-                      <Link to="/profile" className={isActive("/profile")} onClick={() => setUserActive(false)}>
-                        <i className="fas fa-user"></i>
-                        <span>profile</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/auth/logout" onClick={(e) => handleLogout(e)} className={isActive("/logout")} >
-                        <i className="fas fa-arrow-right-from-bracket"></i>
-                        <span>logout</span>
-                      </Link>
-                    </li>
+                    <li><Link to="/profile" className={isActive("/profile")} onClick={() => setUserActive(false)}>
+                      <i className="fas fa-user"></i>
+                      <span>profile</span>
+                    </Link></li>
+
+                    <li><Link to="/auth/logout" onClick={(e) => handleLogout(e)} className={isActive("/logout")} >
+                      <i className="fas fa-arrow-right-from-bracket"></i>
+                      <span>logout</span>
+                    </Link></li>
                   </>
                 )}
               </ul>
@@ -205,7 +194,6 @@ export default function Header() {
           </ul>
         </div>
       </div>
-
     </div>
   );
 }

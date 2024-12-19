@@ -3,6 +3,20 @@ import { addData, updateData } from "../axiosConfig/API";
 export let CART_HELPER;
 export let USER_HELPER;
 export let TOTAL_HELPER;
+export let SITE_HELPER;
+
+try {
+    SITE_HELPER = JSON.parse(Cookies.get("feasta-site-information")) || {};
+} catch (e) {
+    SITE_HELPER = {};
+}
+
+try {
+    CART_HELPER = JSON.parse(localStorage.getItem("cartItems")) || [];
+    TOTAL_HELPER = CART_HELPER.reduce((total, item) => total + item.price * item.quantity, 0);
+} catch (e) {
+    CART_HELPER = [];
+}
 
 try {
     CART_HELPER = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -65,7 +79,7 @@ export const ADD_ITEM_HELPER = async (recipe, dispatch) => {
                 }
             }
         } catch (error) {
-            console.log('error', error);
+            console.log(error);
         }
     }
 }
@@ -101,7 +115,7 @@ export const REMOVE_ITEM_HELPER = async (recipeId, dispatch) => {
                 }
             }
         } catch (error) {
-            console.log('error', error);
+            console.log(error);
         }
     }
 };
@@ -135,7 +149,7 @@ export const DECREMENT_OR_INCREMENT_HELPER = async (recipe, action, dispatch) =>
             }
         }
     } catch (error) {
-        console.log('error', error);
+        console.log(error);
     }
 };
 

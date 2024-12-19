@@ -148,35 +148,6 @@
             }
         }
 
-        & .other_recipes {
-            -ms-grid-row: 20;
-            grid-area: 20px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-            justify-content: space-between;
-
-            & h2 {
-                color: var(--main-color);
-            }
-
-            & a {
-                padding: 10px 20px;
-                white-space: nowrap;
-                color: var(--light-color);
-                background-color: var(--main-color-50);
-
-                &:hover {
-                    background-color: var(--main-color);
-                }
-            }
-        }
-
         & .log_in_to_comment {
             width: 400px;
             padding: 10px;
@@ -528,122 +499,11 @@
             }
         }
 
-        & .cards {
+        & .recipes {
             gap: 20px;
             display: -ms-grid;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-
-            & .card {
-                position: relative;
-                padding-bottom: 20px;
-
-                &::before {
-                    content: "";
-                    width: 100%;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    opacity: 0.2;
-                    border-left: 2px solid var(--main-color);
-                }
-
-                &::after {
-                    content: "";
-                    width: 100%;
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    opacity: 0.2;
-                    border-bottom: 2px solid var(--main-color);
-                }
-
-                & .card-image {
-                    width: 100%;
-                    height: auto;
-                    position: relative;
-
-                    & .rating {
-                        padding: 5px;
-                        font-size: 10px;
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        border-radius: 3px;
-                        color: var(--light-color);
-                        background: var(--main-color);
-                    }
-                }
-
-                & .card-title {
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    display: flex;
-                    position: relative;
-                    -webkit-box-align: center;
-                    -ms-flex-align: center;
-                    align-items: center;
-                    white-space: nowrap;
-                    margin-block: 10px;
-                    font-family: var(--Roboto);
-                    -webkit-box-pack: justify;
-                    -ms-flex-pack: justify;
-                    justify-content: space-between;
-
-                    & .title {
-                        font-size: 14px;
-                    }
-
-                    & .price {
-                        color: var(--main-color);
-                    }
-                }
-
-                & .card-body {
-                    font-size: 12px;
-
-                    & .actions {
-                        gap: 20;
-                        display: -webkit-box;
-                        display: -ms-flexbox;
-                        display: flex;
-                        -webkit-box-align: center;
-                        -ms-flex-align: center;
-                        align-items: center;
-                        -webkit-box-pack: justify;
-                        -ms-flex-pack: justify;
-                        justify-content: space-between;
-
-                        & .btn {
-                            font-size: 12px;
-                            padding: 10px 15px;
-                            font-family: var(--Roboto);
-
-                            & i {
-                                padding-left: 5px;
-                            }
-
-                            &.add {
-                                color: var(--light-color);
-                                background-color: var(--main-color-50);
-
-                                &:hover {
-                                    background-color: var(--main-color);
-                                }
-                            }
-
-                            &.details {
-                                color: var(--light-color);
-                                background-color: var(--toxic-color);
-
-                                &:hover {
-                                    background-color: var(--toxic-color-50);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }

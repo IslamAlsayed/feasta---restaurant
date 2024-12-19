@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export const siteURL = "http://192.168.1.63:3000/";
-// export const basic_URL_API = "http://192.168.1.63:8000/api/";
 export const basic_URL_API = "http://127.0.0.1:8000/api/";
 export const storageURL = basic_URL_API + "storage/images/";
 

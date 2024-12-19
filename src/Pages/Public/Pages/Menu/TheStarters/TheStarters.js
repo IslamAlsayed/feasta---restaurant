@@ -58,12 +58,8 @@ export default function TheStarters() {
                   {[1, 2, 3].map((_, index) => (
                     <div className="card" key={index}>
                       <div className="card-img"></div>
-                      <div className="card-info">
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  ))}
+                      <div className="card-info"><div></div><div></div></div>
+                    </div>))}
                 </div>
               }
 
@@ -111,12 +107,8 @@ export default function TheStarters() {
                   {[1, 2, 3].map((_, index) => (
                     <div className="card" key={index}>
                       <div className="card-img"></div>
-                      <div className="card-info">
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  ))}
+                      <div className="card-info"><div></div><div></div></div>
+                    </div>))}
                 </div>
               }
 
@@ -172,12 +164,8 @@ export default function TheStarters() {
                   {[1, 2, 3].map((_, index) => (
                     <div className="card" key={index}>
                       <div className="card-img"></div>
-                      <div className="card-info">
-                        <div></div>
-                        <div></div>
-                      </div>
-                    </div>
-                  ))}
+                      <div className="card-info"><div></div><div></div></div>
+                    </div>))}
                 </div>
               }
 

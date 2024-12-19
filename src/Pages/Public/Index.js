@@ -1,5 +1,6 @@
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useLocation, useParams } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import CartDrawer from "../../Components/CartDrawer/CartDrawer";
 import Home from "./Pages/Home/Index";
@@ -22,6 +23,7 @@ import CheckOut from "./Pages/CheckOut/CheckOut";
 import GoTop from "../../Components/GoTop/GoTop";
 import Profile from "./Pages/Profile/Profile";
 import NotYet from "./NotYet";
+import { getData } from "../../axiosConfig/API";
 
 export default function Index() {
   const location = useLocation();
@@ -31,8 +33,25 @@ export default function Index() {
     setFooter();
     setTimeout(() => {
       setFooter(location.pathname === "/" ? <Footer /> : <SecondFooter />);
-    }, 3000);
+    }, 300);
   }, [location]);
+
+  useEffect(() => {
+    const getSiteData = async () => {
+      if (!Cookies.get("feasta-site-information")) {
+        try {
+          const result = await getData("site/1");
+
+          if (result.status === 200) {
+            Cookies.set('feasta-site-information', JSON.stringify(result.result));
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    }
+    getSiteData();
+  }, [])
 
   return (
     <div className="Index">

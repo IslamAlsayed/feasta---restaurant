@@ -2,10 +2,11 @@ import "./RecipeDetails.css";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ADD_ITEM_HELPER } from "../../../../Store/helper";
+import { ADD_ITEM_HELPER, USER_HELPER } from "../../../../Store/helper";
 import { addData, deleteData, getData, updateData } from "../../../../axiosConfig/API";
-import { getClient, isAuth } from "../../../../axiosConfig/Auth";
+import { isAuth } from "../../../../axiosConfig/Auth";
 import Swal from "sweetalert2";
+import Recipe from "../../../../Components/Recipe/Recipe";
 
 export default function RecipeDetails() {
   const { id } = useParams();
@@ -16,20 +17,9 @@ export default function RecipeDetails() {
   const [comments, setComments] = useState([]);
   const [requestUpdate, setRequestUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [client, setClient] = useState([]);
   const [clientAuth, setClientAuth] = useState(false);
   const [absoluteImage, setAbsoluteImage] = useState();
-  const [newComment, setNewComment] = useState({
-    comment: "",
-    rate: 2,
-    client_id: "",
-    recipe_id: "",
-  });
-
-  useEffect(() => {
-    const fetch = getClient();
-    if (fetch) setClient(JSON.parse(fetch));
-  }, [location, id]);
+  const [newComment, setNewComment] = useState({ comment: "", rate: 2, client_id: "", recipe_id: "" });
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -40,11 +30,11 @@ export default function RecipeDetails() {
   }, [location]);
 
   useEffect(() => {
-    if (client) setNewComment({ ...newComment, client_id: client.id, recipe_id: parseInt(id) });
-  }, [client, id]);
+    setNewComment((prev) => ({ ...prev, client_id: USER_HELPER.id, recipe_id: parseInt(id) }));
+  }, [id]);
 
   const fetchRecipes = useCallback(async (id) => {
-    // setLoading(false);
+    setLoading(false);
 
     try {
       const result = await getData("recipes");
@@ -53,7 +43,7 @@ export default function RecipeDetails() {
         let getRecipe = result.result.find(recipe => parseInt(recipe.id) === recipeId);
         setRecipe(getRecipe);
 
-        let recipesByMealType = result.result.filter(recipe => recipe.mealType == getRecipe.mealType);
+        let recipesByMealType = result.result.filter(recipe => recipe.mealType === getRecipe.mealType);
         const otherRecipes = recipesByMealType.filter(recipe => parseInt(recipe.id) !== recipeId);
 
         setRecipes(otherRecipes.slice(0, 6));
@@ -80,7 +70,7 @@ export default function RecipeDetails() {
       fetchRecipes(id);
       fetchRecipeComments(id);
     }
-  }, [id]);
+  }, [id, fetchRecipes, fetchRecipeComments]);
 
   const handleAbsoluteImage = (image) => {
     setAbsoluteImage(image);
@@ -121,18 +111,18 @@ export default function RecipeDetails() {
     let comment_id = parseInt(parentEdit.dataset.id);
     let btnEdit = list.querySelector(".btnEdit");
 
-    list.classList.toggle("show");
+    if (list) list.classList.toggle("show");
 
     btnEdit.addEventListener("click", () => {
       let comment = comments.find(comment => comment.id === comment_id);
-      list.classList.remove("show");
+      if (list) list.classList.remove("show");
       setRequestUpdate(true);
-      setNewComment({ ...newComment, id: comment_id, comment: comment.comment, rate: comment.rate });
+      setNewComment((prev) => ({ ...prev, id: comment_id, comment: comment.comment, rate: comment.rate }));
     });
 
     const handleClickOutside = (event) => {
       if (!parentEdit.contains(event.target)) {
-        list.classList.remove("show");
+        if (list) list.classList.remove("show");
         document.removeEventListener("click", handleClickOutside);
       }
     };
@@ -140,7 +130,7 @@ export default function RecipeDetails() {
     document.addEventListener("click", handleClickOutside);
 
     window.addEventListener("scroll", () => {
-      list.classList.remove("show");
+      if (list) list.classList.remove("show");
     });
   };
 
@@ -191,7 +181,7 @@ export default function RecipeDetails() {
             setComments(updateComments);
           }
 
-          setNewComment({ ...newComment, comment: "", rate: 2, client_id: client.id, stock_id: id });
+          setNewComment({ ...newComment, comment: "", rate: 2, client_id: USER_HELPER.id, stock_id: id });
           Swal.fire("Saved!", response.result, "success");
         }
       } catch (error) {
@@ -202,7 +192,7 @@ export default function RecipeDetails() {
 
   const handleCancelComment = () => {
     setRequestUpdate(false);
-    setNewComment({ comment: "", rate: 2, client_id: client.id, recipe_id: parseInt(id) });
+    setNewComment({ comment: "", rate: 2, client_id: USER_HELPER.id, recipe_id: parseInt(id) });
   }
 
   if (!loading) return;
@@ -290,11 +280,9 @@ export default function RecipeDetails() {
                 <button className="cancel" onClick={() => handleCancelComment()}>
                   <i className="fas fa-send"></i>
                   cancel
-                </button>
-              }
+                </button>}
             </form>
-          </div>
-        )}
+          </div>)}
 
         {clientAuth && comments.length > 0 &&
           <div className="comments">
@@ -312,7 +300,7 @@ export default function RecipeDetails() {
                       <div>
                         <b>{comment.client?.name}</b>
                         <div className="profile">
-                          {client && comment.client_id === client.id && (
+                          {USER_HELPER && comment.client_id === USER_HELPER.id && (
                             <div className="edit" data-id={comment.id}>
                               <i className="editAction fas fa-ellipsis btnActive"
                                 onClick={(e) => handleEditing(e)}>
@@ -332,8 +320,7 @@ export default function RecipeDetails() {
                                   </span>
                                 </li>
                               </ul>
-                            </div>
-                          )}
+                            </div>)}
                         </div>
                       </div>
                       <span>{comment.updated_at}</span>
@@ -346,7 +333,8 @@ export default function RecipeDetails() {
                   </div>
                   <div className="review">{comment.comment}</div>
                 </div>
-              </div>))}
+              </div>
+            ))}
           </div>}
 
         {clientAuth && comments.length <= 0 &&
@@ -370,49 +358,14 @@ export default function RecipeDetails() {
                   <div className="card" key={index}>
                     <div className="img"></div>
                     <div className="text"></div>
-                    <div className="btns">
-                      <div></div>
-                      <div></div>
-                    </div>
-                  </div>
-                ))}
+                    <div className="btns"><div></div><div></div></div>
+                  </div>))}
               </div>)}
 
             {recipes.length > 0 && (
-              <div id="cards" className="cards">
-                {recipes.map(
-                  (recipe, index) =>
-                    <div className="card" key={index}>
-                      <div className="card-image">
-                        <img src={recipe.image} className="images" alt={recipe.title} loading="lazy" />
-                        <span className="rating">
-                          <i className="fa-solid fa-star"></i>
-                          {recipe.rating}
-                        </span>
-                      </div>
-
-                      <div className="card-title">
-                        <span className="name">{recipe.title}</span>
-                        <span className="price">${recipe.price}</span>
-                      </div>
-
-                      <div className="card-body">
-                        <div className="actions">
-                          <button className="btn btnActive add" onClick={() => ADD_ITEM_HELPER(recipe, dispatch)} >
-                            add order
-                            <i className="fa-solid fa-cart-plus"></i>
-                          </button>
-
-                          <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details" >
-                            details
-                            <i className="fa-solid fa-bookmark"></i>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                )}
-              </div>
-            )}
+              <div id="recipes" className="recipes">
+                {recipes.map((recipe, index) => <Recipe key={index} data={recipe} dispatch={dispatch} />)}
+              </div>)}
           </div>
         </div>
       </div>

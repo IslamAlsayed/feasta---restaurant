@@ -157,6 +157,7 @@
 
                 &.contact {
                     & ul {
+                        font-size: 12px;
                         list-style: none;
 
                         & li {
@@ -172,12 +173,17 @@
                                 margin-bottom: 10px;
                             }
 
-                            & div {
+                            &>div {
+                                color: var(--main-color);
+                            }
+
+                            & a {
+                                font-weight: bold;
                                 text-transform: lowercase;
-                                color: var(--main-color-50);
+                                color: var(--toxic-color);
 
                                 &:hover {
-                                    color: var(--main-color);
+                                    color: var(--toxic-color-50);
                                 }
                             }
                         }

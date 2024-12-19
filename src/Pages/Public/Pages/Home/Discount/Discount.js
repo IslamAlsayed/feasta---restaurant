@@ -1,8 +1,7 @@
 import "./Discount.css";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { ADD_ITEM_HELPER } from "../../../../../Store/helper";
-import Bibimbap from "../../../../../Assets/images/logos/bibimbap.png";
+import { ADD_ITEM_HELPER, SITE_HELPER } from "../../../../../Store/helper";
 import { getData } from "../../../../../axiosConfig/API";
 
 export default function Discount() {
@@ -34,10 +33,10 @@ export default function Discount() {
       <div className="box-voucher">
         <div className="content-voucher">
           <div className="logo">
-            <img src={Bibimbap} alt="site logo" loading="lazy" />
+            <img src={SITE_HELPER.logo} alt={SITE_HELPER.site_name} loading="lazy" />
             <div className="logo-title">
-              <span>feasta</span>
-              <span>egyptian restaurant</span>
+              <span>{SITE_HELPER.site_name?.split(' ')[0]}</span>
+              <span>{SITE_HELPER.site_name?.split(' ').slice(1).join(' ')}</span>
             </div>
           </div>
 

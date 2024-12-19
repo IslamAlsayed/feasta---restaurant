@@ -51,10 +51,7 @@ export default function TabsRecipes() {
               {Array.from({ length: 3 }).map((_, index) => (
                 <div className="card" key={index}>
                   <div className="image"></div>
-                  <div className="info">
-                    <div></div>
-                    <div></div>
-                  </div>
+                  <div className="info"><div></div><div></div></div>
                 </div>))}
             </div>)}
 

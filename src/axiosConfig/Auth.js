@@ -1,11 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { getData } from "./API";
-const basicURL = "http://127.0.0.1:8000/api/";
+import { basic_URL_API, getData } from "./API";
 
 export const login = async (email, password) => {
     try {
-        const response = await axios.post(basicURL + "auth/login", {
+        const response = await axios.post(basic_URL_API + "auth/login", {
             email: email,
             password: password,
         });
@@ -20,13 +19,13 @@ export const login = async (email, password) => {
             try {
                 let response = await getData(`cart/${client.id}`);
 
-                if (response.status === 200) {
+                if (response && response.status === 200) {
                     localStorage.setItem("cartItems", response.result.items);
                     localStorage.setItem("cartId", response.result.id);
                     localStorage.setItem("code", response.result.code);
                 }
             } catch (error) {
-                console.log('error', error);
+                console.error(error);
             }
         }
 
@@ -38,7 +37,7 @@ export const login = async (email, password) => {
 
 export const checkClient = async () => {
     try {
-        const response = await axios.get(basicURL + "auth/client", {
+        const response = await axios.get(basic_URL_API + "auth/client", {
             headers: {
                 Accept: "application/json",
                 Authorization: `Bearer ${Cookies.get("feasta_token") || ""}`,
@@ -53,7 +52,7 @@ export const checkClient = async () => {
 
 export const register = async (data) => {
     try {
-        const response = await axios.post(basicURL + "auth/register", data);
+        const response = await axios.post(basic_URL_API + "auth/register", data);
 
         // Setting cookies
         Cookies.set("feasta_token", response.data.token);

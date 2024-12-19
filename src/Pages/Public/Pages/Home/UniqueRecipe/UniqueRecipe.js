@@ -12,7 +12,7 @@ export default function UniqueRecipe() {
   const [loading, setLoading] = useState(false);
 
   const fetchRecipeById = useCallback(async () => {
-    setLoading(false);
+    // setLoading(false);
 
     try {
       const result = await getData("recipes");
@@ -48,7 +48,7 @@ export default function UniqueRecipe() {
           </div>
         </div>
 
-        <div className="recipes">
+        <div className="content">
           <div className="recipes">
             {recipes.map((recipe, index) => (
               <div className="recipe" key={index}>
@@ -57,35 +57,36 @@ export default function UniqueRecipe() {
                 ) : (<p>Image not available</p>)}
 
                 <div className="info">
-                  <div className="title">
-                    <h3>special</h3>
-                    <div className="rate">
-                      <i className="fa-solid fa-star"></i>
-                      {recipe ? recipe.rating : "N/A"}
+                  <div className="text">
+                    <div className="title">
+                      <span>${recipe.price}</span>
+                      <div className="rate">
+                        <i className="fa-solid fa-star"></i>
+                        {recipe.rating}
+                      </div>
+                    </div>
+
+                    <b>{recipe.title}</b>
+                    <div className="description">
+                      {recipe && String(recipe.description).length >= 140
+                        ? recipe.description.slice(0, 140) + "..."
+                        : recipe.description}
                     </div>
                   </div>
-                  <div className="price">
-                    <span>{recipe ? recipe.title : "N/A"}</span>
-                    <span>${recipe ? recipe.price : "0.00"}</span>
-                  </div>
-                  <div className="description">
-                    {recipe && String(recipe.description).length >= 140
-                      ? recipe.description.slice(0, 70) + "..."
-                      : recipe ? recipe.description : "No description available"}
+
+                  <div className="actions">
+                    <button className="btn btnActive add" disabled={!recipe} onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
+                      <span>add order</span>
+                      <i className="fa-solid fa-cart-plus"></i>
+                    </button>
+
+                    <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
+                      <span>details</span>
+                      <i className="fa-solid fa-bookmark"></i>
+                    </Link>
                   </div>
                 </div>
 
-                <div className="actions">
-                  <button className="btn btnActive add" disabled={!recipe} onClick={() => ADD_ITEM_HELPER(recipe, dispatch)}>
-                    <span>add order</span>
-                    <i className="fa-solid fa-cart-plus"></i>
-                  </button>
-
-                  <Link to={`/recipe-details/${recipe.id}`} className="btn btnActive details">
-                    <span>details</span>
-                    <i className="fa-solid fa-bookmark"></i>
-                  </Link>
-                </div>
               </div>
             ))}
           </div>

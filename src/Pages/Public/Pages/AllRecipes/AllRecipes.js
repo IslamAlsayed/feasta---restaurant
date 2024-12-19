@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getData } from "../../../../axiosConfig/API";
 import Recipe from "../../../../Components/Recipe/Recipe";
 import TabsRecipes from "../../../../Components/TabsRecipes/TabsRecipes";
+import SearchBar from "../../../../Components/SearchBar/SearchBar";
 
 export default function AllRecipes() {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export default function AllRecipes() {
   const [loading, setLoading] = useState(false);
 
   const fetchRecipes = useCallback(async () => {
-    setLoading(false);
+    // setLoading(false);
 
     try {
       const result = await getData("recipes");
@@ -40,6 +41,8 @@ export default function AllRecipes() {
           choose your <span>dish from menu</span>
         </div>
 
+        <SearchBar data={recipes} setFilterRecipes={setFilterRecipes} />
+
         {filterRecipes.length > 0 && <TabsRecipes data={recipes} setFilterRecipes={setFilterRecipes} />}
 
         <div className="random-recipe">
@@ -48,16 +51,8 @@ export default function AllRecipes() {
               {Array.from({ length: 9 }).map((_, index) => (
                 <div className="card" key={index}>
                   <div className="card-image"></div>
-
-                  <div className="card-title">
-                    <span></span>
-                    <span></span>
-                  </div>
-
-                  <div className="card-body">
-                    <div></div>
-                    <div></div>
-                  </div>
+                  <div className="card-title"><span></span><span></span></div>
+                  <div className="card-body"><div></div><div></div></div>
                 </div>))}
             </div>)}
 

@@ -35,7 +35,7 @@
             }
         }
 
-        & .recipes {
+        & .content {
             gap: 15px;
             display: -ms-grid;
             display: grid;
@@ -77,131 +77,95 @@
                     background-repeat: no-repeat;
                     background-image: url("../../../../../Assets/images/backgrounds/background23.jpg");
 
+                    --translateNegative: -50px;
+                    --translatePositive: 50px;
+
                     & img {
                         width: 120px;
                         height: 120px;
                         border-radius: 50%;
-                        -webkit-transform: translateX(-50px);
-                        -ms-transform: translateX(-50px);
-                        transform: translateX(-50px);
+                        -webkit-transform: translateX(var(--translateNegative));
+                        -ms-transform: translateX(var(--translateNegative));
+                        transform: translateX(var(--translateNegative));
                         border: 5px solid var(--light-color);
                     }
 
                     & .info {
-                        width: 100%;
+                        flex: 1;
                         color: var(--light-color);
-                        -webkit-transform: translateX(-40px);
-                        -ms-transform: translateX(-40px);
-                        transform: translateX(-40px);
 
-                        & .title {
-                            margin-bottom: 30px;
-                        }
+                        & .text {
+                            -webkit-transform: translateX(calc(var(--translateNegative) / 2));
+                            -ms-transform: translateX(calc(var(--translateNegative) / 2));
+                            transform: translateX(calc(var(--translateNegative) / 2));
 
-                        & .title,
-                        & .price {
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-                            -webkit-box-align: center;
-                            -ms-flex-align: center;
-                            align-items: center;
-                            -webkit-box-pack: justify;
-                            -ms-flex-pack: justify;
-                            justify-content: space-between;
-
-                            & h3 {
-                                padding: 5px 7px;
-                                border-radius: 3px;
-                                letter-spacing: 1px;
-                                background: var(--main-color);
-                            }
-                        }
-
-                        & .price {
-                            font-size: 16px;
-                            margin-block: 15px 5px;
-
-                            & span:last-of-type {
-                                font-weight: bold;
+                            & .title {
+                                margin-bottom: 10px;
                                 color: var(--main-color);
                             }
-                        }
 
-                        & .rate {
-                            gap: 5px;
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-                            -webkit-box-align: center;
-                            -ms-flex-align: center;
-                            align-items: center;
-                            color: var(--main-color);
-                        }
+                            & b {
+                                display: block;
+                                margin-bottom: 5px;
+                            }
 
-                        & .description {
-                            font-size: 12px;
-                            line-height: 1.6;
-                            font-family: var(--Playball);
-                        }
-                    }
+                            & .title {
+                                gap: 10px;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                align-items: center;
+                                -webkit-box-pack: justify;
+                                -ms-flex-pack: justify;
+                                justify-content: space-between;
+                            }
 
-                    &::after {
-                        content: "";
-                        width: 100%;
-                        height: 100%;
-                        opacity: 0;
-                        -webkit-transition: 0.2s;
-                        -o-transition: 0.2s;
-                        transition: 0.2s;
-                        background: var(--dark-color);
-                        position: absolute;
-                        top: 0;
-                        left: 0;
+                            & .rate {
+                                gap: 5px;
+                                display: -webkit-box;
+                                display: -ms-flexbox;
+                                display: flex;
+                                -webkit-box-align: center;
+                                -ms-flex-align: center;
+                                align-items: center;
+                                color: var(--main-color);
+                                -webkit-transform: translateX(calc(var(--translatePositive) / 2));
+                                -ms-transform: translateX(calc(var(--translatePositive) / 2));
+                                transform: translateX(calc(var(--translatePositive) / 2));
+                            }
+
+                            & .description {
+                                font-size: 12px;
+                                line-height: 1.6;
+                                font-family: var(--Playball);
+                            }
+                        }
                     }
 
                     & .actions {
-                        gap: 30px;
+                        gap: 10px;
                         display: -webkit-box;
                         display: -ms-flexbox;
                         display: flex;
+                        margin-top: 20px;
                         -webkit-box-align: center;
                         -ms-flex-align: center;
                         align-items: center;
-                        -webkit-box-pack: center;
-                        -ms-flex-pack: center;
-                        justify-content: center;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        opacity: 0;
-                        z-index: 10;
-                        -webkit-transform: scale(0.7) translate(-65%, -50%);
-                        -ms-transform: scale(0.7) translate(-65%, -50%);
-                        transform: scale(0.7) translate(-65%, -50%);
+                        -webkit-box-pack: flex-end;
+                        -ms-flex-pack: flex-end;
+                        justify-content: flex-end;
 
                         & .btn {
+                            padding: 7px;
+                            font-size: 12px;
                             text-wrap: nowrap;
-                            font-size: 14px;
 
                             & i {
                                 -webkit-margin-start: 5px;
                                 margin-inline-start: 5px;
                             }
-                        }
-                    }
-
-                    &:hover {
-                        & .actions {
-                            left: 50%;
-                            opacity: 1;
-                            -webkit-transform: scale(1) translate(-50%, -50%);
-                            -ms-transform: scale(1) translate(-50%, -50%);
-                            transform: scale(1) translate(-50%, -50%);
-                        }
-
-                        &::after {
-                            opacity: 0.3;
                         }
                     }
                 }
@@ -224,7 +188,7 @@
 @media (max-width: 992px) {
     .UniqueRecipes {
         & .container {
-            & .recipes {
+            & .content {
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -261,67 +225,13 @@
                 flex-direction: column;
             }
 
-            & .recipes {
+            & .content {
                 & .recipes {
                     & .recipe {
-                        & .info {
-                            & .title {
-                                -webkit-padding-end: 40px;
-                                padding-inline-end: 40px;
-                            }
-                        }
-
-                        &::after {
-                            display: none;
-                        }
-
-                        &:hover {
-                            & .actions {
-                                top: 10px;
-                                left: auto;
-                                right: 10px;
-                                -webkit-transform: scale(1) translate(0);
-                                -ms-transform: scale(1) translate(0);
-                                transform: scale(1) translate(0);
-                            }
-                        }
-
-                        & .actions {
-                            gap: 10px;
-                            width: -webkit-fit-content;
-                            width: -moz-fit-content;
-                            width: fit-content;
-                            -webkit-box-orient: vertical;
-                            -webkit-box-direction: normal;
-                            -ms-flex-direction: column;
-                            flex-direction: column;
-                            -webkit-box-align: end;
-                            -ms-flex-align: end;
-                            align-items: flex-end;
-                            opacity: 1;
-                            top: 10px;
-                            left: auto;
-                            right: 10px;
-                            -webkit-transform: scale(1) translate(0);
-                            -ms-transform: scale(1) translate(0);
-                            transform: scale(1) translate(0);
-
-                            & .btn {
-                                width: 40px;
-                                height: 30px;
-                                display: -ms-grid;
-                                display: grid;
-                                font-size: 14px;
-                                place-content: center;
-
-                                & span {
-                                    display: none;
-                                }
-
-                                & i {
-                                    margin: 0;
-                                }
-                            }
+                        & img {
+                            width: 120px;
+                            height: 120px;
+                            border: 3px solid var(--light-color);
                         }
                     }
 
@@ -347,47 +257,25 @@
                 }
             }
 
-            & .recipes {
+            & .content {
                 & .recipes {
                     & .recipe {
+                        --translateNegative: -25px;
+                        --translatePositive: 25px;
+
                         & img {
-                            width: 70px;
-                            height: 70px;
-                            -webkit-transform: translateX(-30px);
-                            -ms-transform: translateX(-30px);
-                            transform: translateX(-30px);
+                            width: 90px;
+                            height: 90px;
                         }
 
                         & .info {
-                            -webkit-transform: translateX(-20px);
-                            -ms-transform: translateX(-20px);
-                            transform: translateX(-20px);
-
                             & .title {
                                 font-size: 16px;
                                 margin-bottom: 15px;
-
-                                & h3 {
-                                    font-size: 12px;
-                                }
-                            }
-
-                            & .price {
-                                font-size: 14px;
-                                -webkit-padding-end: 30px;
-                                padding-inline-end: 30px;
                             }
 
                             & .description {
                                 font-size: 10px;
-                            }
-                        }
-
-                        & .actions {
-                            & .btn {
-                                width: 40px;
-                                height: 30px;
-                                font-size: 14px;
                             }
                         }
                     }

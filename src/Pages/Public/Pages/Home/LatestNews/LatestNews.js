@@ -12,14 +12,15 @@ export default function LatestNews() {
 
       if (result.status === 200) {
         result.result.map(article => {
-          article['likeCount'] = article.article_comments.reduce((total, comment) => {
+          return article['likeCount'] = article.article_comments.reduce((total, comment) => {
             return comment.like === 1 ? total + 1 : total;
           }, 0);
         });
 
         setArticles(result.result)
-        setLoading(true);
       }
+
+      setLoading(true);
     } catch (error) {
       setLoading(true);
     }
@@ -35,9 +36,7 @@ export default function LatestNews() {
     <div className="LatestNews">
       <div className="container">
         <div className="title">
-          <h2>
-            <span>latest</span> news from <span>blog</span>
-          </h2>
+          <h2><span>latest</span> news from <span>blog</span></h2>
 
           <div className="description">
             he lay on his armour-like back, and if he lifed his head a little he
@@ -53,6 +52,7 @@ export default function LatestNews() {
               <div className="card-img">
                 <img src={article.image} alt={article.title} loading="lazy" />
               </div>
+
               <div className="card-info">
                 <small>{article.updated_at}, admin</small>
                 <p>{article.title}</p>
@@ -62,16 +62,17 @@ export default function LatestNews() {
                     : article.description}
                 </p>
               </div>
+
               <div className="card-react">
                 <span>
                   <i className="fa-solid fa-message"></i> {article.article_comments.length}
                 </span>
+
                 <span>
                   <i className="fa-solid fa-heart"></i> {article.likeCount}
                 </span>
               </div>
-            </div>
-          ))}
+            </div>))}
         </div>
       </div>
     </div>

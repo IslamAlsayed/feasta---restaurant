@@ -1,7 +1,7 @@
 import "./Footer.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import bibimbap from "../../Assets/images/logos/bibimbap.png";
+import { SITE_HELPER } from "../../Store/helper";
 
 export default function Footer() {
   return (
@@ -9,30 +9,21 @@ export default function Footer() {
       <div className="container">
         <Link to="/" className="logo">
           <div className="logo-img">
-            <img src={bibimbap} alt="site logo" loading="lazy" />
+            <img src={SITE_HELPER.logo} alt={SITE_HELPER.site_name} loading="lazy" />
           </div>
           <div className="logo-title">
-            <span>feasta</span>
-            <span>egyptian restaurant</span>
+            <span>{SITE_HELPER.site_name?.split(' ')[0]}</span>
+            <span>{SITE_HELPER.site_name?.split(' ').slice(1).join(' ')}</span>
           </div>
         </Link>
 
-        <div className="description">
-          A collection of textile samples lay spread out on the table - Samba
-          was a traveling salesman - and above it there hung a picture that he
-          had recently cut out of an illustrated magazine and housed in a nice,
-          gilded frame.
-        </div>
+        <div className="description">{SITE_HELPER.about_us}</div>
 
         <div className="social">
           <div className="address">
-            <div>Palestine is free and independent</div>
-
-            <Link to={"mailto:support@feastaegyptianRestaurant.com"}>
-              support@feastaegyptianRestaurant.com
-            </Link>
-
-            <Link to={"tel:+204864536465"}>(+20) 4864536465</Link>
+            <div>{SITE_HELPER.address}</div>
+            <Link to={`mailto:${SITE_HELPER.email}`}>{SITE_HELPER.email}</Link>
+            <Link to={`tel:${SITE_HELPER.phone}`}>{SITE_HELPER.phone}</Link>
           </div>
 
           <div className="icons">
@@ -51,14 +42,11 @@ export default function Footer() {
           </div>
 
           <div className="copyRight">
-            <p>
-              © 2023 <span>feasta restaurant</span> all right reserved The developer is
-              <Link to={"mailto: eslamalsayed8133@gmail.com"}>IslamAlsayed</Link>
-            </p>
-            <p>
-              <Link to="tel:+201065438133">(+20) 1065438133</Link> but
-              <span className="quote"> the design is quoted</span>
-            </p>
+            <p>© 2023 <span>feasta restaurant</span> all right reserved The developer is
+              <Link to={`mailto: ${JSON.parse(SITE_HELPER.developer)?.email}`}>{JSON.parse(SITE_HELPER.developer)?.name}</Link></p>
+
+            <p><Link to={`tel:${JSON.parse(SITE_HELPER.developer)?.phone}`}>{JSON.parse(SITE_HELPER.developer)?.phone}</Link> but
+              <span className="quote"> the design is quoted</span></p>
           </div>
         </div>
       </div>

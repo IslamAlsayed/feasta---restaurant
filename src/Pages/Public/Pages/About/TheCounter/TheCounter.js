@@ -72,7 +72,7 @@ export default function TheCounter() {
   useEffect(() => {
     const handleScroll = () => {
       const sectionCounter = document.getElementById("TheCounter");
-      if (sectionCounter && window.scrollY + 300 >= sectionCounter.offsetTop && !started) {
+      if (window.scrollY + 300 >= sectionCounter.offsetTop && !started) {
         const counters = document.querySelectorAll(".counter-target");
         counters.forEach((counter) => startCount(counter));
         setStarted(true);
@@ -91,26 +91,17 @@ export default function TheCounter() {
       <div className="container">
         {!Object(counter).length > 0 && (
           <div className="sky-loading">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <div className="card" key={index}>
-                <i></i>
-                <span></span>
-                <p></p>
-              </div>
-            ))}
-          </div>
-        )}
+            {Array.from({ length: 4 }).map((_, index) =>
+              <div className="card" key={index}><i></i><span></span><p></p></div>)}
+          </div>)}
 
         <div className="row">
           {counter.map((count, index) => (
             <div className="col" key={index}>
               <i className={`fas fa-${count.icon}`}></i>
-              <span className="counter-target" data-target={count.target}>
-                0
-              </span>
+              <span className="counter-target" data-target={count.target}>0</span>
               <p>{count.title}</p>
-            </div>
-          ))}
+            </div>))}
         </div>
       </div>
     </div>

@@ -14,24 +14,24 @@ export default function Recipes() {
   const [filterRecipes, setFilterRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchRecipes = useCallback(async (stateLength) => {
+  const fetchRecipes = useCallback(async () => {
     setLoading(false);
     try {
       const result = await getData("recipes");
       if (result.status === 200) {
         setRecipes(result.result);
-        const breakfastRecipes = result.result.filter((recipe) => recipe.mealType === "breakfast").slice(0, stateLength);
+        const breakfastRecipes = result.result.slice(0, stateLength);
         setFilterRecipes(breakfastRecipes);
-        setLoading(true);
       }
+      setLoading(true);
     } catch (error) {
       setLoading(true);
     }
   }, []);
 
   useEffect(() => {
-    fetchRecipes(stateLength);
-  }, [fetchRecipes, stateLength]);
+    fetchRecipes();
+  }, [fetchRecipes]);
 
   useEffect(() => {
     const handleResize = () => setStateLength(window.innerWidth <= 768 ? 3 : window.innerWidth <= 992 ? 6 : 9);
@@ -55,14 +55,11 @@ export default function Recipes() {
         <div className="random-recipe">
           {!Object(filterRecipes).length > 0 && (
             <div className="sky-loading">
-              {Array.from({ length: stateLength }).map((_, index) => (
+              {Array.from({ length: 3 }).map((_, index) => (
                 <div className="card" key={index}>
                   <div className="image"></div>
                   <div className="text"></div>
-                  <div className="btns">
-                    <div></div>
-                    <div></div>
-                  </div>
+                  <div className="btns"><div></div><div></div></div>
                 </div>))}
             </div>)}
 

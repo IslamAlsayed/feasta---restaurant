@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { addData, deleteData, getData } from "../../../../axiosConfig/API";
 import { USER_HELPER } from "../../../../Store/helper";
 import Article2, { handleArticleLike, handleReturnIsLike } from "../../../../Components/Article/Article";
+import Comment from "../../../../Components/Comment/Comment";
 
 export default function Article() {
   const { id } = useParams();
@@ -47,7 +48,7 @@ export default function Article() {
     try {
       const response = await addData(`article_comments`, newComment);
       if (response.status === 200) {
-        setNewComment({ ...newComment, comment: false });
+        setNewComment((prev) => ({ ...prev, comment: false }));
 
         let updateComment = article.article_comments;
         updateComment.unshift(response.data);
@@ -109,7 +110,7 @@ export default function Article() {
             </div>
 
             <div className="article-react">
-              <span onClick={() => setNewComment({ ...newComment, comment: true })}>
+              <span onClick={() => setNewComment((prev) => ({ ...prev, comment: true }))}>
                 <i className="fas fa-message"></i> {article.article_comments.length}
               </span>
 
@@ -119,14 +120,12 @@ export default function Article() {
             </div>
           </div>
 
-          <div className="article-description">
-            {article.description}
-          </div>
+          <div className="article-description">{article.description}</div>
         </div>
 
         {newComment.comment !== false &&
           <div className="createComment">
-            <textarea name="comment" id="comment" onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })} placeholder="write comment..."></textarea>
+            <textarea name="comment" id="comment" onChange={(e) => setNewComment((prev) => ({ ...prev, comment: e.target.value }))} placeholder="write comment..."></textarea>
             <button className="btn btnActive details" onClick={() => handleNewCommentChange()}><i className="far fa-message"></i> send</button>
           </div>}
 
@@ -134,34 +133,8 @@ export default function Article() {
           <div className="comments">
             <h2>{article.article_comments.length} comments</h2>
 
-            {article.article_comments.map((comment, index) =>
-              index < lengthComment && (
-                <div className="comment" key={index}>
-                  <div className="comment-client">
-                    <img src={comment.client.image} alt={comment.client.name} loading="lazy" />
-                  </div>
-
-                  <div className="comment-content">
-                    <div className="comment-text">
-                      <div>
-                        <b>{comment.client.name}</b>
-                        <small>{comment.updated_at}</small>
-                      </div>
-                      <p>{comment.comment}</p>
-                    </div>
-
-                    <div className="comment-react">
-                      {/* <p onClick={(e) => handleReact(e.target)}>like . </p>
-                      <p>reply . </p> */}
-                      {USER_HELPER.id === comment.client_id &&
-                        <p className="btnActive" onClick={() => handleDeleteComment(comment.id)}><i className="fas fa-trash"></i></p>}
-                      {/* <span className={comment.reacts > 0 ? 'main' : ''}>
-                        <i className="fas fa-heart"></i> {comment.reacts}
-                      </span> */}
-                    </div>
-                  </div>
-                </div>
-              ))}
+            {article.article_comments.map((comment, index) => index < lengthComment &&
+              <Comment key={index} data={comment} table="article_comments" setArticle={setArticle} />)}
 
             {article.article_comments.length - lengthComment > 0 &&
               <p className="more_comments" onClick={() => setTimeout(() => setLengthComment(lengthComment + 5), 1000)}>more comments...</p>}
